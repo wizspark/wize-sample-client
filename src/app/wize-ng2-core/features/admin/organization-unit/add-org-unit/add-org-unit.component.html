@@ -1,0 +1,64 @@
+<modal [animation]="true" #modal (onDismiss)="dismiss()"  class="panel-right">
+    <modal-header [showClose]="true">
+        <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} Organization</h5>
+    </modal-header>
+    <modal-body class="edit-rec">
+        <form [formGroup]="form">
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="name.invalid && name.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="name">
+                        <label>Name</label>
+                        <small *ngIf="name.invalid && name.touched" class="form-text">
+                            Name is invalid.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="description.invalid && description.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="description">
+                        <label>Description</label>
+                        <small *ngIf="description.invalid && description.touched" class="form-text">
+                            Description is invalid.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="domain.invalid && domain.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="domain">
+                        <label>Domain</label>
+                        <small *ngIf="domain.invalid && domain.touched" class="form-text">
+                            Domain is invalid.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="footer.invalid && footer.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="footer">
+                        <label>Footer</label>
+                        <small *ngIf="footer.invalid && footer.touched" class="form-text">
+                            Footer is invalid.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="logoUrl.invalid && logoUrl.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="logoUrl">
+                        <label>Logo Url</label>
+                        <small *ngIf="logoUrl.invalid && logoUrl.touched" class="form-text">
+                            Logo Url is invalid.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addOrgUnit()">Save</button>
+    </modal-footer>
+</modal>

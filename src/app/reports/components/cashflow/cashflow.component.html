@@ -1,0 +1,230 @@
+<div class="row">
+  <div class="col-sm-6">
+    <p-chart type="bar" [data]="data" [options]="options" height="500"></p-chart>
+  </div>
+  <div class="col-sm-6">
+    <p-chart type="bar" [data]="data1" [options]="options" height="500"></p-chart>
+  </div>
+</div>
+
+<div>
+  <p-dataTable class="global-grid tbl-popProducts" [value]="products">
+    <p-headerColumnGroup>
+      <p-row>
+        <p-column header="Product" rowspan="2"></p-column>
+        <p-column header="Number of Loans" rowspan="2"></p-column>
+        <p-column header="Interest" rowspan="2"></p-column>
+        <p-column header="Operating Expenses" rowspan="2"></p-column>
+        <p-column header="Risk" colspan="3" class="tbl-chart-colLine"></p-column>
+      </p-row>
+      <p-row class="tbl-chart-colLine">
+        <p-column header="Loan Loss Provision"></p-column>
+        <p-column header="Prepayment"></p-column>
+        <p-column header="Curtailment"></p-column>
+      </p-row>
+    </p-headerColumnGroup>
+    <p-column field="product" [style]="{'width':'350px'}"></p-column>
+    <p-column field="loans"></p-column>
+    <p-column field="interest"></p-column>
+    <p-column field="expenses"></p-column>
+    <p-column field="provision"></p-column>
+    <p-column field="prepayment"></p-column>
+    <p-column field="curtailment"></p-column>
+  </p-dataTable>
+</div>
+  <!--<ul class="nav nav-tabs app-tabs">-->
+  <!--<li class="nav-item">-->
+  <!--<a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">Current Run</a>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--<div class="card mb-2">-->
+    <!--<div class="card-block" >-->
+      <!--<div class="media" style="overflow:visible">-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<h5 class="weight-300">Cash Inflows and Outflows</h5>-->
+        <!--</div>-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<ul class="list-unstyled list-inline m-0 text-xs-right">-->
+            <!--<li class="list-inline-item">-->
+              <!--<button class="btn btn-primary" (click)="export('cashoutin')">-->
+              <!--<i aria-hidden="true" class="fa fa-share-square-o"></i> &nbsp;Export-->
+                <!--</button>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="padding-top: 1.5rem!important;">-->
+        <!--<p-treeTable [value]="treeoutput" expandableRows="true">-->
+          <!--<p-column field="name" header="Name" [style]="{'width':'350px','border':'none'}"></p-column>-->
+          <!--<p-column field="cp" header="Current Position"-->
+                    <!--[style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="oneMonth" header="30 Days" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="threeMonths" header="3 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="sixMonths" header="6 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="twelveMonths" header="12 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--&lt;!&ndash;<p-column field="30stress" header="30 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="90stress" header="90 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="180stress" header="180 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="360stress" header="360 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+        <!--</p-treeTable>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="card mb-2">-->
+    <!--<div class="card-block">-->
+      <!--<div class="media" style="overflow:visible">-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<h5 class="weight-300">Primary Sources of Liquidity</h5>-->
+        <!--</div>-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+
+
+          <!--<ul class="list-unstyled list-inline m-0 text-xs-right">-->
+
+            <!--<li class="list-inline-item">-->
+
+              <!--<div class="dropdown show">-->
+                <!--<a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                  <!--{{selectedHead}}-->
+                <!--</a>-->
+
+                <!--<div class="dropdown-menu dropdown-menu-right custom-height" aria-labelledby="dropdownMenuLink">-->
+                  <!--<a href="javascript:;" class="dropdown-item" *ngFor="let item of headsList" (click)="liquidityFilterChange(item)">{{item}}</a>-->
+                <!--</div>-->
+              <!--</div>-->
+
+            <!--</li>-->
+
+            <!--<li class="list-inline-item">-->
+
+              <!--<button class="btn btn-primary" (click)="clearLiquidityFilter()"><span>Clear</span></button>-->
+            <!--</li>-->
+            <!--<li class="list-inline-item">-->
+              <!--<button class="btn btn-primary" (click)="export('primaryliquidity')">-->
+                <!--<i aria-hidden="true" class="fa fa-share-square-o"></i> &nbsp;Export-->
+              <!--</button>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="padding-top: 1.5rem!important;">-->
+        <!--<p-treeTable [value]="filteredPrimaryLiquidity" expandableRows="true">-->
+          <!--<p-column field="name" header="Name" [style]="{'width': selectedHead === 'Select Head' ? '350px' : '700px','border':'none', 'overflow': 'auto'}"></p-column>-->
+          <!--<p-column field="cp" header="Current Position"-->
+                    <!--[style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="oneMonth" header="30 Days" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="threeMonths" header="3 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="sixMonths" header="6 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="twelveMonths" header="12 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--&lt;!&ndash;<p-column field="30stress" header="30 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="90stress" header="90 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="180stress" header="180 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="360stress" header="360 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+        <!--</p-treeTable>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="card mb-2">-->
+    <!--<div class="card-block">-->
+      <!--<div class="media" style="overflow:visible">-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<h5 class="weight-300">Liquidity Actions</h5>-->
+        <!--</div>-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<ul class="list-unstyled list-inline m-0 text-xs-right">-->
+            <!--<li class="list-inline-item">-->
+              <!--<button class="btn btn-primary" (click)="export('liquidityactions')">-->
+                <!--<i aria-hidden="true" class="fa fa-share-square-o"></i> &nbsp;Export-->
+              <!--</button>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="padding-top: 1.5rem!important;">-->
+        <!--<p-treeTable [value]="liquidityActions" expandableRows="true">-->
+          <!--<p-column field="name" header="Name" [style]="{'width':'350px','border':'none'}"></p-column>-->
+          <!--<p-column field="cp" header="Current Position"-->
+                    <!--[style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="oneMonth" header="30 Days" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="threeMonths" header="3 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="sixMonths" header="6 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="twelveMonths" header="12 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--&lt;!&ndash;<p-column field="30stress" header="30 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="90stress" header="90 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="180stress" header="180 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="360stress" header="360 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+        <!--</p-treeTable>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="card mb-2">-->
+    <!--<div class="card-block">-->
+      <!--<div class="media" style="overflow:visible">-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<h5 class="weight-300">Secondary Sources of Liquidity</h5>-->
+         <!--</div>-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<ul class="list-unstyled list-inline m-0 text-xs-right">-->
+            <!--<li class="list-inline-item">-->
+              <!--<button class="btn btn-primary" (click)="export('secondaryliquidity')">-->
+                <!--<i aria-hidden="true" class="fa fa-share-square-o"></i> &nbsp;Export-->
+              <!--</button>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="padding-top: 1.5rem!important;">-->
+        <!--<p-treeTable [value]="secondaryLiquidity" expandableRows="true">-->
+          <!--<p-column field="name" header="Name" [style]="{'width':'350px','border':'none'}"></p-column>-->
+          <!--<p-column field="cp" header=""-->
+                    <!--[style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="oneMonth" header="30 Days" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="threeMonths" header="3 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="sixMonths" header="6 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="twelveMonths" header="12 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--&lt;!&ndash;<p-column field="30stress" header="30 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="90stress" header="90 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="180stress" header="180 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="360stress" header="360 Day Str" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+        <!--</p-treeTable>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="card">-->
+    <!--<div class="card-block">-->
+      <!--<div class="media" style="overflow:visible">-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<h5 class="weight-300">Totals</h5>-->
+        <!--</div>-->
+        <!--<div class="media-body media-middle" style="overflow:visible">-->
+          <!--<ul class="list-unstyled list-inline m-0 text-xs-right">-->
+            <!--<li class="list-inline-item">-->
+              <!--<button class="btn btn-primary" (click)="export('total')">-->
+                <!--<i aria-hidden="true" class="fa fa-share-square-o"></i> &nbsp;Export-->
+              <!--</button>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div style="padding-top: 1.5rem!important;">-->
+        <!--<p-treeTable [value]="total" expandableRows="true">-->
+          <!--<p-column field="name" header="Name" [style]="{'width':'350px','border':'none'}"></p-column>-->
+          <!--<p-column field="cp" header=""-->
+                    <!--[style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="oneMonth" header="30 Days" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="threeMonths" header="3 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="sixMonths" header="6 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--<p-column field="twelveMonths" header="12 mo" [style]="{'border':'none'}"></p-column>-->
+          <!--&lt;!&ndash;<p-column field="30stress" header="" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="90stress" header="" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="180stress" header="" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+          <!--&lt;!&ndash;<p-column field="360stress" header="" [style]="{'border':'none'}"></p-column>&ndash;&gt;-->
+        <!--</p-treeTable>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+

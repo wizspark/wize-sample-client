@@ -1,0 +1,172 @@
+<div>
+  <section>
+    <ul class="qSelector-list">
+      <h4 role="heading">Measures</h4>
+      <div class="list-item" *ngFor="let field of reportCategoryFields">
+        <li *ngIf="field.isMeasure == true">
+          <div class="row">
+            <div class="col-xs-2 pr-0">
+              <div class="form-group chk-group">
+                <i class="fa icn-integer"  *ngIf="field.dataType != 'DATE'">#</i>
+                <i class="fa fa-clock-o" *ngIf="field.dataType == 'DATE'"></i>
+                <label class="g-handpointer">
+                    <span class="ch-rd">
+                      <input type="checkbox" [(ngModel)]="field.isDefault" title="{{field.description}}"><span class="dummy-ele"></span>
+                    </span>
+                </label>
+              </div>
+            </div>
+            <div class="col-xs-10">
+              <div class="form-group material-style" [class.disabled]="!field.isDefault">
+                <div class="dropdown" *ngIf="field.dataType == 'INTEGER' || field.dataType == 'DOUBLE' || field.dataType == 'FLOAT'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                  <button class="btn btn-secondary" type="button" id="dropdownMenuButtonInt" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
+                    <div class="row">
+                      <div class="col-xs-10">
+                        {{field.displayValue?field.displayValue:field.name}}
+                      </div>
+                      <div class="col-xs-1">
+                        <span class="dropdown-toggle"></span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="dropdown-menu full-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFunction('', field)">{{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('sum', field)">Sum of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('count', field)">Count of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('avg', field)">Average Of {{field.name}}</a>
+                  </div>
+                </div>
+                <div class="dropdown" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                  <button class="btn btn-secondary" type="button" id="dropdownMenuButtonStr" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
+                    <div class="row">
+                      <div class="col-md-10">
+                        {{field.displayValue?field.displayValue:field.name}}
+                      </div>
+                      <div class="col-md-1">
+                        <span class="dropdown-toggle"></span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="dropdown-menu full-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFunction('', field)">{{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('count', field)">Count of {{field.name}}</a>
+                  </div>
+                </div>
+                <div class="dropdown" *ngIf="field.dataType == 'DATE'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                  <button class="btn btn-secondary" type="button" id="dropdownMenuButtonDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
+                    <div class="row">
+                      <div class="col-md-10">
+                        {{field.displayValue?field.displayValue:field.name}}
+                      </div>
+                      <div class="col-md-1">
+                        <span class="dropdown-toggle"></span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="dropdown-menu full-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFunction('', field)">{{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('day', field)">Day of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('month', field)">Month of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('quarter', field)">Quarter Of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('year', field)">Year Of {{field.name}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+    <ul class="qSelector-list">
+      <h4 role="heading">Dimensions</h4>
+      <div class="list-item" *ngFor="let field of reportCategoryFields">
+        <li *ngIf="!field.isMeasure || field.isMeasure == false">
+          <div class="row">
+            <div class="col-xs-2 pr-0">
+              <div class="form-group chk-group">
+                <i class="fa icn-integer"  *ngIf="field.dataType != 'DATE'">#</i>
+                <i class="fa fa-clock-o" *ngIf="field.dataType == 'DATE'"></i>
+                <label class="g-handpointer">
+                    <span class="ch-rd">
+                      <input type="checkbox" [(ngModel)]="field.isDefault" title="{{field.description}}"><span class="dummy-ele"></span>
+                    </span>
+                </label>
+              </div>
+            </div>
+            <div class="col-xs-10">
+              <div class="form-group material-style" [class.disabled]="!field.isDefault">
+                <div class="dropdown" *ngIf="field.dataType == 'INTEGER' || field.dataType == 'DOUBLE' || field.dataType == 'FLOAT'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                  <button class="btn btn-secondary" type="button" id="dropdownMenuButtonInt1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
+                    <div class="row">
+                      <div class="col-xs-10">
+                        {{field.displayValue?field.displayValue:field.name}}
+                      </div>
+                      <div class="col-xs-1">
+                        <span class="dropdown-toggle"></span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="dropdown-menu full-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFunction('', field)">{{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('sum', field)">Sum of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('count', field)">Count of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('avg', field)">Average Of {{field.name}}</a>
+                  </div>
+                </div>
+                <div class="dropdown" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                  <button class="btn btn-secondary" type="button" id="dropdownMenuButtonStr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
+                    <div class="row">
+                      <div class="col-xs-10">
+                        {{field.displayValue?field.displayValue:field.name}}
+                      </div>
+                      <div class="col-xs-1">
+                        <span class="dropdown-toggle"></span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="dropdown-menu full-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFunction('', field)">{{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('count', field)">Count of {{field.name}}</a>
+                  </div>
+                </div>
+                <div class="dropdown" *ngIf="field.dataType == 'DATE'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                  <button class="btn btn-secondary" type="button" id="dropdownMenuButtonDate1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
+                    <div class="row">
+                      <div class="col-xs-10">
+                        {{field.displayValue?field.displayValue:field.name}}
+                      </div>
+                      <div class="col-xs-1">
+                        <span class="dropdown-toggle"></span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="dropdown-menu full-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="setFunction('', field)">{{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('day', field)">Day of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('month', field)">Month of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('quarter', field)">Quarter Of {{field.name}}</a>
+                    <a class="dropdown-item" (click)="setFunction('year', field)">Year Of {{field.name}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+  </section>
+
+  <section class="qSelector-action">
+    <div class="btn-group">
+      <button class="btn btn-secondary" (click)="openFilterModal()" data-toggle="modal" data-target=".bs-example-modal-lg" type="button">Filters
+      </button>
+      <button class="btn btn-secondary" (click)="openPivotModal()" data-toggle="modal" data-target=".bs-example-modal-lg" type="button">Pivot
+      </button>
+    </div>
+    <button class="btn btn-secondary pull-right" (click)="applyChanges()" type="button">
+      <i class="fa fa-eye"></i><span class="hidden-sm-down">&nbsp;&nbsp;Apply</span>
+    </button>
+  </section>
+</div>
+<filter-modal (onSubmit)="onFilterSubmit($event)" (onCancel)="onFilterCancel($event)" #filterModal ></filter-modal>
+<pivot-modal (onSubmit)="onPivotSubmit($event)" (onCancel)="onPivotCancel($event)" #pivotModal ></pivot-modal>

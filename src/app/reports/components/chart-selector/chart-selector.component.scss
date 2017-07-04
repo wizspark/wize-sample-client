@@ -1,0 +1,58 @@
+@import '../../../../styles/_settings';
+
+.btn-chart {
+  img{
+    height:17px;
+  }
+}
+
+.chart-title{
+  color: $subitem-title;
+  display: block;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+.cSelector-action{
+  @extend %dotted-action-container;
+}
+.chart-drow{
+  > .chart-dcols{
+    .form-group{
+      padding-bottom: 1rem;
+    }
+
+    &:last-of-type{
+      .form-group{
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+//For Font Awesome use below
+/*
+.btn-chart{
+  &.btn-group{
+    > .btn{
+      width: 30px;
+      height:26px;
+      line-height: 26px;
+      padding: 0px;
+      font-size: 12px;
+      &:focus,
+      &.active:focus{
+        outline: none;
+      }
+      &:last-child:not(:first-child){
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+  }
+
+  .icn-bigno{
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+*/

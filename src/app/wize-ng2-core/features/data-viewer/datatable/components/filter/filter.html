@@ -1,0 +1,29 @@
+<app-modal #modal styleClass="modal-width-md">
+    <div class="app-modal-header">
+        <h6 class="modal-title text-uppercase weight-400">{{title}}</h6>
+    </div>
+    <div class="app-modal-body">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <label class="modal-title text-uppercase weight-400">Specify Criteria</label>
+            </div>
+        </div>
+        <div *ngFor="let f  of filterList; let i = index;">
+            <filter-item
+                    [filter]="f"
+                    [index]="i + 1"
+                    [columns]="columns"
+                    [totalCount]="filterList.length"
+                    (removeFilterEvent)="removeFilter($event)"
+                    (addFilterEvent)="addFilter()"
+                    (operatorChangeEvent)="operatorChanged($event)"
+            ></filter-item>
+        </div>
+
+        <!--<div>{{ filterQuery }}</div>-->
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveModel()">Apply</button>
+        <button type="button" class="btn btn-secondary" (click)="dismissed()">Close</button>
+    </div>
+</app-modal>

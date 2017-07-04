@@ -1,0 +1,39 @@
+@import '../../../../styles/_settings';
+.autocomplete{
+  .dropdown-menu{
+    width:100%;
+    border-radius: 0px;
+    max-height: 290px;
+    overflow: auto;
+    top: calc(100% - 13px);
+
+    .dropdown-item{
+      padding: 0 5px;
+      &:hover{
+        color: inherit;
+      }
+    }
+  }
+
+  .badge-container{
+    display: inline-block;
+    margin-right: 3px;
+    .badge{
+      background-color: $subitem-title;
+      color: $white;
+      display: inline-block;
+      padding: 1px 5px;
+      margin-top: 3px;
+      border-radius: 0.2rem;
+      a{
+        color: $white;
+        vertical-align: middle;
+        margin-right: -4px;
+        &:hover,
+        &:focus{
+          color: $white;
+        }
+      }
+    }
+  }
+}

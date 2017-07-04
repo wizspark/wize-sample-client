@@ -1,0 +1,97 @@
+<section>
+  <div class="navbar navbar-full py-1 px-2 navbar-light bg-faded sub-header">
+    <div class="media">
+      <div class="media-body media-middle">
+        <h3 class="weight-300  m-0">
+			    {{reportStatus=='list'?"Reports":(reportStatus=='create'?"New Report":(reportStatus=='edit'?"Update Report":(reportStatus=='customview'?("Report - "+staticReport.name):("Report - "+report.name))))}}
+		    </h3>
+      </div>
+      <div class="media-body media-middle">
+        <ul class="list-unstyled list-inline m-0 text-xs-right">
+          <li class="list-inline-item" *ngIf="(reportStatus=='view')">
+            <date-range-selector (dateRangeChange)="onDateRangeChange($event)"></date-range-selector>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='list')">
+            <button class="btn btn-primary" (click)="reportAction('create', null)"><span aria-hidden="true" class="fa fa-plus"></span>&nbsp;&nbsp;<span>Create Report</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='create')">
+            <button class="btn btn-secondary"  (click)="cancelReportBuilderView()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='create')">
+            <button class="btn btn-primary" (click)="isEnableCreateEditReport && saveNewReport()" [class.disabled]="!isEnableCreateEditReport" ><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Save</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='view')">
+            <button class="btn btn-secondary" (click)="reportAction('edit', report)"><span aria-hidden="true" class="fa fa-edit"></span>&nbsp;&nbsp;<span>Edit</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='view')">
+            <button class="btn btn-secondary" (click)="reportAction('delete', report)"><span aria-hidden="true" class="fa fa-trash"></span>&nbsp;&nbsp;<span>Delete</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='edit')">
+            <button class="btn btn-secondary" (click)="cancelUpdateReport()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='edit')">
+            <button class="btn btn-primary" (click)="isEnableCreateEditReport && updateReport()" [class.disabled]="!isEnableCreateEditReport" ><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Update</span></button>
+          </li>
+          <li class="list-inline-item" *ngIf="(reportStatus=='customview' || reportStatus=='view')">
+            <button class="btn btn-primary" (click)="reportAction('list', null)">
+              <span aria-hidden="true" class="fa fa-list"></span>&nbsp;&nbsp;<span>Reports</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="px-2 pt-2 pb-1" *ngIf="(reportStatus=='list')">
+  <div class="card">
+    <div class="card-block">
+      <p-dataTable [value]="allReportsData" [rows]="15" [paginator]="false" [totalRecords]="allReportsData.length" [globalFilter]="gb" [pageLinks]="3"
+                   [rowsPerPageOptions]="[10,20,50]" styleClass="c-grid">
+        <p-column header="Report Name" field="name" [sortable]="true" styleClass="col-button">
+          <ng-template let-col let-row="rowData" pTemplate="body">
+            <a href="javascript:void(0);" (click)="reportAction((row.type=='cashflow' || row.type=='chartsupport')?'customview':'view',row)">{{row[col.field]}}</a>
+          </ng-template>
+        </p-column>
+        <p-column header="Report Description" field="description" [sortable]="true" styleClass="col-button"></p-column>
+        <p-column header="Status" field="isActive" [sortable]="true" styleClass="col-button">
+          <ng-template let-col let-row="rowData" pTemplate="body">
+            {{row[col.field]?"Active":"InActive"}}
+          </ng-template>
+        </p-column>
+        <p-column field="access" header="View Access" [sortable]="true" styleClass="col-button">
+          <ng-template let-col let-row="rowData" pTemplate="body">
+            {{row[col.field]=="everyOne"?"All":"Onlyme"}}
+          </ng-template>
+        </p-column>
+        <p-column header="Actions" [style]="{'width':'180px'}">
+          <ng-template let-row="rowData" pTemplate="body">
+            <div class="dropdown dropdown-custom">
+              <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                &#8226;&#8226;&#8226;
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a href="javascript:;" class="dropdown-item" (click)="reportAction((row.type=='cashflow' || row.type=='chartsupport')?'customview':'view',row)"><i
+                  aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
+                <a class="dropdown-item" href="javascript:;" (click)="reportAction((row.type=='cashflow' || row.type=='chartsupport')?'customview':'edit',row)"><i
+                  aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                <a class="dropdown-item" href="javascript:;" (click)="reportAction((row.type=='cashflow' || row.type=='chartsupport')?'customview':'delete',row)"><i
+                  aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
+              </div>
+            </div>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+  </div>
+</section>
+<section class="px-2 pt-2 pb-1" *ngIf="(reportStatus=='create' || reportStatus=='edit')">
+  <report-builder [queryResult]="queryResult" [report]="report" [reportCategory]="reportCategory" [reportCategories]="reportCategories" (onSaveChart)="onSaveChart($event)" (onSaveActivate)="onSaveChartActivate($event)" #builder ></report-builder>
+</section>
+<section class="px-2 pt-2 pb-1" *ngIf="(reportStatus=='view')">
+  <report-list-view [queryResult]="queryResult" [report]="report" [reportCategory]="reportCategory" #reportViewer ></report-list-view>
+</section>
+<section class="px-2 pt-2 pb-1" *ngIf="(reportStatus=='customview')">
+  <custom-report-list-view [report]="staticReport" #customReportViewer></custom-report-list-view>
+</section>
+<confirmation></confirmation>

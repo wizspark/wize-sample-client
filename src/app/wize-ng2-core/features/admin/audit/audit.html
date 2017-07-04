@@ -1,0 +1,81 @@
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+    <div class="container-no">
+        <div class="media overflow-visible">
+            <div class="media-body media-middle overflow-visible">
+                <h3 class="weight-300 m-0">Audit Trail</h3>
+            </div>
+            <div class="media-right media-middle text-truncate">
+                <ul class="list-unstyled list-inline m-0 text-xs-right">
+                    <li class="list-inline-item align-middle primary-search">
+                        <input #gb type="text" class="form-control" pInputText placeholder="Search">
+                    </li>
+                    <li class="list-inline-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary" data-toggle="dropdown">
+                                <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="export()">
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                                    Export Data
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <ng-select
+                                [items]="displayModels"
+                                (data)="refreshValue($event)"
+                                placeholder="Choose Model">
+                        </ng-select>
+                    </li>
+                    <li class="list-inline-item">
+                        <date-range-selector (dateRangeChange)="onDateRangeChange($event)"></date-range-selector>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="admin-wrapper">
+    <div class="container-no p-2">
+        <div class="card">
+            <div class="card-block">
+                <p-dataTable [value]="records"
+                             [scrollable]="true" scrollWidth="100%"
+                             [expandableRows]="true" rowExpandMode="single">
+                    <p-column expander="true" [style]="{'width':'50px'}"></p-column>
+                    <p-column header="Identifier">
+                        <ng-template let-row="rowData" pTemplate>
+                            {{getRecordIdentifier(row)}}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="action" header="Action"></p-column>
+                    <p-column field="email" header="Performed By"></p-column>
+                    <p-column field="createdAt" header="Performed On">
+                        <ng-template let-row="rowData" pTemplate>
+                            {{row.createdAt  | date:'MMM d, y h:mm a'}}
+                        </ng-template>
+                    </p-column>
+                    <ng-template let-row pTemplate="rowexpansion">
+                        <p-dataTable [value]="row.diff" styleClass="nested-table">
+                            <p-column field="kind" header="Kind">
+                            </p-column>
+                            <p-column field="path" header="Path">
+                            </p-column>
+                            <p-column field="lhs" header="Old Value"></p-column>
+                            <p-column field="rhs" header="New Value"></p-column>
+                            <p-column field="index" header="Index"></p-column>
+                            <p-column field="item" header="Item">
+                                <ng-template let-key="rowData" pTemplate>
+                                    {{key.item | json}}
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </ng-template>
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+ modal-header {
+        background: #2D323E;
+        color: #fff;
+        display: block;
+        
+    }
+    .form-control{
+        font-size: inherit;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0px;
+        padding-top: 1.8rem;
+        &:focus{
+            border-bottom: 1px solid #1f7ad7;
+        }
+    }
+    button{
+     &.close{
+             color: #fff !important;        
+         }
+
+ } 

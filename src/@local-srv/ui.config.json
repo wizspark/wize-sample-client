@@ -1,0 +1,2951 @@
+{
+  "routes": [
+    {
+      "name": "Adjustments",
+      "route": "adjuster",
+      "pageType": "standard",
+      "entities": [
+        {
+          "name": "Adjuster",
+          "primary": true,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/adjusters",
+            "association": "",
+            "order": "",
+            "post": "/api/adjusters",
+            "patch": "/api/adjusters",
+            "delete": "/api/adjusters"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "name",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "unique": true,
+              "displayName": "Name",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "type",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Type",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "allowMultiple",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": false,
+              "displayName": "Allow Multiple",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "AdjusterOption",
+              "type": "hasMany",
+              "displayName": "Options",
+              "required": false,
+              "referenceFields": [
+                "qualification"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "AdjusterOption",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/adjusteroptions",
+            "association": "",
+            "order": "",
+            "post": "/api/adjusteroptions",
+            "patch": "/api/adjusteroptions",
+            "delete": "/api/adjusteroptions"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "qualification",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "unique": true,
+              "displayName": "Qualification",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Adjustment",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "rule",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "Adjuster",
+              "type": "belongsTo",
+              "displayName": "Adjuster",
+              "required": false,
+              "referenceFields": [
+                "name"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "AdjusterException",
+              "type": "hasMany",
+              "displayName": "Adjuster Exceptions",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "ProductFamily",
+              "type": "belongsToMany",
+              "displayName": "Families",
+              "required": false,
+              "options": {
+                "through": "AdjusterOptionsProductFamily"
+              },
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        }
+      ],
+      "actions": {
+        "noHeader": false,
+        "headerOptions": {
+          "noSearch": false,
+          "noFilter": false,
+          "noImport": false,
+          "noExport": false,
+          "noCreate": false,
+          "noDelete": false,
+          "noEdit": false,
+          "noColumnSelector": false
+        }
+      }
+    },
+    {
+      "name": "Analytics",
+      "route": "analytics",
+      "pageType": "custom",
+      "entities": [],
+      "actions": {
+        "noHeader": false,
+        "headerOptions": {
+          "noSearch": false,
+          "noFilter": false,
+          "noImport": false,
+          "noExport": false,
+          "noCreate": false,
+          "noDelete": false,
+          "noEdit": false,
+          "noColumnSelector": false
+        }
+      }
+    },
+    {
+      "name": "Pipeline",
+      "route": "leads",
+      "pageType": "custom",
+      "entities": [],
+      "actions": {
+        "noHeader": false,
+        "headerOptions": {
+          "noSearch": false,
+          "noFilter": false,
+          "noImport": false,
+          "noExport": false,
+          "noCreate": false,
+          "noDelete": false,
+          "noEdit": false,
+          "noColumnSelector": false
+        }
+      }
+    },
+    {
+      "name": "Pricing",
+      "route": "loan-pricing",
+      "pageType": "custom",
+      "entities": [],
+      "actions": {
+        "noHeader": false,
+        "headerOptions": {
+          "noSearch": false,
+          "noFilter": false,
+          "noImport": false,
+          "noExport": false,
+          "noCreate": false,
+          "noDelete": false,
+          "noEdit": false,
+          "noColumnSelector": false
+        }
+      }
+    },
+    {
+      "name": "products",
+      "route": "productfamily",
+      "pageType": "standard",
+      "entities": [
+        {
+          "name": "ProductFamily",
+          "primary": true,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/productfamilies",
+            "association": "",
+            "order": "",
+            "post": "/api/productfamilies",
+            "patch": "/api/productfamilies",
+            "delete": "/api/productfamilies"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "family",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "unique": true,
+              "displayName": "Family",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": false,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "description",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Description",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "investor",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Investor",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": false,
+              "displayName": "Active?",
+              "defaultValue": true,
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startTime",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_TIME",
+              "required": false,
+              "displayName": "Rate Cut-off Start",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endTime",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_TIME",
+              "required": false,
+              "displayName": "Rate Cut-Off End",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "Product",
+              "type": "hasMany",
+              "displayName": "Products",
+              "required": false,
+              "referenceFields": [
+                "name"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "FinanceCharge",
+              "type": "hasMany",
+              "displayName": "Finance Charges",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "HardStopGuideline",
+              "type": "hasMany",
+              "displayName": "Hard Stop Guidelines",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "group",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "SoftStopGuideline",
+              "type": "hasMany",
+              "displayName": "Soft Stop Guidelines",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "group",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "AutoAdjuster",
+              "type": "hasMany",
+              "displayName": "Auto Adjustments",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "group",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "AdjusterOption",
+              "type": "belongsToMany",
+              "displayName": "AdjustersOptions",
+              "required": false,
+              "options": {
+                "through": "AdjusterOptionsProductFamily"
+              },
+              "referenceFields": [
+                "qualification"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "AdjusterException",
+              "type": "hasMany",
+              "displayName": "Adjustment Exceptions",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "Product",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/products",
+            "association": "",
+            "order": "",
+            "post": "/api/products",
+            "patch": "/api/products",
+            "delete": "/api/products"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "name",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Name",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "code",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "unique": true,
+              "displayName": "Code",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "floor",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Floor",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "maxDiscount",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Max Discount",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "type",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Type",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "term",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Term",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "interestOnly",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Interest Only",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "arm",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": false,
+              "displayName": "ARM?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "interestOnlyTerm",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": false,
+              "displayName": "Interest Only Period",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "balloonDueIn",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": false,
+              "displayName": "Balloon Due in",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "initialFixedRatePeriod",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": false,
+              "displayName": "Initial Fixed Rate Period",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "normalRateAdjustmentPeriod",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": false,
+              "displayName": "Normal Rate Adjustment Period",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "firstRateAdjustmentCap",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "1st Rate Adjustment CAP",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "normalRateAdjustmentCap",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Normal Rate Adjustment CAP",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "lifetimeRateDecreaseCap",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Lifetime Rate Decrease CAP",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "lifetimeRateIncreaseCap",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Lifetime Rate Increase CAP",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "index",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Index",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "margin",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "FLOAT",
+              "required": false,
+              "displayName": "Margin",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "ProductFamily",
+              "type": "belongsTo",
+              "displayName": "Family",
+              "required": false,
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "FinanceCharge",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/financecharges",
+            "association": "",
+            "order": "",
+            "post": "/api/financecharges",
+            "patch": "/api/financecharges",
+            "delete": "/api/financecharges"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "rule",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "priority",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Priority",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Fee",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "eligibilityMessage",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Eligibility",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "ProductFamily",
+              "type": "belongsTo",
+              "displayName": "Family",
+              "required": false,
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "HardStopGuideline",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/hardstopguidelines",
+            "association": "[{ \"model\": \"HardStopGuidelineType\"}]",
+            "order": "{\"HardStopGuidelineTypeId\": \"ASC\"}",
+            "post": "/api/hardstopguidelines",
+            "patch": "/api/hardstopguidelines",
+            "delete": "/api/hardstopguidelines"
+          },
+          "viewOptions": {
+            "type": "group",
+            "isSelection": false,
+            "paginator": false,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "sortField": "HardStopGuidelineType.type",
+            "rowGroupMode": "subheader",
+            "groupField": "HardStopGuidelineType.type",
+            "expandableRowGroups": true,
+            "sortableRowGroup": false,
+            "expandableRows": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "matchCondition",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "priority",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Priority",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Output",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "eligibility",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Eligibility",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "ProductFamily",
+              "type": "belongsTo",
+              "displayName": "Family",
+              "required": false,
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "HardStopGuidelineType",
+              "type": "belongsTo",
+              "displayName": "Type",
+              "required": false,
+              "referenceFields": [
+                "type"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "SoftStopGuideline",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/softstopguidelines",
+            "association": "[{ \"model\": \"SoftStopGuidelineType\"}]",
+            "order": "{\"SoftStopGuidelineTypeId\": \"ASC\"}",
+            "post": "/api/softstopguidelines",
+            "patch": "/api/softstopguidelines",
+            "delete": "/api/softstopguidelines"
+          },
+          "viewOptions": {
+            "type": "group",
+            "isSelection": false,
+            "paginator": false,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "sortField": "SoftStopGuidelineType.type",
+            "rowGroupMode": "subheader",
+            "groupField": "SoftStopGuidelineType.type",
+            "expandableRowGroups": true,
+            "sortableRowGroup": false,
+            "expandableRows": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "matchCondition",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "priority",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Priority",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Output",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "eligibility",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Eligibility",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "ProductFamily",
+              "type": "belongsTo",
+              "displayName": "Family",
+              "required": false,
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "SoftStopGuidelineType",
+              "type": "belongsTo",
+              "displayName": "Type",
+              "required": false,
+              "referenceFields": [
+                "type"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "AutoAdjuster",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/autoadjusters",
+            "association": "[{\"model\": \"AutoAdjusterType\"}]",
+            "order": "{\"AutoAdjusterTypeId\": \"ASC\"}",
+            "post": "/api/autoadjusters",
+            "patch": "/api/autoadjusters",
+            "delete": "/api/autoadjusters"
+          },
+          "viewOptions": {
+            "type": "group",
+            "isSelection": false,
+            "paginator": false,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "sortField": "AutoAdjusterType.Type",
+            "rowGroupMode": "subheader",
+            "groupField": "AutoAdjusterType.Type",
+            "expandableRowGroups": true,
+            "sortableRowGroup": false,
+            "expandableRows": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "rule",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "priority",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Priority",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Output",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "qualification",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Eligibility",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "ProductFamily",
+              "type": "belongsTo",
+              "displayName": "Family",
+              "required": false,
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "AutoAdjusterType",
+              "type": "belongsTo",
+              "displayName": "Type",
+              "required": false,
+              "referenceFields": [
+                "type"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "AdjusterOption",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/adjusteroptions",
+            "association": "",
+            "order": "",
+            "post": "/api/adjusteroptions",
+            "patch": "/api/adjusteroptions",
+            "delete": "/api/adjusteroptions"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "qualification",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "unique": true,
+              "displayName": "Qualification",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Adjustment",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "rule",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "Adjuster",
+              "type": "belongsTo",
+              "displayName": "Adjuster",
+              "required": false,
+              "referenceFields": [
+                "name"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "AdjusterException",
+              "type": "hasMany",
+              "displayName": "Adjuster Exceptions",
+              "required": false,
+              "referenceFields": [
+                "rule"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "ProductFamily",
+              "type": "belongsToMany",
+              "displayName": "Families",
+              "required": false,
+              "options": {
+                "through": "AdjusterOptionsProductFamily"
+              },
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "AdjusterException",
+          "primary": false,
+          "template": "datatable",
+          "apis": {
+            "get": "/api/adjusterexceptions",
+            "association": "",
+            "order": "",
+            "post": "/api/adjusterexceptions",
+            "patch": "/api/adjusterexceptions",
+            "delete": "/api/adjusterexceptions"
+          },
+          "viewOptions": {
+            "type": "basic",
+            "isSelection": false,
+            "paginator": true,
+            "rows": 10,
+            "stacked": "stacked",
+            "responsive": true,
+            "resizableColumns": true,
+            "reorderableColumns": true,
+            "disabled": false
+          },
+          "attributes": [
+            {
+              "name": "id",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "autoIncrement": true,
+              "primaryKey": true,
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Created At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "updatedAt",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": true,
+              "displayName": "Updated At",
+              "default": "curr_date",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "type",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Type",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "rule",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "WIZE_CODE",
+              "required": false,
+              "displayName": "Rule",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "startDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective Start Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "endDate",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "DATE",
+              "required": false,
+              "displayName": "Effective End Date",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "isActive",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "BOOLEAN",
+              "required": true,
+              "defaultValue": true,
+              "displayName": "Active?",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "priority",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "INTEGER",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Priority",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "output",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "TEXT",
+              "required": true,
+              "allowNull": false,
+              "displayName": "Output",
+              "viewOptions": {
+                "noView": false,
+                "noUnique": true,
+                "noSortable": false,
+                "noFilterable": false,
+                "noEdit": false
+              }
+            },
+            {
+              "name": "createdBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Created By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            },
+            {
+              "name": "modifiedBy",
+              "summary": false,
+              "sortable": false,
+              "filterable": false,
+              "type": "STRING",
+              "required": false,
+              "displayName": "Modified By",
+              "viewOptions": {
+                "noView": true,
+                "noUnique": true,
+                "noSortable": true,
+                "noFilterable": true,
+                "noEdit": true
+              }
+            }
+          ],
+          "relationships": [
+            {
+              "target": "AdjusterOption",
+              "type": "belongsTo",
+              "displayName": "Adjustment",
+              "required": false,
+              "referenceFields": [
+                "qualification"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            },
+            {
+              "target": "ProductFamily",
+              "type": "belongsTo",
+              "displayName": "Family",
+              "required": false,
+              "referenceFields": [
+                "family"
+              ],
+              "viewOptions": {
+                "type": "basic",
+                "isSelection": false,
+                "paginator": true,
+                "rows": 10,
+                "stacked": "stacked",
+                "responsive": true,
+                "resizableColumns": true,
+                "reorderableColumns": true,
+                "disabled": false
+              }
+            }
+          ]
+        }
+      ],
+      "actions": {
+        "noHeader": false,
+        "headerOptions": {
+          "noSearch": false,
+          "noFilter": false,
+          "noImport": false,
+          "noExport": false,
+          "noCreate": false,
+          "noDelete": false,
+          "noEdit": false,
+          "noColumnSelector": false
+        }
+      }
+    },
+    {
+      "name": "Reports",
+      "route": "reports",
+      "pageType": "custom",
+      "entities": [],
+      "actions": {
+        "noHeader": false,
+        "headerOptions": {
+          "noSearch": false,
+          "noFilter": false,
+          "noImport": false,
+          "noExport": false,
+          "noCreate": false,
+          "noDelete": false,
+          "noEdit": false,
+          "noColumnSelector": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+  <div class="container-no">
+
+    <div class="media overflow-visible">
+      <div class="media-body media-middle overflow-visible">
+        <h3 class="weight-300 m-0">Pricing Lookup Data</h3>
+      </div>
+      <div class="media-right media-middle text-truncate">
+        <ul class="list-unstyled list-inline mb-0">
+          <li class="list-inline-item">
+            <button class="btn btn-primary" (click)="addPricingLookupRecord()"><i class="fa fa-plus"></i> <span
+              class="hidden-sm-down">&nbsp;Add Pricing Lookup Data</span></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="admin-wrapper">
+  <div class="container-no p-2">
+    <div class="card">
+      <div class="card-block">
+        <p-dataTable [value]="pricingLookupRecords" [rows]="15" [globalFilter]="rc" [paginator]="false" [pageLinks]="3"
+                     [rowsPerPageOptions]="[10,20,50]" scrollWidth="100%">
+          <p-column field="key" header="Key" [style]="{width: '250px'}"></p-column>
+          <p-column field="description" header="Description" [style]="{width: '280px'}"></p-column>
+          <p-column field="isActive" header="Active"></p-column>
+          <p-column field="order" header="Display Order"></p-column>
+          <p-column header="Actions">
+            <ng-template let-row="rowData" pTemplate="body">
+              <div class="dropdown dropdown-custom pl-1">
+                <a class="action-dot" href="javascript:;" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                  &#8226;&#8226;&#8226;
+                </a>
+                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="javascript:;" (click)="editPricingLookupRecord(row)"><i aria-hidden="true"
+                                                                                                   class="fa fa-pencil"></i>
+                    &nbsp;&nbsp;Edit</a>
+                  <a class="dropdown-item" href="javascript:;" (click)="deletePricingLookupRecord(row)"><i aria-hidden="true"
+                                                                                                     class="fa fa-trash-o"></i>
+                    &nbsp;&nbsp;Delete</a>
+                </div>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+<div (click)="onContainerClicked($event)" class="modal fade panel-right" tabindex="-1" role="dialog"
+     [ngClass]="{'in': visibleAnimate}"
+     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <add-pricing-lookup-data></add-pricing-lookup-data>
+</div>
+<confirmation></confirmation>

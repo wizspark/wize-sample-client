@@ -1,0 +1,125 @@
+@import '../../../../styles/_settings';
+.qSelector-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+    h4[role="heading"] {
+        font-size: .85rem;
+        color: $subitem-title;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+    >.list-item {
+        //padding-left: 1rem;
+        .form-group {
+            &.disabled {
+                opacity: 0.4;
+                pointer-events: none;
+                //cursor: not-allowed;
+            }
+        }
+    }
+    .chk-group {
+        padding-top: 19px;
+        margin-bottom: 0;
+        text-align: right;
+        i.fa {
+            color: $grid-border-dark;
+            font-size: 12px;
+            padding-right: 3px;
+            &.icn-integer {
+                font-size: 15px;
+                font-weight: 700;
+                vertical-align: middle;
+                font-style: normal;
+            }
+        }
+    }
+}
+
+.qSelector-action {
+    @extend %dotted-action-container;
+    &:after {
+        clear: both;
+    }
+    .btn-group {
+        >.btn {
+            //Comment line below to perform operations
+            //pointer-events: none;
+        }
+        >.btn:last-child:not(:first-child) {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+    }
+}
+
+.qSelector-filter {
+    border-right: 1px solid $grid-border-dark;
+    padding-right: 1.25rem;
+}
+.full-menu[aria-labelledby="dropdownMenuButton"]{
+  min-width: 100%;
+  > a{
+    cursor: pointer;
+  }
+}
+
+/*Styled Input*/
+
+
+/*
+.z-depth-0 {
+  box-shadow: none !important;
+}
+
+.z-depth-1{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.z-depth-1-half {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+.z-depth-2 {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-3 {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-4 {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-5 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+.z-depth-hover-0:hover {
+  box-shadow: none !important;
+}
+
+.z-depth-hover-1:hover {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.z-depth-hover-1-half:hover {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+.z-depth-hover-2:hover {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-hover-3:hover {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-hover-4:hover {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-hover-5:hover {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}*/

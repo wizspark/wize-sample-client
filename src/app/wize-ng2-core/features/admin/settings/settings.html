@@ -1,0 +1,76 @@
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+  <div class="container-no">
+    <div class="media overflow-visible">
+      <div class="media-body media-middle overflow-visible">
+        <h3 class="weight-300 m-0">Settings</h3>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="admin-wrapper">
+  <div class="container-no p-2">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="text-muted">
+              Use this section to store all configurable key/value pairs. These can be accessed in the rules using
+              <code>lookUps.settings</code>
+              object.
+            </p>
+            <div class="row">
+              <div class="col-md-8">
+                <p-dataTable [value]="fixedConfigEntries" *ngIf="fixedConfigEntries.length > 0">
+                  <p-column header="" field="key" [style]="{'width': '250px'}"></p-column>
+                  <p-column header="" [style]="{'width': '250px'}">
+                    <ng-template let-entry="rowData" pTemplate>
+                      <label class="switch material m-0" *ngIf="entry.type === 'boolean'">
+                        <input type="checkbox" [(ngModel)]="entry.value">
+                        <span class="switch-label"></span>
+                      </label>
+                    </ng-template>
+                  </p-column>
+                  <p-column></p-column>
+                </p-dataTable>
+              </div>
+            </div>
+            <div class="row pt-2" >
+              <div class="col-md-8">
+                <form class="form-inline createForm" [formGroup]="form" style="margin-left: 5px">
+                  <div class="form-group material-style" style="width: 260px;">
+                    <input class="form-control" formControlName="key" name="key" type="text" placeholder="Key">
+                  </div>
+                  <div class="form-group material-style" style="width: 540px;">
+                    <input class="form-control" style="width: 520px;" formControlName="value" name="value" type="text" placeholder="Value">
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary"
+                            (click)="addEntry(form.value)"
+                            [disabled]="!form.valid">Create
+                    </button>
+                  </div>
+                </form>
+                <div class="pt-2">
+                  <p-dataTable [value]="customConfigEntries" *ngIf="customConfigEntries.length > 0">
+                    <p-column header="Key" field="key" [style]="{'width': '250px'}"></p-column>
+                    <p-column header="Value" field="value" [style]="{'width': '550px'}">
+                      <ng-template let-entry="rowData" pTemplate>
+                        <code>{{ entry['value'] | json }}</code>
+                      </ng-template>
+                    </p-column>
+                    <p-column [style]="{'width': '50px'}">
+                      <ng-template let-entry="rowData" pTemplate>
+                        <button class="btn btn-secondary btn-sm" (click)="removeEntry(entry)"><i class="fa fa-close"></i></button>
+                      </ng-template>
+                    </p-column>
+                  </p-dataTable>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

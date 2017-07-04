@@ -1,0 +1,102 @@
+// overrides
+//
+// Copy variables from `_variables.scss` to this file to override default values
+// without modifying source files.
+
+
+
+
+.logo-md{
+  text-indent: -99999rem;
+  background-size: 100px 32px;
+  display: inline-block;
+  width: 100px;
+  height: 32px;
+  bottom: 3px;
+  position: relative;
+  background-image: url(/assets/scss/wizni-framework/images/logo/logo-md@1x.png);
+
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2 / 1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    background-image: url(/assets/scss/wizni-framework/images/logo/logo-md@2x.png);
+  }
+
+}
+
+
+.logo-sm{
+  text-indent: -99999rem;
+  background-size: 75px 24px;
+  display: inline-block;
+  width: 75px;
+  height: 24px;
+  bottom: 3px;
+  position: relative;
+  background-image: url(/assets/scss/wizni-framework/images/logo/logo-sm@1x.png);
+
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2 / 1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    background-image: url(/assets/scss/wizni-framework/images/logo/logo-sm@2x.png);
+  }
+
+}
+
+
+
+
+
+
+.logo-whitetxt-md{
+  text-indent: -99999rem;
+  background-size: 100px 32px;
+  display: inline-block;
+  width: 100px;
+  height: 32px;
+  bottom: 3px;
+  position: relative;
+  background-image: url(/assets/scss/wizni-framework/images/logo/logo-whitetxt-md@1x.png);
+
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2 / 1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    background-image: url(/assets/scss/wizni-framework/images/logo/logo-whitetxt-md@2x.png);
+  }
+
+}
+
+
+.logo-whitetxt-sm{
+  text-indent: -99999rem;
+  background-size: 75px 24px;
+  display: inline-block;
+  width: 75px;
+  height: 24px;
+  bottom: 3px;
+  position: relative;
+  background-image: url(/assets/scss/wizni-framework/images/logo/logo-whitetxt-sm@1x.png);
+
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2 / 1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    background-image: url(/assets/scss/wizni-framework/images/logo/logo-whitetxt-sm@2x.png);
+  }
+
+}

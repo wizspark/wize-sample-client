@@ -1,0 +1,96 @@
+@import '../../../../styles/wizni-framework/scss/framework/_variables';
+$border-radius:.20rem !default;
+$grey: #727678;
+
+.dashboard-box {
+  padding: 0px 0 5px;
+
+  .text-truncate {
+    overflow: visible;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 300;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  p {
+    color: #727678;
+    font-size: 13px;
+  }
+
+  .currency {
+    font-size: 13px;
+  }
+
+  .incentive-box {
+    border: 1px solid #ea6965;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    border-radius: $border-radius;
+    background: #fff;
+    color: #ea6965;
+    padding: 15px;
+
+    p {
+      color: #727678;
+    }
+
+    img {
+      max-width: 65px;
+    }
+  }
+
+  .retention-box {
+    border: 1px solid #3cc595;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    border-radius: $border-radius;
+    background: #fff;
+    color: #3cc595;
+    padding: 15px;
+
+    img {
+      max-width: 70px;
+      margin: 5px 0 0;
+      float: right;
+    }
+  }
+
+  .approved-box {
+    border: 1px solid #197ce0;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    border-radius: $border-radius;
+    background: #fff;
+    color: #197ce0;
+    padding: 15px;
+
+    img {
+      max-width: 70px;
+    }
+  }
+
+  .ytd-box {
+    border: 1px solid #825ab8;
+    -webkit-border-radius: $border-radius;
+    -moz-border-radius: $border-radius;
+    border-radius: $border-radius;
+    background: #fff;
+    color: #825ab8;
+    padding: 15px;
+
+    img {
+      max-width: 60px;
+    }
+  }
+}

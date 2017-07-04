@@ -1,0 +1,17 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <title>chart-number</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Page-1">
+   <g fill="#E85B5D" id="chart-number">
+    <path fill="#ffffff" id="2" d="m21.12552,27.78301l-6.13442,0l0,-12.591c0,-1.52915 0.03059,-2.92814 0.09178,-4.19701c-0.37734,0.48803 -0.84647,0.99774 -1.40739,1.52914l-2.53944,2.22864l-3.13605,-4.09939l7.6795,-6.65339l5.44602,0l0,23.78301z"/>
+   </g>
+  </g>
+ </g>
+</svg>

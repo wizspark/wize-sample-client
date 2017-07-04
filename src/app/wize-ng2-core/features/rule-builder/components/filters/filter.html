@@ -1,0 +1,16 @@
+<div (click)="activate()">
+  <ng-content></ng-content>
+</div>
+
+<app-modal #modal styleClass="modal-width-md">
+  <div class="app-modal-header">
+    <h6 class="modal-title text-uppercase weight-400">Apply Filters</h6>
+  </div>
+  <div class="app-modal-body">
+    <rule-group [group]="group" [fields]="fields" [rootLevel]="true"></rule-group>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="dismissed()">Close</button>
+  </div>
+</app-modal>

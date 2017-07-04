@@ -1,0 +1,132 @@
+@import '../../../../../../../styles/wizni-framework/scss/framework/variables';
+@import '../../../../../../../styles/wizni-framework/scss/framework/mixins';
+
+
+body{
+	background-color: #f5f7f8; /*#F0F3F4*/
+	&.have-navbar-fixed-top{
+		padding-top: 62px;
+	}
+}
+
+
+.sub-header{
+	border-bottom: 1px solid $card-border-color;
+
+	.btn{
+		height:auto;
+		margin-top:0px;
+	}
+
+	.breadcrumb{
+		background: none;
+		padding: 0;
+		margin: 0;
+		font-size: 12px;
+		> li{
+			display: inline-block;
+			+ li {
+				&:before{
+				padding-right: .5rem;
+				padding-left: .5rem;
+				color: #818a91;
+				content: "/";
+				}
+			}
+		}
+
+		>.active{
+			color: #818a91;
+		}
+		a{
+			color:#acaeb1;
+		}
+	}
+}
+
+
+
+
+
+
+
+.primary-search{
+	position: relative;
+	.form-control{
+		width:200px;
+		padding-right: 36px;
+	}
+	&:before{
+		content: "\56";
+		display: inline-block;
+		font-family: "wizni-iconset";
+		position: absolute;
+		top: 0px;
+		right: 0.75rem;
+		height: 22px;
+		width: 22px;
+		bottom: 0px;
+		margin: auto;
+		color: rgba(0, 0, 0, 0.15);
+	}
+}
+
+
+
+
+
+
+
+
+.customizer{
+	position: fixed;
+	height: 100%;
+	width: 400px;
+	top: 0px;
+	right: -400px;
+	z-index: 1031;
+	border-left:1px solid #ccc;
+	padding: 30px;
+	.toggle-customizer{
+		position: absolute;
+		top: 0px;
+		left: -44px;
+		bottom: 0px;
+		margin: auto;
+		height: 38px;
+		border-right-color:#fff;
+	}
+	&.open{
+		right: 0px;
+	}
+}
+
+
+.overflow-visible{
+	overflow: visible !important;
+}
+
+.admin-wrapper{
+	margin-left: 200px;
+}
+
+.logo{
+	margin: 0px 0px 0 -21px;
+    padding: 12px 13px 11px 13px;
+    background: #1a212a;
+  img{
+    height:21px;
+  }
+}
+.lrm-logo{
+  color: $brand-danger;
+  font-weight: 700;
+  display: inline-block;
+  font-size: 17px;
+  padding:1px 0 0 8px;
+}
+
+
+.display-in-block{
+	display: inline-block;
+}

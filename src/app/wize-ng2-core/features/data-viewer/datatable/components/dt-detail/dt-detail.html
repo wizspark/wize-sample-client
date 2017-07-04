@@ -1,0 +1,100 @@
+<div *ngIf="dataTableInputConfig.isHeader && entity"
+     class="navbar navbar-full py-1 px-2 navbar-light bg-faded sub-header">
+    <dt-header
+            [entity]="entity"
+            [columns]="allColumns"
+            [headerOptions]="dataTableInputConfig.headerOptions"
+            (resetColumnsEvent)="resetColumns($event)"
+            (updateColumnsEvent)="updateColumns($event)"
+            (searchEvent)="searchRecords($event)"
+            (addRowEvent)="addRow($event)"
+            (importEvent)="importData($event)"
+            (exportEvent)="exportData($event)"
+            (filterEvent)="showFilterModal($event)"
+    >
+    </dt-header>
+</div>
+<div [ngClass]="{ 'p-2' : dataTableInputConfig.isHeader }">
+    <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">
+        <div [ngClass]="{ 'card-block' : dataTableInputConfig.isHeader}">
+            <p-dataTable styleClass="c-grid" [value]="rows"
+                         [lazy]="true"
+                         (onLazyLoad)="getModelData($event)"
+                         expandableRows="true"
+                         [totalRecords]="totalRecords"
+                         [rows]="limit"
+                         [paginator]="paginator"
+                         [stacked]="stacked"
+                         [responsive]="true"
+                         expandableRows="true"
+                         resizableColumns="true"
+                         reorderableColumns="true">
+                <p-column expander="true" styleClass="col-icon"></p-column>
+                <p-column *ngFor="let col of activeColumns" [field]="col.name" [header]="col.displayName" [sortable]="true">
+                    <ng-template let-row="rowData" pTemplate>
+            <span [ngSwitch]="col.type">
+                <span *ngSwitchCase="'datetime'">{{row[col.name] | date:'mediumDate' | uppercase}}</span>
+                <span *ngSwitchCase="'WIZE_MONEY'">{{row[col.name] | currency:'USD':true }}</span>
+                  <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;">
+                    <span class="fa fa-sitemap" (click)="showRuleEditor(row, col.name)"></span>
+                  </a>
+                <span *ngSwitchDefault>{{row[col.name]}}</span>
+            </span>
+                    </ng-template>
+                </p-column>
+                <p-column header="Actions" [style]="{'width':'180px'}">
+                    <ng-template let-row="rowData" pTemplate="body">
+                        <div class="dropdown dropdown-custom">
+                            <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a *ngIf="header" href="javascript:;" class="dropdown-item" (click)="showRow(row)"><i
+                                        aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
+                                <a class="dropdown-item" href="javascript:;" (click)="editRow(row)"><i
+                                        aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                                <a class="dropdown-item" href="javascript:;" (click)="deleteRow(row)"><i
+                                        aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="false" styleClass="col-button">
+                    <ng-template pTemplate="header">
+                    </ng-template>
+                    <ng-template let-row="rowData" pTemplate="body">
+                        <button *ngIf="header" class="btn btn-sm action-btn" type="button" pButton
+                                (click)="showRow(row)"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-sm action-btn" type="button" pButton (click)="editRow(row)"><i
+                                class="fa fa-pencil"></i></button>
+                        <button class="btn btn-sm action-btn" type="button" pButton (click)="deleteRow(row)"><i
+                                class="fa fa-trash"></i></button>
+                    </ng-template>
+                </p-column>
+                <ng-template let-car pTemplate="rowexpansion">
+                    <div class="depend-table">
+                        <ul class="nav nav-tabs app-tabs">
+                            <li class="nav-item" *ngFor="let tab of entity.viewOptions.tabs; let j = index">
+                                <a class="nav-link" data-toggle="tab" role="tab" [class.active]="isTabActive(j)"
+                                   (click)="updateTabIndex(j)">{{ tab }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div *ngFor="let dt of entity.viewOptions.tabs; let p = index;" class="tab-pane" [id]="dt"
+                                 role="tabpanel" [class.active]="isTabActive(p)">
+                                <!--<dt-basic  [routes]="routes" [entityName]="dt" [header]="false"></dt-basic>-->
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataTable>
+        </div>
+    </div>
+</div>
+
+<add-edit [name]="entity.name" (modelChanged)="refreshModel($event)"></add-edit>
+<import-data></import-data>
+<filter [name]="entity.name"></filter>
+<rule-builder #ruleBuilder></rule-builder>
+

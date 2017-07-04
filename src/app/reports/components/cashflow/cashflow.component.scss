@@ -1,0 +1,11 @@
+@import '../../../../styles/wizni-framework/scss/framework/variables';
+@import '../../../../styles/wizni-framework/scss/framework/mixins';
+
+chart {
+  display: block;
+}
+
+.custom-height{
+  max-height:240px;
+  overflow: auto;
+}

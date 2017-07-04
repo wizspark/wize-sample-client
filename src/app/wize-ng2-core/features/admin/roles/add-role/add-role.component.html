@@ -1,0 +1,24 @@
+<modal [animation]="true" #modal (onDismiss)="dismiss()"  class="panel-right" [size]="sm">
+    <modal-header [showClose]="true">
+        <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} User</h5>
+    </modal-header>
+    <modal-body class="edit-rec">
+        <form [formGroup]="form">
+            <div class="row mb-1">
+                <div class="col-sm-12">
+                    <div class="form-group material-style" [class.has-error]="name.invalid && name.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="name">
+                        <label>Name</label>
+                        <small *ngIf="name.invalid && name.touched" class="form-text">
+                            Name is invalid.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdateRole()">Save</button>
+    </modal-footer>
+</modal>

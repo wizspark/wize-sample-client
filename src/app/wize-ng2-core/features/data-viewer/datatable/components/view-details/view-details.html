@@ -1,0 +1,22 @@
+<app-modal #modal [styleClass]="styleClass">
+    <div class="app-modal-header">
+        <h6 class="modal-title text-uppercase weight-400">{{title}}</h6>
+    </div>
+    <div class="app-modal-body">
+        <div class="row mb-2" *ngIf="data">
+            <div class="col-sm-6" *ngFor="let attr of data.customFormData.attributes">
+                <div class="form-group material-style">
+                    <label [attr.for]="attr.name">
+                        {{ attr.displayName }}
+                    </label>
+                    <div class="form-group material-style" [ngSwitch]="attr.type">
+                        <span class="form-control">{{ attr.value }} &nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="dismissed()">Close</button>
+    </div>
+</app-modal>

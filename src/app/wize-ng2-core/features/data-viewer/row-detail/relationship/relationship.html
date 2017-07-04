@@ -1,0 +1,6 @@
+<div [ngSwitch]="relationship.viewOptions.type">
+    <dt-detail *ngSwitchCase="'detail'"
+               [dataTableInputConfig]="config"></dt-detail>
+    <dt-group *ngSwitchCase="'group'" [dataTableInputConfig]="config"></dt-group>
+    <dt-basic *ngSwitchDefault [dataTableInputConfig]="config"></dt-basic>
+</div>

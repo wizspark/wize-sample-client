@@ -1,0 +1,124 @@
+<div class="">
+  <div class="" *ngIf="report">
+
+    <!--Big Number Charts-->
+
+    <div *ngIf="!chartData.chartErrorFlag">
+      <div *ngIf="report.type == 'bignumber'">
+        <div class="card">
+          <div class="card-block">
+            <div class="dashboard-box m-b-2">
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 offset-lg-4 offset-xl-4 col-md-6 offset-md-3 p-b-1">
+                  <div class="incentive-box">
+                    <div class="media m-b-0">
+                      <section>
+                        <h2 [title]="chartData.title">{{chartData.title}}</h2>
+                        <h1 [title]="chartData.value">
+                              <span>
+                                <span class="pre-sup-title" *ngIf="chartData.preText && chartData.isPreTextSuperscript">
+                                  <sup>{{chartData.preText}}</sup>
+                                </span>
+                                <span class="pre-title" *ngIf="chartData.preText && !chartData.isPreTextSuperscript">{{chartData.preText}}</span>
+                                  {{chartData.value}}
+                                <span class="post-title" *ngIf="chartData.postText && !chartData.isPostTextSuperscript">$</span>
+                                <span class="post-sup-title" *ngIf="chartData.postText && chartData.isPostTextSuperscript">
+                                  <sup>{{chartData.postText}}</sup>
+                                </span>
+                              </span></h1>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        TABULAR DATA
+        <div class="card">
+          <div class="card-block" *ngIf="queryResult">
+            <p-dataTable [value]="queryResult" scrollable="true" [responsive]="true" class="report-table" [scrollHeight]="600">
+              <p-header>{{chartData.title}}</p-header>
+              <p-column *ngFor="let field of tableDisplayColumns" [field]="field.columnName"
+                        [header]="chartData.columns[field.columnName]" [sortable]="true">
+                <ng-template let-row="rowData" pTemplate="body">
+                  <div [ngSwitch]="field.columnType">
+                    <span *ngSwitchCase="'DATE'" [innerHTML]="toDate(row[field.columnName])"></span>
+                    <span *ngSwitchCase="'DOUBLE'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchCase="'FLOAT'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchCase="'INTEGER'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchDefault [innerHTML]="row[field.columnName]"></span>
+                  </div>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+
+      <!--Other Charts-->
+      <div class="" *ngIf="report.type !== 'bignumber' && report.type !=='table'">
+        <div class="card mb-2">
+          <div class="card-block">
+            <h4 class="weight-300 mb-1">Chart Data</h4>
+            <div *ngIf="isReady && chartData && chartData.options">
+              <p-chart class="report-chart" [type]="chartData.chartType" [data]="chartData" [options]="chartData.options" height="400" #reportChart></p-chart>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-block" *ngIf="queryResult">
+            <h4 class="weight-300 mb-1">Tabular Data</h4>
+            <p-dataTable [value]="queryResult" scrollable="true" [responsive]="true" class="report-table" [scrollHeight]="600">
+              <p-header>{{chartData.title}}</p-header>
+              <p-column *ngFor="let field of tableDisplayColumns" [field]="field.columnName"
+                        [header]="chartData.columns[field.columnName]" [sortable]="true">
+                <ng-template let-row="rowData" pTemplate="body">
+                  <div [ngSwitch]="field.columnType">
+                    <span *ngSwitchCase="'DATE'" [innerHTML]="toDate(row[field.columnName])"></span>
+                    <span *ngSwitchCase="'DOUBLE'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchCase="'FLOAT'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchCase="'INTEGER'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchDefault [innerHTML]="row[field.columnName]"></span>
+                  </div>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+
+      <!--Table Charts-->
+      <div class="card" *ngIf="report.type == 'table'">
+        <div class="card-block">
+          <p-dataTable [value]="queryResult" scrollable="true" [responsive]="true" class="report-table" [scrollHeight]="300">
+            <p-header>{{chartData.title}}</p-header>
+            <p-column *ngFor="let field of tableDisplayColumns" [field]="field.columnName"
+                      [header]="chartData.columns[field.columnName]" [sortable]="true">
+              <ng-template let-row="rowData" pTemplate="body">
+                <div [ngSwitch]="field.columnType">
+                  <span *ngSwitchCase="'DATE'" [innerHTML]="toDate(row[field.columnName])"></span>
+                  <span *ngSwitchCase="'DOUBLE'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                  <span *ngSwitchCase="'FLOAT'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                  <span *ngSwitchCase="'INTEGER'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                  <span *ngSwitchDefault [innerHTML]="row[field.columnName]"></span>
+                </div>
+              </ng-template>
+            </p-column>
+          </p-dataTable>
+        </div>
+      </div>
+    </div>
+
+    <!--Error-->
+
+    <div *ngIf="chartData.chartErrorFlag">
+      <div>
+        <h3 class="weight-400 text-xs-center pt-2">Error</h3>
+        <p class="weight-400 text-xs-center">{{chartData.chartErrorMessage}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

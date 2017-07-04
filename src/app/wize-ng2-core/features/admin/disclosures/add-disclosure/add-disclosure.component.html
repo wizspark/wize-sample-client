@@ -1,0 +1,70 @@
+<modal [animation]="true" #modal (onDismiss)="dismiss()" class="panel-right">
+  <modal-header [showClose]="true">
+    <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} Disclosure</h5>
+  </modal-header>
+  <modal-body class="edit-rec">
+    <form [formGroup]="form">
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <select (change)="onSelect($event.target.value)" class="form-control" placeholder=" "
+                    formControlName="DisclosureTypeId">
+              <option value="">Choose One</option>
+              <option [value]="disclosureType.id" *ngFor="let disclosureType of disclosureTypes">{{ disclosureType.type
+                }}
+              </option>
+            </select>
+            <label>Disclosure Type</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <select class="form-control" placeholder=" " formControlName="recordId">
+              <option value="">Choose One</option>
+              <option [value]="record" *ngFor="let record of records">{{ record }}
+              </option>
+            </select>
+            <label>Record</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-12">
+          <div class="form-group material-style">
+            <input type="textarea" class="form-control" placeholder=" " formControlName="note">
+            <label>Note</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <input type="date" class="form-control" placeholder=" " formControlName="effectiveStartDate">
+            <label>Effective Start Date</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <input type="date" class="form-control" placeholder=" " formControlName="effectiveEndDate">
+            <label>Effective End Date</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <select class="form-control" placeholder=" " formControlName="isActive">
+              <option value="false">False</option>
+              <option value="true" selected="selected">True</option>
+            </select>
+            <label>Active</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdateDisclosure()">Save</button>
+  </modal-footer>
+</modal>

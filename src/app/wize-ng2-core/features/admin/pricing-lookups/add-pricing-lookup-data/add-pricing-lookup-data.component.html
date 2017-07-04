@@ -1,0 +1,58 @@
+<modal [animation]="true" #modal (onDismiss)="dismiss()" class="panel-right">
+  <modal-header [showClose]="true">
+    <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} Pricing Lookup Data</h5>
+  </modal-header>
+  <modal-body class="edit-rec">
+    <form [formGroup]="form">
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <select class="form-control" placeholder=" "
+                    formControlName="LookupTypeId" disabled="disabled">
+              <option value="">Choose One</option>
+              <option [value]="lookupType.id" *ngFor="let lookupType of lookupTypes">{{ lookupType.type
+                }}
+              </option>
+            </select>
+            <label>Lookup Type</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <input type="text" class="form-control" placeholder=" " formControlName="key">
+            <label>Key</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <input type="text" class="form-control" placeholder=" " formControlName="description">
+            <label>Description</label>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <input type="number" class="form-control" placeholder=" " formControlName="order">
+            <label>Display Order</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-sm-6">
+          <div class="form-group material-style">
+            <select class="form-control" placeholder=" " formControlName="isActive">
+              <option value="false">False</option>
+              <option value="true" selected="selected">True</option>
+            </select>
+            <label>Active</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdatePricingLookup()">Save</button>
+  </modal-footer>
+</modal>

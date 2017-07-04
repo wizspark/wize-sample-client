@@ -1,0 +1,29 @@
+@import "../../../../../styles/_settings";
+.model-table{
+  border-top: 1px solid $grid-border;
+  border-bottom: 1px solid $grid-border;
+  padding: 5px 0;
+  .table{
+    margin-bottom: 0;
+    tr {
+      &:first-child{
+        td{
+          border: none;
+        }
+      }
+      > td:first-child{
+        width: 40px;
+        border: none;
+        .ch-rd .dummy-ele{
+          border-radius: 50%;
+          line-height: 15px;
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+    label[for="fieldName"]{
+      color: $light-text-color;
+    }
+  }
+}

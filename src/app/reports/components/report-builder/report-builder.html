@@ -1,0 +1,221 @@
+<div id="accordion" class="report-accordion" role="tablist" aria-multiselectable="true">
+
+  <!-- Report Details -->
+
+  <div class="card">
+    <div class="card-header" [class.active]="accordionConfig.activeSection==accordionConfig.sections[0].key">
+      <h4 role="heading">
+        <a href="javascript:void(0);" (click)="onAccordionSelect($event,accordionConfig.sections[0])">
+          <i class="fa arrow-state"></i>
+          <span>{{accordionConfig.sections[0].title}}</span>
+        </a>
+      </h4>
+    </div>
+    <div [class.collapse]="accordionConfig.activeSection!=accordionConfig.sections[0].key">
+      <div class="card-block report-details">
+        <div class="row">
+          <div class="col-md-7">
+            <form novalidate name="reportDetailForm" class="report-form">
+              <div class="form-group material-style pb-1">
+                <select [(ngModel)]="report.ReportCategoryId" name="category" class="form-control"
+                        (ngModelChange)="onReportCategoryChange($event)" required>
+                  <option *ngFor="let category of reportCategories" [value]="category.id"
+                          title="{{category.description}}">{{category.name}}
+                  </option>
+                </select>
+                <label>Report Category <sup>*</sup></label>
+              </div>
+              <div class="form-group material-style pb-1">
+                <input type="text" name="reportName" class="form-control" [(ngModel)]="report.name" (keyup)="reportNameChange($event)" maxlength="50"
+                       placeholder=" ">
+                <label>Report Name <sup>*</sup></label>
+              </div>
+              <div class="form-group material-style">
+                <input type="text" name="reportDescription" class="form-control" [(ngModel)]="report.description"
+                       maxlength="50" placeholder=" ">
+                <label>Report Description</label>
+              </div>
+              <div class="form-group mb-0">
+                <label class="lbl-visibiltygp" for="visible-to">Visible To</label>
+                <div id="visible-to" class="visibility-controls">
+                  <label class="g-handpointer mb-0">
+                                  <span class="ch-rd">
+                                    <input type="checkbox" name="visibleToEveryOne" (click)="toggleVisibleState($event)"
+                                           [checked]="report.access == 'everyOne'"
+                                           value="everyOne"
+                                           class="ng-untouched ng-valid has-value form-control-success ng-dirty">
+                                    <span class="dummy-ele"></span>
+                                  </span>
+                    <span>Every One</span>
+                  </label>
+                  <label class="g-handpointer mb-0">
+                                  <span class="ch-rd">
+                                    <input type="checkbox" name="visibleToOnlyMe" (click)="toggleVisibleState($event)"
+                                           [checked]="report.access == 'onlyMe'"
+                                           value="onlyMe"
+                                           class="ng-untouched ng-valid has-value form-control-success ng-dirty"><span
+                                    class="dummy-ele"></span>
+                                  </span>
+                    <span>Only Me</span>
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-5">
+            <div class="reports-help">
+              <h5 role="heading"><i class="fa fa-lightbulb-o"></i>Tip</h5>
+              <p>Select the category of data for your report and choose to either share it with your team or make it
+                private. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metrics, Grouping, Filtering & Preview Data -->
+
+  <div class="card">
+    <!--[style.opacity]="(customObj.id?1:0.5)"-->
+    <div class="card-header" [class.active]="accordionConfig.activeSection==accordionConfig.sections[1].key">
+      <h4 role="heading">
+        <a href="javascript:void(0);"
+           (click)="validateReportDetails() && onAccordionSelect($event,accordionConfig.sections[1])"
+           [style.cursor]="(!validateReportDetails()?'not-allowed':'')">
+          <i class="fa arrow-state"></i>
+          <span>{{accordionConfig.sections[1].title}}</span>
+        </a>
+      </h4>
+    </div>
+    <div [class.collapse]="accordionConfig.activeSection!=accordionConfig.sections[1].key">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-3" #queryDiv>
+            <query-selector [filterGroup]="filterGroup" [pivotGroup]="pivotGroup" [reportCategoryFields]="reportCategoryFields"
+                            (submit)="onPreviewData($event)"></query-selector>
+          </div>
+          <!--<div *ngIf="querySelector.selectedColumns.length == 0">-->
+          <!--<h5 class="weight-300 text-xs-center pt-2">No Records Found</h5>-->
+          <!--<p class="weight-300 text-xs-center">Fill the form details in the left and click on "Preview" Button</p>-->
+          <!--</div>-->
+          <!--<div class="col-md-9" *ngIf="querySelector.selectedColumns.length > 0">-->
+          <div class="col-md-9 report-tableblock">
+            <p-dataTable class="report-table" *ngIf="queryResult" [value]="queryResult" [responsive]="true"
+                         [emptyMessage]="queryErrorMessage" scrollable="true" [scrollHeight]="getHeigthDy()">
+              <p-header>{{reportCategory.name}}</p-header>
+              <p-column *ngFor="let field of tableDisplayColumns" [field]="field.columnName"
+                        [header]="field.columnHeader" [sortable]="true">
+                <ng-template let-row="rowData" pTemplate="body">
+                  <div [ngSwitch]="field.columnType">
+                    <span *ngSwitchCase="'DATE'" [innerHTML]="toDate(row[field.columnName])"></span>
+                    <span *ngSwitchCase="'DOUBLE'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchCase="'FLOAT'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchCase="'INTEGER'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                    <span *ngSwitchDefault [innerHTML]="row[field.columnName]"></span>
+                  </div>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Settings & Preview Charts -->
+
+  <div class="card">
+    <!--[style.opacity]="((queryResult.length != 0)?1:0.5)"-->
+    <div class="card-header" [class.active]="accordionConfig.activeSection==accordionConfig.sections[2].key">
+      <h4 role="heading">
+        <a href="javascript:void(0);"
+           (click)="((queryResult.length != 0) && validateReportDetails() && onAccordionSelect($event,accordionConfig.sections[2]))"
+           [style.cursor]="((queryResult.length == 0 || !validateReportDetails())?'not-allowed':'')">
+          <i class="fa arrow-state"></i>
+          <span>{{accordionConfig.sections[2].title}}</span>
+        </a>
+      </h4>
+    </div>
+    <div [class.collapse]="accordionConfig.activeSection!=accordionConfig.sections[2].key">
+      <div class="card-block">
+        <div class="row" *ngIf="chartData">
+          <div class="col-md-3 chartselector-column">
+            <div class="container-fluid">
+              <app-chart-selector [chartData]="chartData" (submit)="onPreviewChart($event)"
+                                  [displayColumns]="tableDisplayColumns"
+                                  (onChange)="onChartChange($event)"></app-chart-selector>
+            </div>
+          </div>
+          <div class="col-md-9 report-table" *ngIf="chartData">
+            <div class="row">
+              <div class="col-md-12" *ngIf="!chartData.chartErrorFlag">
+
+                <div *ngIf="!previewChart">
+
+                  <h5 class="weight-300 text-xs-center pt-2">No Records Found</h5>
+                  <p class="weight-300 text-xs-center">Click on the "Chart" Buttons in the left, fill the form details
+                    and "Preview" </p>
+                </div>
+
+                <!--Chart Type - Table-->
+                <p-dataTable class="report-table" *ngIf="chartType === 'table' && previewChart" [value]="queryResult"
+                             [responsive]="true" [emptyMessage]="queryErrorMessage" scrollable="true"
+                             [scrollHeight]="getHeigthDy()">
+                  <p-header>{{chartData.title}}</p-header>
+                  <p-column *ngFor="let field of tableDisplayColumns" [field]="field.columnName"
+                            [header]="chartData.columns[field.columnName]" [sortable]="true">
+                    <ng-template let-row="rowData" pTemplate="body">
+                      <div [ngSwitch]="field.columnType">
+                        <span *ngSwitchCase="'DATE'" [innerHTML]="toDate(row[field.columnName])"></span>
+                        <span *ngSwitchCase="'DOUBLE'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                        <span *ngSwitchCase="'FLOAT'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                        <span *ngSwitchCase="'INTEGER'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
+                        <span *ngSwitchDefault [innerHTML]="row[field.columnName]"></span>
+                      </div>
+                    </ng-template>
+                  </p-column>
+                </p-dataTable>
+
+                <!--Chart Type - Big Number-->
+
+                <div class="col-xl-6 col-lg-6 col-md-12 p-b-1" *ngIf="chartType === 'bignumber' && previewChart">
+                  <div class="incentive-box">
+                    <div class="media m-b-0">
+                      <section>
+                        <h2 [title]="chartData.title">{{chartData.title}}</h2>
+                        <h1 [title]="chartData.value">
+                          <label *ngIf="chartData.isPreTextSuperscript"><sup>{{chartData.preText}}</sup>{{chartData.value}}</label>
+                          <label
+                            *ngIf="!chartData.isPreTextSuperscript">{{chartData.preText}}{{chartData.value}} </label>
+                          <label *ngIf="chartData.isPostTextSuperscript"><sup> {{chartData.postText}}</sup></label>
+                          <label *ngIf="!chartData.isPostTextSuperscript"> {{chartData.postText}}</label>
+                        </h1>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="!(chartType === 'bignumber' || chartType === 'table')">
+                  <p-chart *ngIf="previewChart" #reportChart [type]="chartType" [data]="chartData" [options]="chartData.options" [height]="600"></p-chart>
+                </div>
+                <!--<p-chart type="bar" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'bar' && previewChart" height="600"></p-chart>-->
+                <!--<p-chart type="pie" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'pie' && previewChart" height="600"></p-chart>-->
+                <!--<p-chart type="line" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'line' && previewChart" height="600"></p-chart>-->
+                <!--<p-chart type="polarArea" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'polararea' && previewChart" height="600"></p-chart>-->
+                <!--<p-chart type="doughnut" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'doughnut' && previewChart" height="600"></p-chart>-->
+                <!--<p-chart type="radar" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'radar' && previewChart" height="600"></p-chart>-->
+            </div>
+            <div class="col-md-12" *ngIf="chartData.chartErrorFlag">
+              <div>
+                <h3 class="weight-400 text-xs-center pt-2">Error</h3>
+                <p class="weight-400 text-xs-center">{{chartData.chartErrorMessage}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

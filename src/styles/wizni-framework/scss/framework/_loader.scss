@@ -1,0 +1,33 @@
+//
+// Pre Loader
+//
+
+
+
+.pre-loader{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1099;
+  &:before{
+    background: #fff url('/assets/scss/wizni-framework/images/logo/logo-icon.png') center center;
+    background-repeat: no-repeat;
+    background-size: 50px 47px;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 100px;
+    margin: auto;
+    content: "";
+    display: block;
+  }
+}

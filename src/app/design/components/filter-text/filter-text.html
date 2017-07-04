@@ -1,0 +1,9 @@
+<form>
+  <input id="filterText"
+         type="text"
+         class="form-control"
+         [placeholder]="placeholder"
+         [(ngModel)]="filter"
+         (keyup)="filterChanged($event)"
+         name="filterText">
+</form>

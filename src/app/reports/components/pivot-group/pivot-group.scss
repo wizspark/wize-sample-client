@@ -1,0 +1,146 @@
+@import '../../../../styles/_settings';
+%cardType{
+  background-color: $bg-lightest;
+  border:1px solid $grid-border;
+  border-radius: 0.2rem;
+  position: relative;
+  display: block;
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+@mixin connector($con){
+  @if $con{
+    margin-left: -10px;
+    border-top: 1px dotted $subitem-title;
+    width: 20px;
+    height: 1px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+.c-conditiongp{
+  margin-top: 1.5rem;
+  .btn{
+    + .btn{
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    /*
+    > .fa{
+      color: $gray;
+    }*/
+    > span{
+      font-size: 1rem;
+      line-height: 1;
+      padding-left: 3px;
+    }
+  }
+}
+.c-containergp{
+  &:after{
+    clear: both;
+    content:" ";
+  }
+  &.of-condition{
+    @extend %cardType;
+    background-color: $white;
+  }
+  .c-col{
+    display: inline-block;
+    margin-right: 10px;
+    max-width: 160px;
+    &.col-input{
+      max-width: 140px;
+    }
+
+    .form-group.material-style{
+      > select.form-control{
+        padding-right: 28px;
+        min-width: 90px;
+      }
+    }
+  }
+}
+.c-innergp{
+  //margin-left: 5px;
+  /*padding-left: 10px;
+  border-left:1px dotted $subitem-title;
+
+  &+&{
+    margin-top: 10px;
+  }*/
+}
+.c-controlgp{
+  @extend %cardType;
+  background-color: $bg-lightest;
+  &.is-child{
+
+  }
+}
+.when-group{
+  margin-bottom: 1rem;
+  position: relative;
+  .connector{
+    @include connector($con:false);
+  }
+  label{
+    @extend %form-title;
+    color: $text-color;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    //for circle
+    border-radius: 50%;
+    border: 1px dotted $grid-border-dark;
+    padding: 10px 5px;
+    background-color: $bg-lightest;
+  }
+
+  &.with-and{
+    label{
+      padding: 7px 5px;
+      > a{
+        width: 23px;
+        display: inline-block;
+        text-align: center;
+      }
+    }
+
+  }
+}
+
+.badge-index{
+  width: 30px;
+  height: 30px;
+  border: 1px solid #999;
+  padding: 5px;
+  border-radius: 100%;
+  display: inline-block;
+  text-align: center;
+  background: #eee;
+  line-height: 18px;
+  margin-bottom: 3px;
+}
+/*.group{
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  border: solid 1px #666;
+}
+
+.group-conditions{
+
+}
+
+.alert-group{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // border-color: rgb(192, 152, 83);
+  // border-color: rgb(251, 238, 213);
+  // border-color: rgb(220, 200, 150);
+}
+
+.condition, .group{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+*/

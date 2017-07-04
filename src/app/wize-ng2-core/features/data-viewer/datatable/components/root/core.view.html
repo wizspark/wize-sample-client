@@ -1,0 +1,7 @@
+<div *ngIf="primaryEntity" [ngSwitch]="primaryEntity.viewOptions.type">
+  <dt-detail *ngSwitchCase="'detail'" [dataTableInputConfig]="dataTableInputConfig"></dt-detail>
+  <dt-group *ngSwitchCase="'group'" [dataTableInputConfig]="dataTableInputConfig"></dt-group>
+  <dt-basic *ngSwitchDefault [dataTableInputConfig]="dataTableInputConfig" [templates]="templates"></dt-basic>
+</div>
+<div *ngIf="!primaryEntity">
+</div>

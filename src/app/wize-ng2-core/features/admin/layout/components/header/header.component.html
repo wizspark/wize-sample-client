@@ -1,0 +1,99 @@
+<nav class="navbar navbar-full py-0 px-2 navbar-dark bg-inverse">
+  <div class="container-no">
+    <!--<a class="navbar-brand py-0 logo-whitetxt-sm">Wizni</a>-->
+    <button class="navbar-toggler my-1 float-xs-right hidden-lg-up" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation"></button>
+    <div class="clearfix hidden-lg-up"></div>
+    <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+      <ul class="nav navbar-nav">
+        <li class="nav-item logo">
+          <a routerLink="/">
+            <!--<div class="float-xs-left "><img src="../../../../assets/img/logo/wize-logo.png" alt=""></div>-->
+            <span class="lrm-logo">LRM</span>
+          </a>
+        </li>
+
+
+        <!--<li class="nav-item mr-2">-->
+        <!--<a class="nav-link py-1" routerLink="/overview" routerLinkActive="active">Overview</a>-->
+        <!--</li>-->
+        <li class="nav-item mr-2 dropdown" routerLinkActive="active">
+          <a class="nav-link py-1 dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+             aria-expanded="false">Inputs</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/dependency-breakdown" routerLinkActive="active">Dependency
+              Breakdown</a>
+            <a class="dropdown-item" routerLink="/debt" routerLinkActive="active">Debt</a>
+            <a class="dropdown-item" routerLink="/pipeline" routerLinkActive="active">Pipeline</a>
+            <a class="dropdown-item" routerLink="/federal-backup" routerLinkActive="active">Federal Backup</a>
+            <a class="dropdown-item" routerLink="/federal-fund-lines" routerLinkActive="active">Federal Fund
+              Lines</a>
+            <a class="dropdown-item" routerLink="/loan-distribution" routerLinkActive="active">Loan
+              Distribution</a>
+            <a class="dropdown-item" routerLink="/flow-loan-sales" routerLinkActive="active">Flow Loan
+              Sales</a>
+            <a class="dropdown-item" routerLink="/liquidity-pools" routerLinkActive="active">Liquidity
+              Pools</a>
+            <a class="dropdown-item" routerLink="/reserve-requirement" routerLinkActive="active">Reserve
+              Requirements</a>
+          </div>
+        </li>
+        <li class="nav-item mr-2 dropdown" routerLinkActive="active">
+          <a class="nav-link py-1 dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+             aria-expanded="false">Background Calculation</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/calculations/loans-mv" routerLinkActive="active">Loans MV</a>
+            <a class="dropdown-item" routerLink="/calculations/income-statement" routerLinkActive="active">Income
+              Statement</a>
+            <a class="dropdown-item" routerLink="/calculations/cash-flow" routerLinkActive="active">Cash Flow</a>
+            <a class="dropdown-item" routerLink="/calculations/investment-portfolio" routerLinkActive="active">Investment
+              Portfolio</a>
+          </div>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link py-1" routerLink="/assumptions" routerLinkActive="active">Business Assumptions</a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link py-1" routerLink="/scenario" routerLinkActive="active">Scenario Management</a>
+        </li>
+
+        <li class="nav-item mr-2">
+          <a class="nav-link py-1" routerLink="/stress" routerLinkActive="active">Stress Test</a>
+        </li>
+        <li class="nav-item mr-2" routerLinkActive="active">
+          <a class="nav-link py-1" routerLink="/reports/all">Reports</a>
+          <a class="nav-link py-1" routerLink="/reports/cashflow" style="display: none;">Reports-cashflow</a>
+          <a class="nav-link py-1" routerLink="/reports/chart-support" style="display: none;">Reports-Summary</a>
+          <a class="nav-link py-1" routerLink="/reports/result-summary" style="display: none;">Reports-Summary</a>
+          <a class="nav-link py-1" routerLink="/reports/sensitivity" style="display: none;">Reports-Sensitivity</a>
+          <a class="nav-link py-1" routerLink="/reports/sensitivity-output" style="display: none;">Reports-Sensitivity-Output</a>
+        </li>
+
+        <li class="nav-item mr-2">
+          <a class="nav-link py-1" routerLink="/setup/coefficients" routerLinkActive="active">Coefficients</a>
+        </li>
+        <li class="nav-item float-lg-right btn-group pl-1" routerLinkActive="active">
+
+
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link  pt-1" data-toggle="dropdown" href="#"
+             style="padding-bottom: 14px">{{email}}</a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+
+        </li>
+        <li class="nav-item float-lg-right" routerLinkActive="active">
+          <a class="nav-link pt-1" routerLink="/admin/settings"
+             style="padding-bottom: 14px;padding-left: 5px;padding-right: 5px;"><i class="fa fa-cog" aria-hidden="true"></i></a>
+          <a class="nav-link pt-1" routerLink="/admin/audits" style="display: none"></a>
+          <a class="nav-link pt-1" routerLink="/admin/roles" style="display: none"></a>
+          <a class="nav-link pt-1" routerLink="/admin/emails" style="display: none"></a>
+          <a class="nav-link pt-1" routerLink="/admin/models" style="display: none"></a>
+          <a class="nav-link pt-1" routerLink="/admin/ui" style="display: none"></a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

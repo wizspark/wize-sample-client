@@ -1,0 +1,107 @@
+<modal [animation]="true" #modal (onDismiss)="dismiss()" class="panel-right">
+    <modal-header [showClose]="true">
+        <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} User</h5>
+    </modal-header>
+    <modal-body class="edit-rec">
+        <form [formGroup]="form">
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="email.invalid && email.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="email" (blur)="checkDomain($event)">
+                        <label>Email</label>
+                        <small *ngIf="email.invalid && email.touched" class="form-text">
+                            Email is invalid.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="name.invalid && name.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="name">
+                        <label>Name</label>
+                        <small *ngIf="name.invalid && name.touched" class="form-text">
+                            Name is invalid.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="companyName.invalid && companyName.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="companyName">
+                        <label>Company</label>
+                        <small *ngIf="companyName.invalid && companyName.touched" class="form-text">
+                            Company is invalid.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group material-style" [class.has-error]="phoneNumber.invalid && phoneNumber.touched">
+                        <input type="text" class="form-control" placeholder=" " formControlName="phoneNumber">
+                        <label>Phone Number</label>
+                        <small *ngIf="phoneNumber.invalid && phoneNumber.touched" class="form-text">
+                            Phone Number is invalid.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style">
+                        <select class="form-control" placeholder=" " formControlName="WizeOrgUnitId">
+                            <option value="">Choose One</option>
+                            <option [value]="org.id" *ngFor="let org of organizationUnits">{{ org.name }}</option>
+                        </select>
+                        <label>Organizations</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group material-style">
+                        <select class="form-control" placeholder=" " formControlName="parentId">
+                            <option value="">Choose One</option>
+                            <option [value]="user.id" *ngFor="let user of users">{{ user.email }}</option>
+                        </select>
+                        <label>Reports To</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-sm-6">
+                    <div class="form-group material-style">
+                        <select class="form-control" placeholder=" " formControlName="isAdmin">
+                            <option value="false" selected="selected">False</option>
+                            <option value="true">True</option>
+                        </select>
+                        <label>Admin</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group material-style">
+                        <select class="form-control" placeholder=" " formControlName="EOM">
+                            <option value="false" selected="selected">False</option>
+                            <option value="true">True</option>
+                        </select>
+                        <label>EOM</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-sm-12">
+                    <div class="form-group material-style">
+                        <ng-select *ngIf="!resetSelect"
+                                [active]="initRoles"
+                                [multiple]="true"
+                                [items]="roles"
+                                (data)="refreshValue($event)"
+                                placeholder="Choose Role(s)">
+                        </ng-select>
+                        <label>Role</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdateUser()">Save</button>
+    </modal-footer>
+</modal>

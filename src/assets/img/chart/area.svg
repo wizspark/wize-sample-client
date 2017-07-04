@@ -1,0 +1,10 @@
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>chart-area</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="chart-area" sketch:type="MSArtboardGroup" fill="#000000">
+            <path d="M8.14400741,19.1950369 C8.83873887,18.3405878 10.0350507,18.2751048 10.8223146,19.0549877 L13.9428016,22.1462182 C14.3337465,22.5334979 14.9100007,22.4913009 15.2391388,22.0392823 L24.2747469,9.63032246 C25.2508677,8.2897769 26.04217,8.55535921 26.04217,10.1942265 L26.04217,25.19485 L3.25907,25.2030132 L8.14400741,19.1950369 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

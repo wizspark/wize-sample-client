@@ -1,0 +1,14 @@
+
+
+.card{
+
+    &.group{
+      background-color: #f9f9f9;
+      border-color: #eee;
+    }
+
+    &.child{
+      border-color: #e8ecf1;
+    }
+
+}

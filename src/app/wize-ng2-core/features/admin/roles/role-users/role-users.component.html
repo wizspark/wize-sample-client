@@ -1,0 +1,159 @@
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+    <div class="container-no">
+        <div class="media overflow-visible">
+            <div class="media-body media-middle overflow-visible">
+                <h3 class="weight-300 m-0">Users</h3>
+            </div>
+            <div class="media-right media-middle text-truncate">
+                <ul class="list-unstyled list-inline mb-0">
+                    <li class="list-inline-item">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#users" (click)="getUsers()"><i
+                                class="fa fa-plus"></i> <span class="hidden-sm-down">&nbsp;Add User</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="admin-wrapper">
+    <div class="container-no p-2">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#permissions" role="tab">Permissions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#roleusers" role="tab">Users</a>
+            </li>
+        </ul>
+        <div class="card">
+            <div class="card-block">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="permissions" role="tabpanel">
+                        <p-dataTable [value]="permissions">
+                            <p-column field="resource" header="Resource" [sortable]="true"></p-column>
+                            <p-column field="access" header="">
+                                <ng-template let-row="rowData" pTemplate="body">
+                                    <label class="switch material m-0 mr-1">
+                                        <input type="checkbox" (change)="updateAllResouceAccess(row, $event)" [checked]="isResoucesAccessed(row)">
+                                        <span class="switch-label"></span>
+                                    </label>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="access" header="">
+                                <ng-template let-row="rowData" pTemplate="body">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle no-border" style="background:none;"
+                                           href="javascript:void(0);" id="dropdownMenuLink" data-toggle="dropdown"
+                                           aria-haspopup="true" aria-expanded="false">
+                                            {{ getAccess(row) }}
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="javascript:void(0);" *ngFor="let x of getAccessMethods(row.resource)">
+                                                <label class="c-lblvalue mb-0">
+                                                    <span class="ch-rd">
+                                                        <input class="has-value" type="checkbox" [checked]="x.access" (change)="updateAccess(x, $event)">
+                                                        <span class="dummy-ele"></span>
+                                                    </span>
+                                                </label>
+                                                {{ x.permission ? x.permission.split('_')[0] : '' }}
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                    <div class="tab-pane" id="roleusers" role="tabpanel">
+                        <p-dataTable [value]="roleUsers" [rows]="15" [globalFilter]="rc" [paginator]="false" [pageLinks]="3"
+                                     [rowsPerPageOptions]="[10,20,50]" scrollWidth="100%">
+                            <p-column field="email" header="User"></p-column>
+                            <p-column field="createdAt" header="Created On">
+                                <ng-template let-row="rowData" pTemplate="body">
+                                    {{ row.createdAt | date:'MMM d, y h:mm a'}}
+                                </ng-template>
+                            </p-column>
+                            <p-column field="updatedAt" header="Updated On">
+                                <ng-template let-row="rowData" pTemplate="body">
+                                    {{ row.updatedAt | date:'MMM d, y h:mm a'}}
+                                </ng-template>
+                            </p-column>
+
+                            <p-column *ngIf="!roleId" header="Actions">
+                                <ng-template pTemplate="body">
+                                    <div class="dropdown dropdown-custom pl-1">
+                                        <a class="action-dot" href="javascript:;" data-toggle="dropdown"
+                                           aria-haspopup="true" aria-expanded="false">
+                                            &#8226;&#8226;&#8226;
+                                        </a>
+                                        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="javascript:;"><i aria-hidden="true"
+                                                                                            class="fa fa-pencil"></i>
+                                                &nbsp;&nbsp;Edit</a>
+                                            <a class="dropdown-item" href="javascript:;"><i aria-hidden="true"
+                                                                                            class="fa fa-clone"></i>
+                                                &nbsp;&nbsp;Send Activation Link</a>
+                                            <a class="dropdown-item" href="javascript:;"><i aria-hidden="true"
+                                                                                            class="fa fa-trash-o"></i>
+                                                &nbsp;&nbsp;Delete</a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade panel-right" id="users" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-faded px-2">
+                <h6 class="modal-title text-uppercase" id="exampleModalLabel">Add User</h6>
+            </div>
+            <div class="modal-body pt-2 pb-3 px-2">
+                <div class="row mb-2">
+                    <p-dataTable [value]="allUsers" [rows]="15" [globalFilter]="rc" [paginator]="false" [pageLinks]="3"
+                                 [rowsPerPageOptions]="[10,20,50]" scrollWidth="100%">
+                        <p-column header="" [style]="{width: '32px'}">
+                            <ng-template  let-row="rowData" pTemplate="body">
+                                <label class="c-lblvalue d-block mb-0" >
+                            <span class="ch-rd">
+                                <input class="has-value"  type="checkbox" [checked]="isUserInRole(row)" (change)="updateSelectedRecord(row, $event)">
+                                <span class="dummy-ele"></span>
+                            </span>
+                                </label>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="email" header="User"></p-column>
+                        <p-column field="createdAt" header="Created On">
+                            <ng-template let-row="rowData" pTemplate="body">
+                                {{ row.createdAt | date:'MMM d, y h:mm a'}}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="updatedAt" header="Updated On">
+                            <ng-template let-row="rowData" pTemplate="body">
+                                {{ row.updatedAt | date:'MMM d, y h:mm a'}}
+                            </ng-template>
+                        </p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+            <div class="modal-footer bg-faded">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addUsersToRole()">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<app-modal #modal (onDismiss)="dismissed()">
+  <div class="app-modal-header">
+    <h6 class="modal-title text-uppercase weight-400">Filters</h6>
+  </div>
+  <div class="app-modal-body">
+      <!--<div>-->
+          <!--{{filterGroup.toString()}}-->
+      <!--</div>-->
+      <div>
+          <filter-group [conditionGroups]="filterGroup.conditionGroups" [showOperatorList]="false" [showRemoveGroupButton]="false" [tablesDef]="schemaDef" [aggregateFields]="aggregateFields"></filter-group>
+      </div>
+    </div>
+  <div class="app-modal-footer">
+    <div class="media" style="overflow:visible">
+      <div class="media-body media-middle text-xs-left" style="overflow:visible">
+        <button type="button" class="btn btn-secondary" (click)="clearAll()">Clear All</button>
+      </div>
+      <div class="media-body media-middle" style="overflow:visible">
+        <button type="button" class="btn btn-secondary" (click)="dismissed(true)" >Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="ok()" >Ok</button>
+      </div>
+    </div>
+  </div>
+</app-modal>

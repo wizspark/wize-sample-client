@@ -1,0 +1,79 @@
+<div [formGroup]="form" class="form-group material-style" [ngSwitch]="attribute.type">
+        <select class="form-control"
+                *ngSwitchCase="'dropdown'"
+                [formControlName]="attribute.name"
+                (ngModelChange)="onValueChange($event)"
+                [ngClass]="attribute.classes?.attribute"
+                [id]="attribute.key">
+            <option *ngFor="let o of attribute.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
+        </select>
+
+        <div *ngSwitchCase="'checkbox'" [ngClass]="attribute.classes?.attribute">
+            <div class="checkbox" *ngFor="let o of attribute.options">
+                <input class="form-control"
+                        [type]="attribute.type"
+                        [formControlName]="attribute.name"
+                        [name]="attribute.name"
+                        [value]="o.value"
+                        [checked]="isSelectActive(o)"
+                        (change)="chackboxValueChange()"
+                        [disabled]="o.disabled"
+                        (click)="setCheckbox(o)">
+                <span>{{o.displayName ? o.displayName : o.value}}</span>
+            </div>
+        </div>
+
+        <textarea class="form-control"
+                        *ngSwitchCase="'textarea'"
+                        [formControlName]="attribute.name"
+                        (ngModelChange)="onValueChange($event)"
+                        [id]="attribute.key"
+                        [ngClass]="attribute.classes?.attribute">
+                </textarea>
+
+        <div *ngSwitchCase="'radio'" [ngClass]="attribute.classes?.attribute">
+            <div class="radio" *ngFor="let o of attribute.options">
+                <input class="form-control"
+                        [type]="attribute.type"
+                        [formControlName]="attribute.name"
+                        [name]="attribute.name"
+                        [value]="o.value"
+                        [checked]="attribute.value === o.value"
+                        (click)="setRadio(o)">
+                <span>{{o.displayName ? o.displayName : o.value}}</span>
+            </div>
+        </div>
+        <input class="form-control"
+           *ngSwitchCase="'WIZE_TIME'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="time"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+        <code-editor *ngSwitchCase="'WIZE_CODE'"
+                      class="height-auto"
+                      [formControl]="form.controls[attribute.name]"
+                      (ngModelChange)="onValueChange($event)"
+                      [ngClass]="attribute.classes?.attribute"
+                      [id]="attribute.key">
+        </code-editor>
+
+        <input class="form-control"
+                *ngSwitchDefault
+                [formControlName]="attribute.name"
+                placeholder=" "
+                [type]="attribute.type"
+                (ngModelChange)="onValueChange($event)"
+                [ngClass]="attribute.classes?.attribute"
+                [id]="attribute.key">
+
+
+
+        <label
+            *ngIf="attribute.displayName"
+            [attr.for]="attribute.name">
+        {{attribute.displayName}}
+    </label>
+</div>

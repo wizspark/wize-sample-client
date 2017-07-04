@@ -1,0 +1,15 @@
+<div [ngClass]="{ 'p-2' : header }">
+  <div [ngClass]="{ 'card' : header }">
+    <div [ngClass]="{ 'card-block' : header}">
+      <p-dataTable
+        styleClass="c-grid"
+        [value]="rows"
+        [responsive]="true">
+        <p-column field="vin" header="Vin" styleClass="col-button"></p-column>
+        <p-column field="year" header="Year" styleClass="col-button"></p-column>
+        <p-column field="brand" header="Brand" styleClass="col-button"></p-column>
+        <p-column field="color" header="Color" styleClass="col-button"></p-column>
+      </p-dataTable>
+    </div>
+  </div>
+</div>

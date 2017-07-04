@@ -1,0 +1,22 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <title>chart-bar</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Icons">
+   <g fill="#E85B5D" id="chart-bar">
+    <g id="Group">
+     <rect fill="#ffffff" height="8.461538" width="4" y="18.538462" x="5" id="Rectangle-18"/>
+     <rect fill="#ffffff" height="15.230769" width="4" y="11.769231" x="11" id="Rectangle-19"/>
+     <rect fill="#ffffff" height="10.153846" width="4" y="16.846154" x="17" id="Rectangle-20"/>
+     <rect fill="#ffffff" height="22" width="4" y="5" x="23" id="Rectangle-21"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

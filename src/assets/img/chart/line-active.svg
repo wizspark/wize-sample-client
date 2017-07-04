@@ -1,0 +1,19 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <title>chart-line</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Icons">
+   <g stroke-linecap="round" id="chart-line">
+    <path fill="#ffffff" stroke-width="2" stroke="#ffffff" id="Path-405" d="m5,16l3.73171,-4.19352c0.73447,-0.82536 2.01349,-0.90638 2.84668,-0.18965l11.13983,9.58281c0.83771,0.72063 2.04477,0.57868 2.69388,-0.31406l1.371,-1.88558"/>
+    <path fill="#ffffff" stroke-width="5" stroke="#ffffff" id="Path-404" d="m5,25l4.82031,-6.11364c0.68554,-0.86948 1.87564,-0.93764 2.65494,-0.15548l2.34611,2.35472c0.78074,0.7836 1.94749,0.70213 2.60601,-0.18201l10.35573,-13.90359"/>
+    <path fill="#ffffff" stroke-width="2" stroke="#ffffff" id="Path-403" d="m5,25l4.82031,-6.11364c0.68554,-0.86948 1.87564,-0.93764 2.65494,-0.15548l2.34611,2.35472c0.78074,0.7836 1.94749,0.70213 2.60601,-0.18201l10.35573,-13.90359"/>
+   </g>
+  </g>
+ </g>
+</svg>

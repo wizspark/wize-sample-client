@@ -1,0 +1,31 @@
+<app-modal #modal styleClass="modal-width-md">
+  <div class="app-modal-header">
+    <h6 class="modal-title text-uppercase weight-400">Create/Edit Rules</h6>
+  </div>
+  <div class="app-modal-body">
+    <div class="form-group material-style" *ngIf="group">
+      <p class="form-control">
+        {{getRuntimeQuery()}}&nbsp;
+      </p>
+      <label>Generated Rule</label>
+    </div>
+
+    <rule-group [group]="group" [fields]="fields" [rootLevel]="true" *ngIf="group"></rule-group>
+    <div *ngIf="!group">
+      <div class="form-group material-style">
+        <input type="text" class="form-control" [(ngModel)]="query" placeholder=" " required autofocus>
+        <label>Rule</label>
+      </div>
+      <p class="pt-2">
+        This rule can not be edited using rule editor but you can still edit the rule query above.
+        <br>
+        If you want to create a new rule instead, please click below button.
+      </p>
+      <button type="button" class="btn btn-secondary" (click)="createNewRule()">Create New Rule</button>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="dismissed()">Close</button>
+  </div>
+</app-modal>

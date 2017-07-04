@@ -1,0 +1,17 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <title>chart-pie</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Page-1">
+   <g fill="#E85B5D" id="chart-pie">
+    <path fill="#ffffff" id="Oval-30" d="m17.37706,4.057185c5.963926,0.697041 10.591972,5.767186 10.591972,11.918268c0,6.627417 -5.372583,12 -12,12c-6.183703,0 -11.274972,-4.677263 -11.928988,-10.686967l12.246107,0c0.602493,0 1.090909,-0.488417 1.090909,-1.090909l0,-12.140392l0,0zm-2.181818,-0.057185c-5.97928,0.380535 -10.768365,5.140096 -11.195242,11.106668l11.195242,0c0,0 0,-6.99994 0,-11.106668l0,0z"/>
+   </g>
+  </g>
+ </g>
+</svg>

@@ -1,0 +1,37 @@
+<div class="btn-group">
+    <button id="columnSelector" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"
+            class="btn btn-secondary dropdown-toggle" [ngClass]="{active : isOpen()}"
+            #columnSelectorDrop>
+        <i class="fa fa-bars" aria-hidden="true"></i>
+        <span class="hidden-sm-down"></span>
+    </button>
+    <div class="dropdown-menu p-0 dropdown-menu-right select-filter" aria-labelledby="columnSelector">
+        <div class="card m-0">
+            <div class="card-block p-1" (click)="$event.stopPropagation();">
+
+                <label class="c-lblvalue d-block" *ngFor="let column of columns">
+                              <span class="ch-rd">
+                                  <input class="has-value" (click)="updateColumnStatus(column, $event)"
+                                         type="checkbox" ngcontrol="versioning" [checked]="!column.viewOptions.noView">
+                                  <span class="dummy-ele"></span>
+                              </span>
+                    <span class="c-lbltitle"[outerHTML]="column.displayName || column.name"></span>
+                </label>
+
+            </div>
+            <div class="card-footer p-1">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button data-toggle="dropdown" (click)="resetColumns();" class="btn btn-secondary btn-block">Reset</button>
+                    </div>
+                    <div class="col-xs-6 pl-0">
+                        <button data-toggle="dropdown" (click)="updateColumns()"
+                                class="btn btn-primary btn-block">
+                            Apply
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

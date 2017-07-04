@@ -1,0 +1,187 @@
+<div>
+  <div class="row" *ngIf="isDataLoaded">
+    <div class="col-md-6">
+      <div class="form-group material-style pb-1">
+        <input type="text" name="reportName" class="form-control" [(ngModel)]="reportName" maxlength="255"
+               (change)="changeReportNameAndDesc($event)"
+               placeholder=" ">
+        <label>Report Category Name <!--<sup>*</sup>--></label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group material-style pb-1">
+        <input type="text" name="reportName" class="form-control" [(ngModel)]="reportDescription" maxlength="255"
+               (change)="changeReportNameAndDesc($event)"
+               placeholder=" ">
+        <label>Report Category Description <!--<sup>*</sup>--></label>
+      </div>
+    </div>
+</div>
+  <div class="table-responsive">
+    <div class="w-head">
+      <table class="table table-sm table-condensed" style="margin-bottom: 0;">
+        <colgroup>
+          <col width="10%">
+          <col width="40%">
+          <col width="50%">
+        </colgroup>
+        <thead class="ui-datatable-thead" >
+        <tr>
+          <th>
+
+          </th>
+          <th>
+            Model Name
+          </th>
+          <th>
+            Model Descripton
+          </th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="w-body" style="overflow-y: auto;" [style.height]="(dynamicHeight.scrollHeight(300)+'px')">
+      <table class="table table-sm table-condensed">
+        <colgroup>
+          <col width="10%">
+          <col width="40%">
+          <col width="50%">
+        </colgroup>
+        <thead class="ui-datatable-thead">
+        <tr>
+          <th style="border-bottom: none;">
+
+          </th>
+          <th style="border-bottom: none;">
+            <!--Model Name-->
+          </th>
+          <th style="border-bottom: none;">
+            <!--Model Descripton-->
+          </th>
+        </tr>
+        </thead>
+        <tbody class="ui-datatable-data" *ngFor="let model of modelsAndColumns">
+        <tr
+          [style.backgroundColor]="(((activeState.main.key == model.modelName && activeState.main.columns.length > 0) || activeState.relational[model.modelName]))?'inherit':((activeState.main.key=='' || activeState.main.columns.length <= 0)?'inherit':'#f7f7f7')"
+          [style.cursor]="(((activeState.main.key == model.modelName && activeState.main.columns.length > 0) || activeState.relational[model.modelName]))?'':((activeState.main.key=='' || activeState.main.columns.length <= 0)?'':'not-allowed')">
+          <!-- [style.backgroundColor]="((reportCategoryResponse.modelName != '' && reportCategoryResponse.modelName != model.modelName) || activeState.relational[model.modelName])?'#f7f7f7':'inherit'" -->
+
+          <td> <!-- [style.cursor]="((reportCategoryResponse.modelName != '' && reportCategoryResponse.modelName != model.modelName) || activeState.relational[model.modelName])?'not-allowed':''" -->
+
+            <i class="cursor-pointer fa fa-chevron-circle-right"
+               *ngIf="activeState.active!=model.modelName"
+               (click)="expandState($event,model)"></i>
+            <i class="cursor-pointer fa fa-chevron-circle-down"
+               *ngIf="activeState.active==model.modelName"
+               (click)="collapseState($event,model)"></i>
+          </td>
+          <td>
+            {{model.name}}
+          </td>
+          <td>
+            {{model.description}}
+          </td>
+        </tr>
+        <tr class="expandable" [class.collapse]="(activeState.active!=model.modelName)">
+          <td colspan="3">
+            <div class="table-responsive">
+              <table class="table table-sm table-condensed" style="margin-bottom: 0;">
+                <colgroup>
+                  <col width="10%">
+                  <col width="10%">
+                  <col width="20%">
+                  <col width="20%">
+                  <col width="20%">
+                  <col width="10%">
+                  <col width="10%">
+                </colgroup>
+                <thead class="ui-datatable-thead">
+                <tr>
+                  <th>
+                    <b>#</b>
+                  </th>
+                  <th text-center="">
+                    <b>Field Type</b>
+                  </th>
+                  <th>
+                    <b>Field Name</b>
+                  </th>
+                  <th>
+                    <b>Field Display Name</b>
+                  </th>
+                  <th>
+                    <b>Field Description</b>
+                  </th>
+                  <th text-center="">
+                    <b>Is Measure</b>
+                  </th>
+                  <th text-center="">
+                    <b>Display Default</b>
+                  </th>
+                </tr>
+                </thead>
+                <tbody class="ui-datatable-data">
+                <tr *ngFor="let col of model.ReportCategoryFields">
+                  <td>
+                    <label class="g-handpointer mb-0">
+                      <span class="ch-rd">
+                        <input type="checkbox"
+                               name="visisbleToEveryOne"
+                               [(ngModel)]="col.selected"
+                               (change)="changeModalStatusMap($event, 'selected', model, col, (activeState.relational[model.modelName]?true:false))"
+                               class="ng-untouched ng-valid has-value form-control-success ng-dirty">
+                        <span class="dummy-ele"></span>
+                      </span>
+                      <span></span>
+                    </label>
+                  </td>
+                  <td text-center="">
+                    <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'INTEGER' || col['dataType'] == 'FLOAT' || col['dataType'] == 'DOUBLE'" title="{{col['dataType']}}">#</i>
+                    <i class="fa fa-clock-o" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'DATE'" title="{{col['dataType']}}"></i>
+                    <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'STRING' || col['dataType'] == 'BOOLEAN'" title="{{col['dataType']}}"></i>
+                  </td>
+                  <td>
+                    {{col['columnName']}}
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="col['name']"
+                           [readonly]="!col.selected"
+                           (keyup)="changeReportFieldNameAndDesc($event, model, col, (activeState.relational[model.modelName]?true:false))"
+                           placeholder="Field Name" class="form-control" />
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="col['description']"
+                           [readonly]="!col.selected"
+                           (keyup)="changeReportFieldNameAndDesc($event, model, col, (activeState.relational[model.modelName]?true:false))"
+                           placeholder="Field Description" class="form-control" />
+                  </td>
+                  <td text-center="" [style.backgroundColor]="col.selected?'inherit':'#eceeef'">
+                    <label class="switch material m-0">
+                      <input type="checkbox"
+                             [disabled]="!col.selected"
+                             [(ngModel)]="col['isMeasure']"
+                             (change)="changeModalStatusMap($event, 'isMeasure', model, col, (activeState.relational[model.modelName]?true:false))">
+                      <span class="switch-label"></span>
+                    </label>
+                  </td>
+                  <td text-center="" [style.backgroundColor]="col.selected?'inherit':'#eceeef'">
+                    <label class="switch material m-0">
+                      <input type="checkbox"
+                             [disabled]="!col.selected"
+                             [(ngModel)]="col['isDefault']"
+                             (change)="changeModalStatusMap($event, 'isDefault', model, col, (activeState.relational[model.modelName]?true:false))">
+                      <span class="switch-label"></span>
+                    </label>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

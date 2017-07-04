@@ -1,0 +1,34 @@
+<div class="row mb-2">
+    <div class="col-sm-1 text-xs-center">
+        <span class="badge-index">{{ index }}</span>
+        <a (click)="changeOperator()" href="javascript:;">{{ filter.operator }}</a>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group material-style">
+            <select class="form-control" [(ngModel)]="filter.column">
+                <option selected="selected" value="">Choose Column</option>
+                <option *ngFor="let col of columns" [value]="col.name">{{ col.displayName }}</option>
+            </select>
+            <label>Column</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group material-style">
+            <select class="form-control" [(ngModel)]="filter.expression">
+                <option selected="selected" value="">Choose Condition</option>
+                <option *ngFor="let item of getFilters('STRING')">{{ item }}</option>
+            </select>
+            <label>Condition</label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group material-style" *ngIf="filter.expression !== 'exists' && filter.expression !== 'does not exist'">
+            <input type="text" class="form-control" placeholder=" " [(ngModel)]="filter.value">
+            <label>Value</label>
+        </div>
+    </div>
+    <div class="col-sm-2 mt-2 ">
+        <button *ngIf="totalCount > 1" class="btn btn-secondary btn-sm" (click)="removeFilter()"><i class="fa fa-close"></i></button>
+        <button *ngIf="showAddButton" class="btn btn-secondary btn-sm" (click)="addFilter()"><i class="fa fa-plus"></i></button>
+    </div>
+</div>

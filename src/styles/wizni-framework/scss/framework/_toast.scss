@@ -1,0 +1,39 @@
+.toast-wrapper{
+  position: fixed;
+  padding: 20px;
+  max-width: 400px;
+  top: 0px;
+  right: 0px;
+  z-index: 99999999;
+  margin: auto;
+  &.top-center{
+    left: 0px;
+  }
+  &.top-left{
+    right: auto;
+    left: 0px;
+  }
+  &.bottom-left{
+    top: auto;
+    bottom: 0px;
+    left: 0px;
+    right: auto;
+  }
+  &.bottom-center{
+    top: auto;
+    bottom: 0px;
+    left: 0px;
+  }
+  &.bottom-right{
+    top: auto;
+    bottom: 0px;
+  }
+}
+
+.toast-custom{
+  padding:0px !important;
+  .toast-close-button{
+    top:0px;
+    right:10px;
+  }
+}

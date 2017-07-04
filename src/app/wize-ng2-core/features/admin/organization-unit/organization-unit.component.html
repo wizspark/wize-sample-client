@@ -1,0 +1,63 @@
+
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+    <div class="container-no">
+
+        <div class="media" style="overflow:visible">
+            <div class="media-body media-middle" style="overflow:visible">
+                <h3 class="weight-300  m-0">Organization Unit</h3>
+            </div>
+            <div class="media-body media-middle" style="overflow:visible">
+                <ul class="list-unstyled list-inline m-0 text-xs-right">
+                    <li class="list-inline-item align-middle primary-search">
+                        <input type="text" class="form-control" (change)="search($event)" placeholder="Search">
+                    </li>
+                    <li class="list-inline-item">
+                        <button class="btn btn-primary" (click)="addOrganization()"><i class="fa fa-plus"></i> <span class="hidden-sm-down">&nbsp;Add Organization Unit</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="admin-wrapper">
+    <div class="container-no p-2">
+        <div class="card">
+            <div class="card-block">
+                <p-dataTable [value]="organizationUnits" [rows]="15" [globalFilter]="rc" [paginator]="false" [pageLinks]="3"
+                             [rowsPerPageOptions]="[10,20,50]">
+                    <p-column field="metadata.logoUrl" header=""  [style]="{width: '150px'}">
+                        <ng-template let-row="rowData" pTemplate="body">
+                            <img height="40px" [src]="row.metadata.logoUrl" alt="Logo" />
+                        </ng-template>
+                    </p-column>
+                    <p-column field="name" header="Name"  [style]="{width: '200px'}">
+                        <ng-template let-row="rowData" pTemplate="body">
+                            <a [routerLink]="[row.id]"><span>{{row.name}}</span></a>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="description" header="Description"  [style]="{width: '250px'}"></p-column>
+                    <p-column field="domain" header="Domain"  [style]="{width: '150px'}"></p-column>
+                    <p-column field="isDefault" header="Default"  [style]="{width: '100px'}"></p-column>
+                    <p-column field="metadata.footer" header="Footer"  [style]="{width: '350px'}"></p-column>
+                    <p-column header="Actions"  [style]="{width: '100px'}">
+                        <ng-template let-row="rowData" pTemplate="body">
+                            <div class="dropdown dropdown-custom pl-1">
+                                <a class="action-dot" href="javascript:;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    &#8226;&#8226;&#8226;
+                                </a>
+                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="javascript:;" (click)="editOrganization(row)"><i aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                                    <a *ngIf="!row.isDefault" class="dropdown-item" href="javascript:;" (click)="deleteOrganization(row)"><i aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+</div>
+<add-org-unit></add-org-unit>
+<confirmation></confirmation>

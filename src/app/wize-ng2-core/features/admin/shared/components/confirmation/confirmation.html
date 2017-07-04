@@ -1,0 +1,18 @@
+<modal class="g-modal-conf" [animation]="true" (onClose)="closed()" (onDismiss)="dismissed()" #modal>
+  <modal-header [showClose]="true">
+    <h4 class="h5 mb-0">{{_confirmation.title}}</h4>
+  </modal-header>
+
+  <modal-body>
+    <p>{{_confirmation.message}}</p>
+  </modal-body>
+
+  <modal-footer>
+    <button class="btn btn-primary" data-dismiss="modal" (click)="positiveOnClick()">
+      {{_confirmation.firstButton}}
+    </button>
+    <button class="btn btn-secondary" data-dismiss="modal" (click)="negativeOnClick()">
+      {{_confirmation.secondButton}}
+    </button>
+  </modal-footer>
+</modal>

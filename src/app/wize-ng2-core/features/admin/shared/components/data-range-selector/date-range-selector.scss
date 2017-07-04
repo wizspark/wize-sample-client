@@ -1,0 +1,12 @@
+.linksBlock{
+	a{
+		display: block;
+		padding: 4px 8px;
+		cursor: pointer;
+		
+		border-radius: 4px;
+		&.is-selected{
+			background-color: #f5f5f5;
+		}
+	}	
+}

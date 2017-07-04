@@ -1,0 +1,121 @@
+<div class="c-innergp" *ngFor="let group of conditionGroups; let p = index">
+  <div class="c-containergp">
+    <div class="c-operatorlist" *ngIf="showOperatorList">
+      <div class="c-col">
+        <div class="when-group with-and" *ngIf="!group.isHavingClause">
+          <span class="connector"></span><label><a class="" (click)="changeOperator(group)" href="javascript:;">{{ group.operator }}</a></label>
+        </div>
+      </div>
+      <div class="c-conditiongp mt-0 mb-1 d-inline-block">
+        <button (click)="addGroupCondition(group)" class="btn btn-secondary">
+          <i class="fa fa-plus-circle"></i><span>Condition</span>
+        </button>
+        <button (click)="addGroupConditionGroup(group)" class="btn btn-secondary btn-sm">
+          <i class="fa fa-plus-circle"></i><span>Group</span></button>
+        <button (click)="removeGroupConditionGroup(group)" class="btn btn-secondary" *ngIf="showRemoveGroupButton">
+          <i class="fa fa-close"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let condition of group.conditions; let i = index">
+    <div class="c-containergp of-condition">
+      <div>
+        <div class="c-col c1" *ngIf="condition.showOperator">
+          <div class="when-group with-and">
+            <span class="connector"></span><label><a class="" (click)="changeOperator(condition)" href="javascript:;">{{ condition.operator }}</a></label>
+          </div>
+        </div>
+        <div class="c-col c2">
+          <div class="form-group material-style">
+            <select [(ngModel)]="condition.index" class="form-control has-value" required  (change)="onColumnChange($event,condition)" *ngIf="!group.isHavingClause">
+              <option *ngFor="let field of tablesDef" [value]="field.id">
+                <span> {{field.name}} </span>
+              </option>
+            </select>
+            <select [(ngModel)]="condition.index" class="form-control has-value" required  (change)="onAggColumnChange($event,condition)" *ngIf="group.isHavingClause">
+              <option *ngFor="let field of aggregateFields" [value]="field.id">
+                <span> {{field.name}} </span>
+              </option>
+            </select>
+            <label>Field</label>
+          </div>
+        </div>
+        <div class="c-col c2">
+          <div class="form-group material-style">
+            <select class="form-control has-value" required [(ngModel)]="condition.conditionOperator" (change)="onOperatorChange($event,condition)">
+              <option *ngFor="let operator of (filtersMap[condition.columnType] || [])" [ngValue]="operator.value">
+                <span> {{operator.name}} </span>
+              </option>
+            </select>
+            <label>Condition</label>
+          </div>
+        </div>
+        <div class="c-col col-input c2" *ngIf="((condition.columnType == null || condition.columnType == '' || condition.columnType === 'STRING') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+          <div class="form-group material-style">
+            <input class="form-control has-value" [(ngModel)]="condition.value1" required/>
+            <label>Value</label>
+          </div>
+        </div>
+        <div class="c-col col-input c2" *ngIf="((condition.columnType === 'FLOAT' || condition.columnType === 'NUMBER' || condition.columnType === 'DOUBLE' || condition.columnType === 'INTEGER') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+          <div class="form-group material-style">
+            <input type="number" class="form-control" [(ngModel)]="condition.value1" required/>
+            <label>Value</label>
+          </div>
+        </div>
+        <div class="c-col col-input c2" *ngIf="((condition.columnType === 'FLOAT' || condition.columnType === 'NUMBER' || condition.columnType === 'DOUBLE' || condition.columnType === 'INTEGER') && (condition.conditionOperator=='><' || condition.conditionOperator=='>=<=') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+          <div class="form-group material-style">
+            <input type="number" class="form-control" [(ngModel)]="condition.value2" required/>
+            <label>Value-1</label>
+          </div>
+        </div>
+        <div class="c-col c2" *ngIf="(condition.columnType === 'BOOLEAN' && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+          <div class="form-group material-style">
+            <select class="form-control has-value" [(ngModel)]="condition.value1" required>
+              <option value="">Select One</option>
+              <option [value]="false">false</option>
+              <option [value]="true">true</option>
+            </select>
+            <label>Value</label>
+          </div>
+        </div>
+        <div class="c-col col-input c2" *ngIf="((condition.columnType === 'DATE') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+          <div class="form-group material-style">
+            <input type="date" class="form-control" [(ngModel)]="condition.value1" required/>
+            <label>Value</label>
+          </div>
+        </div>
+        <div class="c-col col-input c2" *ngIf="((condition.columnType === 'DATE') && (condition.conditionOperator=='><' || condition.conditionOperator=='>=<=') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+          <div class="form-group material-style">
+            <input type="date" class="form-control" [(ngModel)]="condition.value2" required/>
+            <label>Value-1</label>
+          </div>
+        </div>
+        <div class="c-col c1 mt-2">
+          <button (click)="removeGroupCondition(group, condition)" class="btn btn-secondary">
+            <span class="fa fa-close"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="" *ngIf="group.conditionGroups && group.conditionGroups.length > 0">
+    <filter-group #whereFilter class="c-controlgp is-child" [conditionGroups]="group.conditionGroups" [showOperatorList]="true" [showRemoveGroupButton]="true" [tablesDef]="tablesDef" [aggregateFields]="aggregateFields"></filter-group>
+  </div>
+  <div class="" *ngIf="group.havingGroups && group.havingGroups.length > 0">
+    <filter-group #havingFilter class="c-controlgp is-child" [conditionGroups]="group.havingGroups" [showOperatorList]="true" [showRemoveGroupButton]="true" [tablesDef]="tablesDef" [aggregateFields]="aggregateFields"></filter-group>
+  </div>
+  <div class="c-conditiongp" *ngIf="!showOperatorList">
+    <button (click)="addGroupCondition(group)" class="btn btn-secondary">
+      <i class="fa fa-plus-circle"></i><span>Condition</span>
+    </button>
+    <button (click)="addGroupConditionGroup(group, true)" class="btn btn-secondary" *ngIf="aggregateFields && aggregateFields.length>0" [disabled]="group.havingGroups && group.havingGroups.length > 0">
+      <i class="fa fa-plus-circle"></i><span>Aggregate Condition Group</span>
+    </button>
+    <button (click)="addGroupConditionGroup(group, false)" class="btn btn-secondary">
+      <i class="fa fa-plus-circle"></i><span>Group</span>
+    </button><button (click)="removeGroupConditionGroup(group)" class="btn btn-secondary" *ngIf="showRemoveGroupButton">
+      <i class="fa fa-close"></i>
+    </button>
+  </div>
+</div>

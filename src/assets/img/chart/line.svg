@@ -1,0 +1,12 @@
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>chart-line</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="chart-line" sketch:type="MSArtboardGroup" stroke-linecap="round">
+            <path d="M5,16 L8.7317146,11.8064777 C9.46618284,10.9811175 10.7452013,10.9000963 11.5783929,11.6168327 L22.7182167,21.1996433 C23.5559255,21.9202655 24.7629855,21.7783219 25.4120979,20.885578 L26.783098,19" id="Path-405" stroke="#333333" stroke-width="2" sketch:type="MSShapeGroup"></path>
+            <path d="M5,25 L9.82030733,18.8863578 C10.5058472,18.016881 11.6959518,17.9487227 12.475251,18.7308808 L14.8213586,21.0855952 C15.6021037,21.8692044 16.7688498,21.7877289 17.4273741,20.9035942 L27.783098,7" id="Path-404" stroke="#FFFFFF" stroke-width="5" sketch:type="MSShapeGroup"></path>
+            <path d="M5,25 L9.82030733,18.8863578 C10.5058472,18.016881 11.6959518,17.9487227 12.475251,18.7308808 L14.8213586,21.0855952 C15.6021037,21.8692044 16.7688498,21.7877289 17.4273741,20.9035942 L27.783098,7" id="Path-403" stroke="#333333" stroke-width="2" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,45 @@
+@import "wizni-framework/scss/framework/_variables.scss";
+//Color settings
+$brand-primary: #368FC4;
+$brand-danger: #e85b5d;
+$white:#ffffff;
+$black:#333333;
+$subitem-title:#9da5ab;
+$bg-faded: #f7f7f9;
+//Custom color settings
+$brand-primary-hover: #307EAD;
+$grid-border: #eeeeee;
+$grid-border-dark: #dddddd;
+$text-color: #4a4c50;
+$light-text-color:#666666;
+$bg-lightest: #f9f9f9;
+
+//Common PS
+%dotted-action-container{
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dotted $card-border-color;
+}
+%cursor-pointer{
+  cursor: pointer;
+}
+%form-title{
+  color: $subitem-title;
+  font-size: 11px;
+}
+//Button and anchor settings
+.btn-primary{
+  &:hover,
+  &:focus,
+  &:active{
+    background-color: $brand-primary-hover;
+    border-color: $brand-primary-hover;
+  }
+}
+a{
+  &:hover,
+  &:focus,
+  &:active{
+    color: $brand-primary-hover;
+  }
+}

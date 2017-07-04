@@ -1,0 +1,45 @@
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+    <div class="container-no">
+
+      <div class="media overflow-visible">
+        <div class="media-body media-middle overflow-visible">
+          <h3 class="weight-300 m-0">Users</h3>
+        </div>
+        <div class="media-right media-middle text-truncate">
+          <ul class="list-unstyled list-inline mb-0">
+            <li class="list-inline-item">
+              <button class="btn btn-primary" (click)="addUser()"><i class="fa fa-plus"></i> <span class="hidden-sm-down">&nbsp;Add User</span></button>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+
+<div class="admin-wrapper">
+  <div class="container-no p-2">
+    <div class="card">
+      <div class="card-block">
+        <p-dataTable [value]="users" [rows]="15" [globalFilter]="rc" [paginator]="false" [pageLinks]="3"
+                     [rowsPerPageOptions]="[10,20,50]" scrollWidth="100%">
+          <p-column field="email" header="User"></p-column>
+          <p-column field="metadata.name" header="Name"></p-column>
+          <p-column field="metadata.companyName" header="Company"></p-column>
+          <p-column field="metadata.phoneNumber" header="Phone"></p-column>
+          <p-column field="createdAt" header="Created On">
+            <ng-template let-row="rowData" pTemplate="body">
+              {{ row.createdAt | date:'MMM d, y h:mm a'}}
+            </ng-template>
+          </p-column>
+          <p-column field="updatedAt" header="Updated On">
+            <ng-template let-row="rowData" pTemplate="body">
+              {{ row.updatedAt | date:'MMM d, y h:mm a'}}
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>

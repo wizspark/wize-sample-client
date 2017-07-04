@@ -1,0 +1,20 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <title>chart-bubble</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Icons">
+   <g fill="#E85B5D" id="chart-bubble">
+    <path fill="#ffffff" id="Oval-14" d="m12,18c3.313709,0 6,-2.686291 6,-6c0,-3.313709 -2.686291,-6 -6,-6c-3.313709,0 -6,2.686291 -6,6c0,3.313709 2.686291,6 6,6z"/>
+    <circle fill="#ffffff" r="3.5" cy="23.5" cx="6.5" id="Oval-17"/>
+    <path fill="#ffffff" id="Oval-15" d="m26,16c2.209139,0 4,-1.790861 4,-4c0,-2.209139 -1.790861,-4 -4,-4c-2.209139,0 -4,1.790861 -4,4c0,2.209139 1.790861,4 4,4z"/>
+    <path fill="#ffffff" id="Oval-16" d="m20,25c1.656854,0 3,-1.343146 3,-3c0,-1.656854 -1.343146,-3 -3,-3c-1.656854,0 -3,1.343146 -3,3c0,1.656854 1.343146,3 3,3z"/>
+   </g>
+  </g>
+ </g>
+</svg>

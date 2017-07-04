@@ -1,0 +1,43 @@
+.nav-tabs:not(.card-tabs){
+  border: none;
+  margin-bottom: 3px;
+  a {
+    &.nav-link {
+      color: #4a4c50;
+      border: 0 none;
+      padding: 0.5em 0em;
+      margin: 0 1.5em 0 0;
+      &.active {
+        background: transparent;
+        border: 0 none;
+        box-shadow: 0 3px 0px $brand-danger;
+        font-weight: 500;
+
+        &:focus, &:hover {
+          border-color: transparent;
+          background: transparent;
+          box-shadow: 0 3px 0px $brand-danger;
+          border: 0 none;
+        }
+      }
+      &:focus, &:hover {
+        border-color: transparent;
+        background: transparent;
+        box-shadow: 0 3px 0px $brand-danger;
+      }
+
+    }
+  }
+
+}
+
+.navbar-dark .navbar-nav .open > .nav-link, .navbar-dark .navbar-nav .open > .nav-link:focus, .navbar-dark .navbar-nav .open > .nav-link:hover, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .active > .nav-link:focus, .navbar-dark .navbar-nav .active > .nav-link:hover, .navbar-dark .navbar-nav .nav-link.open, .navbar-dark .navbar-nav .nav-link.open:focus, .navbar-dark .navbar-nav .nav-link.open:hover, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.active:focus, .navbar-dark .navbar-nav .nav-link.active:hover {
+  box-shadow: inset 0px -3px 0px $brand-danger;
+}
+
+.navbar {
+  &.sub-header {
+    z-index: 999;
+  }
+}
+

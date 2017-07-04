@@ -1,0 +1,25 @@
+.modal {
+    background: rgba(0,0,0,0.6);
+
+  &.panel-right{
+    .c-loanstack{
+      &.rmode{
+        .c-pricercol{
+          width: 25%;
+        }
+      }
+    }
+  }
+}
+.modal-width-sm{
+    min-width:45vw !important;
+}
+.modal-width-md{
+    min-width:60vw !important;
+}
+.modal-width-lg{
+    min-width:80vw !important;
+}
+.modal-width-xlg{
+  min-width:90vw !important;
+}

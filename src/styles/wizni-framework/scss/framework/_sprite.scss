@@ -1,0 +1,110 @@
+
+  $icon-xlg : 64px;
+  $icon-lg  : 32px;
+  $icon-md  : 24px;
+  $icon-sm  : 16px;
+  $icon-xs  : 14px;
+
+
+
+@import "compass/utilities/sprites";
+$icons-1x: sprite-map("../images/icons/@1x/*.png");
+$icons-2x: sprite-map("../images/icons/@2x/*.png");
+
+/**/
+
+.icon-sprite{
+  vertical-align: middle;
+  &:before{
+    content: "";
+    height: $icon-xs;
+    width: $icon-xs;
+    display:inline-block;
+    vertical-align: middle;
+    background-image: sprite-url($icons-1x);
+    background-repeat: no-repeat;
+    position:relative;
+    top:-2px;
+  }
+
+  ///
+  /// Sizes
+  /// --------------------------------------------------
+
+  &.icon-xlg{
+    &:before, &:after{
+      height: $icon-xlg;
+      width : $icon-xlg;
+    }
+  } 
+
+  &.icon-lg{
+    &:before, &:after{
+      height: $icon-lg;
+      width : $icon-lg;
+    }
+  }
+
+
+  &.icon-md{
+    &:before, &:after{
+      height: $icon-md;
+      width : $icon-md;
+    }
+  }
+
+  &.icon-sm{
+    &:before, &:after{
+      height: $icon-sm;
+      width : $icon-sm;
+    }
+  }
+
+  &.icon-xs{
+    &:before, &:after{
+      height: $icon-xs;
+      width : $icon-xs;
+    }
+  }
+
+}
+
+
+
+
+@each $i in sprite_names($icons-1x){
+    .sprite-#{$i}:before{
+        background-position: sprite-position($icons-1x, $i);
+        //@include sprite-dimensions($icons-1x, $i); //For Height & Width
+    }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) { 
+  
+  .icon-sprite{
+    &:before, &:after{
+     background-image: sprite-url($icons-2x);
+     background-size: ceil(image-width(sprite-path($icons-2x)) / 2), auto;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+.mitu{
+  &:hover{
+    @extend .sprite-heart;
+  }
+}
+

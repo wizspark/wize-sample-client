@@ -1,0 +1,18 @@
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+ <title>chart-table</title>
+ <desc>Created with Sketch.</desc>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Icons">
+   <g fill="#E85B5D" id="chart-table">
+    <path fill="#ffffff" stroke="#ffffff" id="Fill-1" d="m2,5c-1.108,0 -2,0.89203 -2,2l0,18c0,1.10797 0.892,2 2,2l28,0c1.108,0 2,-0.89203 2,-2l0,-18c0,-1.10797 -0.892,-2 -2,-2l-28,0zm20,1.91304l8,0l0,4.78261l-8,0l0,-4.78261zm-10,6.69566l8,0l0,4.7826l-8,0l0,-4.7826zm0,6.69565l8,0l0,4.78261l-8,0l0,-4.78261zm-10,-6.69565l8,0l0,4.7826l-8,0l0,-4.7826zm10,-6.69566l8,0l0,4.78261l-8,0l0,-4.78261zm10,6.69566l8,0l0,4.7826l-8,0l0,-4.7826zm-20,-6.69566l8,0l0,4.78261l-8,0l0,-4.78261zm0,13.39131l8,0l0,4.78261l-8,0l0,-4.78261zm20,0l8,0l0,4.78261l-8,0l0,-4.78261z"/>
+   </g>
+  </g>
+ </g>
+</svg>

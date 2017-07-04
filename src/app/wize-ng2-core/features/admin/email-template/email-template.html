@@ -1,0 +1,44 @@
+<nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
+  <div class="container-no">
+    <div class="media overflow-visible">
+      <div class="media-body media-middle overflow-visible">
+        <h3 class="weight-300 m-0">Email Template</h3>
+      </div>
+      <div class="media-right media-middle text-truncate">
+        <ul class="list-unstyled list-inline mb-0">
+          <li class="list-inline-item">
+            <button type="button" class="btn btn-secondary" (click)="save()">Save</button>
+            <button type="button" class="btn btn-primary" (click)="setSelected(selectedIndex)">Reset</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="admin-wrapper">
+  <div class="container-no p-2">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group material-style">
+              <select class="form-control" [(ngModel)]="selectedIndex" (ngModelChange)="setSelected($event)">
+                <option *ngFor="let template of templates; let idx = index" [value]="idx"
+                        [innerHtml]="template.description"></option>
+              </select>
+              <label>Template</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div *ngIf="selectedTemplate" class="pt-2">
+              <code-editor [(ngModel)]="selectedTemplate.content" [config]="editorConfig" required></code-editor>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

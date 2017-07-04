@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-8">
+    <p-dataTable class="global-grid tbl-cumulative" [value]="lossData">
+            <p-column header="Category" field="category"></p-column>
+            <p-column header="Loans(#)" field="loans"></p-column>
+            <p-column header="Loan Balance" field="balance"></p-column>
+            <p-column header="% of Total" field="percentage"></p-column>
+            <p-column header="FICO" field="fico"></p-column>
+            <p-column header="LTV" field="ltv"></p-column>
+          </p-dataTable>
+  </div>
+  <div class="col-sm-4">
+    <p-chart type="horizontalBar" [data]="data" [options]="options" height="800"></p-chart>
+  </div>
+</div>
+
+
+  <!--<div class="card mb-2">-->
+    <!--<div class="row">-->
+      <!--<div class="col-sm-12">-->
+        <!--<div class="card-block">-->
+          <!--<div id="container2">-->
+            <!--&lt;!&ndash;<chart [options]="options"></chart>&ndash;&gt;-->
+            <!--<p-chart type="line" [data]="data" [options]="options" height="400px"></p-chart>-->
+
+          <!--</div>-->
+        <!--</div>-->
+        <!---->
+      <!--</div>-->
+
+    <!--</div>-->
+  <!--</div>-->
+
+
+  <!--<div class="card mb-2">-->
+      <!--<div class="card-block">-->
+        <!--<h4 class="text-xs-center mb-1" style="line-height:30px;">Quarter over quarter evolution: Realistic worst case:-->
+          <!--Realistic worst case senario – <br>Net Stressed Outflows</h4>-->
+        <!--<div class="col-sm-6">-->
+          <!--<p-chart type="bar" [data]="barData" [options]="options2" height="200px"></p-chart>-->
+        <!--</div>-->
+        <!--<div class="col-sm-6">-->
+          <!--<p-chart type="bar" [data]="barData2" [options]="options3" height="200px"></p-chart>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+
+

@@ -1,0 +1,220 @@
+<form novalidate>
+  <div class="row">
+    <div class="form-group">
+      <label class="chart-title">Chart Type</label>
+      <div class="btn-chart" data-toggle="buttons">
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('table')" [class.active]="(chartData.chartType=='table')">
+          <input type="radio" name="chart-type" value="table" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='table')?'/assets/img/chart/table.svg':'/assets/img/chart/table.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('bignumber')" [class.active]="(chartData.chartType=='bignumber')">
+          <input type="radio" name="chart-type" value="bignumber" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='bignumber')?'/assets/img/chart/single_value.svg':'/assets/img/chart/single_value.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('bar')" [class.active]="(chartData.chartType=='bar')">
+          <input type="radio" name="chart-type" value="bar" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='bar')?'/assets/img/chart/bar.svg':'/assets/img/chart/bar.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('polarArea')" [class.active]="(chartData.chartType=='polarArea')">
+          <input type="radio" name="chart-type" value="polarArea" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='polarArea')?'/assets/img/chart/area.svg':'/assets/img/chart/area.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('pie')" [class.active]="(chartData.chartType=='pie')">
+          <input type="radio" name="chart-type" value="pie" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='pie')?'/assets/img/chart/pie.svg':'/assets/img/chart/pie.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('line')" [class.active]="(chartData.chartType=='line')">
+          <input type="radio" name="chart-type" value="line" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='line')?'/assets/img/chart/line.svg':'/assets/img/chart/line.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('doughnut')" [class.active]="(chartData.chartType=='doughnut')">
+          <input type="radio" name="chart-type" value="doughnut" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='doughnut')?'/assets/img/chart/box.svg':'/assets/img/chart/box.svg')">
+        </label>
+        <label class="btn btn-secondary btn-sm" (click)="selectChart('radar')" [class.active]="(chartData.chartType=='radar')">
+          <input type="radio" name="chart-type" value="radar" [(ngModel)]="chartData.chartType">
+          <img [src]="((chartData.chartType=='radar')?'/assets/img/chart/bubble.svg':'/assets/img/chart/bubble.svg')">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row chart-drow" *ngIf="chartData.chartType === 'table'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="headerTitle" [(ngModel)]="chartData.title" type="text" placeholder=" ">
+      <label>Table Header</label>
+    </div>
+    <div class="chart-dcols" *ngFor="let col of displayColumns">
+      <div class="form-group material-style">
+        <input class="form-control" [name]="('table_col_'+col.columnName)" [(ngModel)]="chartData.columns[col.columnName]" type="text" placeholder=" ">
+        <label>Display Name of {{col.columnHeader}}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="chartData.chartType === 'bignumber'">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group material-style">
+          <input class="form-control" name="bigNumberTitle" [(ngModel)]="chartData.title" type="text" placeholder=" ">
+          <label>Title</label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group material-style">
+          <input class="form-control" name="bigNumberPreTextTitle" strictLength [strictMaxLength]="5" [(ngModel)]="chartData.preText" type="text" placeholder=" ">
+          <label>Pre text</label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="pre-text" class="mb-0 mr-1 g-handpointer" (click)="chartData.isPreTextSuperscript = !chartData.isPreTextSuperscript">Pre text superscript</label>
+          <label id="pre-text" class="switch mr-2 mb-0 material">
+            <input type="checkbox" name="bigNumberIsPreSuperscript" [(ngModel)]="chartData.isPreTextSuperscript">
+            <span class="switch-label"></span>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group material-style">
+          <input class="form-control" name="bigNumberPostTextTitle" type="text" strictLength [strictMaxLength]="5" [(ngModel)]="chartData.postText" placeholder=" ">
+          <label>Post text</label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="post-text" class="mb-0 mr-1 g-handpointer" (click)="chartData.isPostTextSuperscript = !chartData.isPostTextSuperscript">Post text superscript </label>
+          <label id="post-text" class="switch mr-2 mb-0 material">
+            <input type="checkbox" name="bigNumberIsPostSuperscript" [(ngModel)]="chartData.isPostTextSuperscript">
+            <span class="switch-label"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="chartData.chartType === 'bar'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="barTitle" type="text" [(ngModel)]="chartData.title" placeholder=" ">
+      <label>Bar Chart Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="barXAxisTitle" type="text" [(ngModel)]="chartData.xAxisTitle" placeholder=" ">
+      <label>X Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="barYAxisTitle" type="text" [(ngModel)]="chartData.yAxisTitle" placeholder=" ">
+      <label>Y Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <select class="form-control" name="barYAxisFormat" [(ngModel)]="chartData.yAxisFormat">
+        <option value="">Select One</option>
+        <option value=".3s">.3s | 12.3k</option>
+        <option value="$,.2f">$,.2f | $12,345.43</option>
+      </select>
+      <label>Y Axis Format</label>
+    </div>
+    <div *ngFor="let col of displayColumns">
+      <div class="form-group material-style pb-1" *ngIf="col.columnType=='INTEGER' || col.columnType == 'FLOAT' || col.columnType == 'DOUBLE'">
+        <input class="form-control" [name]="('table_col_'+col.columnName)" [(ngModel)]="chartData.columns[col.columnName]" type="text" placeholder=" ">
+        <label>Dataset Label of {{col.columnHeader}}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="chartData.chartType === 'polarArea'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="areaTitle" type="text" [(ngModel)]="chartData.title" placeholder=" ">
+      <label>Area Chart Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="areaXAxisTitle" type="text" [(ngModel)]="chartData.xAxisTitle" placeholder=" ">
+      <label>X Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="areaYAxisTitle" type="text" [(ngModel)]="chartData.yAxisTitle" placeholder=" ">
+      <label>Y Axis Title</label>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="chartData.chartType === 'pie'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="pieTitle" type="text" [(ngModel)]="chartData.title" placeholder=" ">
+      <label>Pie Chart Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="pieXAxisTitle" type="text" [(ngModel)]="chartData.xAxisTitle" placeholder=" ">
+      <label>X Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="pieYAxisTitle" type="text" [(ngModel)]="chartData.yAxisTitle" placeholder=" ">
+      <label>Y Axis Title</label>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="chartData.chartType === 'line'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="lineTitle" type="text" [(ngModel)]="chartData.title" placeholder=" ">
+      <label>Line Chart Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="lineXAxisTitle" type="text" [(ngModel)]="chartData.xAxisTitle" placeholder=" ">
+      <label>X Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="lineYAxisTitle" type="text" [(ngModel)]="chartData.yAxisTitle" placeholder=" ">
+      <label>Y Axis Title</label>
+    </div>
+    <div *ngFor="let col of displayColumns">
+      <div class="form-group material-style pb-1" *ngIf="col.columnType=='INTEGER' || col.columnType == 'FLOAT' || col.columnType == 'DOUBLE'">
+        <input class="form-control" [name]="('table_col_'+col.columnName)" [(ngModel)]="chartData.columns[col.columnName]" type="text" placeholder=" ">
+        <label>Dataset Label of {{col.columnHeader}}</label>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="row" *ngIf="chartData.chartType === 'doughnut'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="doughnutTitle" type="text" [(ngModel)]="chartData.title" placeholder=" ">
+      <label>Doughnut Chart Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="doughnutXAxisTitle" type="text" [(ngModel)]="chartData.xAxisTitle" placeholder=" ">
+      <label>X Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="doughnutYAxisTitle" type="text" [(ngModel)]="chartData.yAxisTitle" placeholder=" ">
+      <label>Y Axis Title</label>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="chartData.chartType === 'radar'">
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="radarTitle" type="text" [(ngModel)]="chartData.title" placeholder=" ">
+      <label>Radar Chart Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="radarXAxisTitle" type="text" [(ngModel)]="chartData.xAxisTitle" placeholder=" ">
+      <label>X Axis Title</label>
+    </div>
+    <div class="form-group material-style pb-1">
+      <input class="form-control" name="radarYAxisTitle" type="text" [(ngModel)]="chartData.yAxisTitle" placeholder=" ">
+      <label>Y Axis Title</label>
+    </div>
+    <div *ngFor="let col of displayColumns">
+      <div class="form-group material-style pb-1" *ngIf="col.columnType=='INTEGER' || col.columnType == 'FLOAT' || col.columnType == 'DOUBLE'">
+        <input class="form-control" [name]="('table_col_'+col.columnName)" [(ngModel)]="chartData.columns[col.columnName]" type="text" placeholder=" ">
+        <label>Dataset Label of {{col.columnHeader}}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cSelector-action" *ngIf="chartData.chartType">
+      <button class="btn btn-secondary pull-right" (click)="previewChart()" type="button">
+        <i class="fa fa-eye"></i><span class="hidden-sm-down">&nbsp;&nbsp;Preview</span>
+      </button>
+  </div>
+</form>

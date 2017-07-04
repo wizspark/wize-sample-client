@@ -1,0 +1,13 @@
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>chart-bubble</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="chart-bubble" sketch:type="MSArtboardGroup" fill="#333333">
+            <path d="M12,18 C15.3137085,18 18,15.3137085 18,12 C18,8.6862915 15.3137085,6 12,6 C8.6862915,6 6,8.6862915 6,12 C6,15.3137085 8.6862915,18 12,18 Z" id="Oval-14" sketch:type="MSShapeGroup"></path>
+            <circle id="Oval-17" sketch:type="MSShapeGroup" cx="6.5" cy="23.5" r="3.5"></circle>
+            <path d="M26,16 C28.209139,16 30,14.209139 30,12 C30,9.790861 28.209139,8 26,8 C23.790861,8 22,9.790861 22,12 C22,14.209139 23.790861,16 26,16 Z" id="Oval-15" sketch:type="MSShapeGroup"></path>
+            <path d="M20,25 C21.6568542,25 23,23.6568542 23,22 C23,20.3431458 21.6568542,19 20,19 C18.3431458,19 17,20.3431458 17,22 C17,23.6568542 18.3431458,25 20,25 Z" id="Oval-16" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
