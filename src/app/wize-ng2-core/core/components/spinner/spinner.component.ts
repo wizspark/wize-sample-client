@@ -9,8 +9,8 @@ import { SpinnerService, SpinnerState } from '../../shared/services/spinner.serv
 })
 
 export class SpinnerComponent implements OnDestroy, OnInit {
-  private visible = false;
-  private message: string;
+  public visible = false;
+  public message: string;
   private spinnerStateChanged: Subscription;
 
   constructor(private spinnerService: SpinnerService) {

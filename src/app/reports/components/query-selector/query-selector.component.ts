@@ -42,7 +42,7 @@ export class QuerySelectorComponent implements OnInit {
   /**
    * On click of Apply button on UI. Publish the event to parent component.
    */
-  private applyChanges() {
+  public applyChanges() {
     let obj = {};
     obj["filterGroup"] = this.filterGroup;
     obj["pivotGroup"] = this.pivotGroup;
@@ -53,7 +53,7 @@ export class QuerySelectorComponent implements OnInit {
    * On click of Filter button open the Filter popup.
    * It passes the clone object of FilterGroup to maintain the state of object on cancel & dismiss event.
    */
-  private openFilterModal(){
+  public openFilterModal(){
     let filterFields = JSON.parse(JSON.stringify(this.reportCategoryFields));
     let aggregateFields = [];
     for(let i=0;i<filterFields.length; i++) {
@@ -74,7 +74,7 @@ export class QuerySelectorComponent implements OnInit {
    * On apply filters.
    * @param event
    */
-  private onFilterSubmit(event: any){
+  public onFilterSubmit(event: any){
     this.filterGroup = event.filterGroup;
   }
 
@@ -82,7 +82,7 @@ export class QuerySelectorComponent implements OnInit {
    * On cancel/dismiss Filter popup model.
    * @param event
    */
-  private onFilterCancel(event: any){
+  public onFilterCancel(event: any){
     // Do Nothing
   }
 
@@ -90,7 +90,7 @@ export class QuerySelectorComponent implements OnInit {
    * On click of Pivot button open the Pivot popup.
    * It passes the clone object of PivotGroup to maintain the state of object on cancel & dismiss event.
    */
-  private openPivotModal(){
+  public openPivotModal(){
     this.pivotModalService.activate({schemaDef: this.reportCategoryFields, pivotGroup: JSON.parse(JSON.stringify(this.pivotGroup)), _parent:this}).then((res) => {
       console.log(res);
     });
@@ -100,7 +100,7 @@ export class QuerySelectorComponent implements OnInit {
    * On apply Pivots.
    * @param event
    */
-  private onPivotSubmit(event: any) {
+  public onPivotSubmit(event: any) {
     this.pivotGroup = event.pivotGroup;
   }
 
@@ -108,7 +108,7 @@ export class QuerySelectorComponent implements OnInit {
    * On cancel/dismiss Pivot popup model.
    * @param event
    */
-  private onPivotCancel(event: any){
+  public onPivotCancel(event: any){
     // Do nothing
   }
 

@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule, DataTableModule, TabViewModule } from 'primeng/primeng';
 
 import { DataViewComponent } from './components/root/core.view.component';
-import { BasicDTComponent } from './components/basic/datatable.component';
 import { BasicDataTableComponent } from './components/dt-basic/dt-basic.component';
 import { DetailDataTableComponent } from './components/dt-detail/dt-detail.component';
 import { GroupDataTableComponent } from './components/dt-group/dt-group.component';
@@ -58,7 +57,6 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     SearchComponent,
     ImportExportComponent,
     ColumnSelectorComponent,
-    BasicDTComponent,
     AddComponent,
     AddEditComponent,
     ImportDataComponent,
@@ -77,7 +75,6 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     SearchComponent,
     ImportExportComponent,
     ColumnSelectorComponent,
-    BasicDTComponent,
     AddComponent,
     DataViewComponent,
     RowDetailComponent,

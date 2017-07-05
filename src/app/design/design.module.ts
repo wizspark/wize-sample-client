@@ -14,7 +14,7 @@ import { HttpEx } from './services/http/http-ex';
 import { HttpResponseHandler } from './services/http/http-response-handler.service';
 import { HttpHeaders } from './services/http/http-headers';
 import { SpinnerComponent } from './components/spinner/spinner';
-import { COMMON_VALIDATORS } from './services/validators/directives';
+import { COMMON_VALIDATORS } from './services/validators/directives/index';
 import { FormErrorService } from './services/form-error.service';
 import { MODAL_DIRECTIVES } from './components/modal/index';
 import { ConfirmationComponent } from './components/confirmation/confirmation';

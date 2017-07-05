@@ -10,7 +10,7 @@ import { UIConfigService } from '../../../wize-ng2-core/core/shared';
 
 export class NavBarComponent implements OnInit {
   pages: any[] ;
-  private items: MenuItem[];
+  items: MenuItem[];
 
   constructor(private uiConfigService: UIConfigService) {
     this.pages = [{

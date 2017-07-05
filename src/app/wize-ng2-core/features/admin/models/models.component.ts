@@ -142,7 +142,7 @@ export class ModelsComponent implements OnInit {
 
   }
 
-  private ok(){
+  public ok(){
     let model = {};
     model["name"] = this.selectedModel.name;
     model["displayField"] = this.modelFields.find(function (field) {
@@ -153,7 +153,7 @@ export class ModelsComponent implements OnInit {
     });
   }
 
-  private dismissed(isReset?: boolean) {
+  public dismissed(isReset?: boolean) {
     this.getScopedAndVersionedModels();
     this.modal.hide();
   }

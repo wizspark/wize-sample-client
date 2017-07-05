@@ -7,12 +7,12 @@
     <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">
         <div [ngClass]="{ 'card-block' : dataTableInputConfig.isHeader}">
             <p-dataTable [styleClass]="(rows && rows.length) ? 'c-grid pf-expand-grid' : 'c-grid'" [lazy]="true" [value]="rows" [responsive]="true" [sortField]="entity.viewOptions.sortField" [rowGroupMode]="entity.viewOptions.rowGroupMode" [groupField]="entity.viewOptions.groupField"
-                [sortableRowGroup]="false" [rows]="limit" [paginator]="paginator" expandableRowGroups="true" [stacked]="stacked" [responsive]="true" resizableColumns="true" reorderableColumns="true" (onLazyLoad)="getModelData($event)" scrollable="true" resizableColumns="true"
+                [sortableRowGroup]="false" [rows]="limit" [paginator]="paginator" expandableRowGroups="true" stacked="stacked" [responsive]="true" resizableColumns="true" reorderableColumns="true" (onLazyLoad)="getModelData($event)" scrollable="true" resizableColumns="true"
                 [scrollHeight]="dataTableInputConfig.isHeader ? '600px' : '300px'">
                 <ng-template pTemplate="rowgroupheader" let-rowData>{{getString( rowData,entity.viewOptions.groupField)}}
                 </ng-template>
                 <p-column *ngFor="let col of activeColumns" [field]="col.name" [header]="col.displayName" [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)">
-                    <template let-row="rowData" pTemplate>
+                    <ng-template let-row="rowData" pTemplate>
                         <span [ngSwitch]="col.type">
                             <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'MMM d, y h:mm a'}}</span>
                             <span *ngSwitchCase="'WIZE_MONEY'">{{row[col.name] | currency:'USD':true }}</span>
@@ -23,7 +23,7 @@
                                 <span [innerHTML]="row[col.name] | ellipsis : 20"></span>
                             </span>
                         </span>
-                    </template>
+                    </ng-template>
                 </p-column>
                 <p-column header="Actions" [style]="{'width':'180px'}">
                     <ng-template let-row="rowData" pTemplate="body">

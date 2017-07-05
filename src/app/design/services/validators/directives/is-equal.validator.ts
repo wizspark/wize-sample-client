@@ -4,9 +4,10 @@ import { FormControl, NG_VALIDATORS, Validator, ValidatorFn } from '@angular/for
 
 @Directive({
   selector: '[isEqual][ngModel]',
-  providers: [{provide: NG_VALIDATORS, useExisting: () => IsEqualValidatorDirective, multi: true}]
+  providers: [{provide: NG_VALIDATORS, useExisting: IsEqualValidatorDirective, multi: true}]
 })
-export class IsEqualValidatorDirective implements Validator, OnInit {
+export class IsEqualValidatorDirective implements OnInit {
+
   private validator: ValidatorFn;
 
   @Input() private isEqual: FormControl;

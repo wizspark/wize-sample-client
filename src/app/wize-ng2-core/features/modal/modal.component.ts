@@ -10,7 +10,7 @@ export class ModalComponent {
     @Input() styleClass: string;
     @Input() positionClass: string = 'panel-right';
     public visible = false;
-    private visibleAnimate = false;
+    public visibleAnimate = false;
 
     constructor(){}
 

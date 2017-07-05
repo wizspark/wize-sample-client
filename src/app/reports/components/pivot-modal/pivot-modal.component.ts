@@ -57,12 +57,12 @@ export class PivotModalComponent implements OnInit, AfterContentInit, OnDestroy 
     });
   }
 
-  private ok(){
+  public ok(){
     this.onSubmit.emit(this);
     this.dismissed();
   }
 
-  private dismissed(isReset?: boolean) {
+  public dismissed(isReset?: boolean) {
     if (isReset){
         this.onCancel.emit(this);
     }

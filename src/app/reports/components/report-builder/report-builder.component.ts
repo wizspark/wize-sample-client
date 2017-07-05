@@ -114,7 +114,7 @@ export class ReportBuilderComponent implements OnInit {
    * @param event
    * @param accordion
    */
-  private onAccordionSelect(event: any, accordion) {
+  public onAccordionSelect(event: any, accordion) {
     this.previewChart = false;
     this.accordionConfig.activeSection = accordion.key;
     //if(!this.chartData) this.chartData = new ChartData();
@@ -258,7 +258,7 @@ export class ReportBuilderComponent implements OnInit {
        //this.chartData.title = this.querySelector.modelName;
   }
 
-  private onReportCategoryChange(modelSelector) {
+  public onReportCategoryChange(modelSelector) {
     for(let i=0;i<this.reportCategories.length;i++) {
       let category = this.reportCategories[i];
       if(category.id == modelSelector) {
@@ -411,7 +411,7 @@ export class ReportBuilderComponent implements OnInit {
     let fieldVal = (field.modelName + "_" + field.columnName).toLowerCase();
     return fieldVal;
   }
-  private reportNameChange(event){
+  public reportNameChange(event){
     this.saveActivate();
   }
   private getHeigthDy(): string {

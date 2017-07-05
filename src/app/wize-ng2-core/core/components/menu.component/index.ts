@@ -12,9 +12,8 @@ import { AppConfigService } from '../../shared/services/app.config.service';
 })
 
 export class MenuBarComponent implements OnInit {
-  private items:MenuItem[];
-  private isReport:boolean = false;
-  private isAdmin:boolean = false;
+  public items:MenuItem[];
+  public isReport:boolean = false;
 
   constructor(private uiConfigService:UIConfigService,
               private authService:AuthService,
