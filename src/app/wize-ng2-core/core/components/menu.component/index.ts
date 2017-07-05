@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UIConfigService } from '../../shared/services/index';
 import { MenuItem } from 'primeng/primeng';
 import { AuthService } from '../../../../user/services/auth.service';
+import { AppConfigService } from '../../shared/services/app.config.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -16,7 +17,9 @@ export class MenuBarComponent implements OnInit {
   private isAdmin:boolean = false;
 
   constructor(private uiConfigService:UIConfigService,
-              private authService:AuthService, private router:Router, private route:ActivatedRoute) {
+              private authService:AuthService,
+              private router:Router,
+              private route:ActivatedRoute, private appConfigService: AppConfigService) {
   }
 
   ngOnInit() {
@@ -50,5 +53,9 @@ export class MenuBarComponent implements OnInit {
      */
   isModuleInstalled(module: string){
     return this.uiConfigService.getModule(module)
+  }
+
+  navigateToHome() {
+    this.router.navigate([this.appConfigService.getConfig('defaultRoute')])
   }
 }

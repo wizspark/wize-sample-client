@@ -9,9 +9,9 @@ const orderBy = require('lodash/orderBy');
 @Injectable()
 export class UIConfigService {
 
-  private config: any = [];
+  private config:any = [];
 
-  constructor(private _http: CoreHttpService, private configService: AppConfigService) {
+  constructor(private _http:CoreHttpService, private configService:AppConfigService) {
   }
 
   /**
@@ -23,11 +23,11 @@ export class UIConfigService {
       const host = this.configService.getConfig('host');
       const uiconfigEndpoint = `${host}/api/metadata/pages`; //'@local-srv/ui.config.json';
       this._http.get(uiconfigEndpoint).map((res) => res.json())
-        .catch((error: any): any => {
+        .catch((error:any):any => {
           console.log('Configuration file "ui.config.json" could not be read');
           resolve(true);
           return Observable.throw(error.json().error || 'Server error');
-        }).subscribe((config: any) => {
+        }).subscribe((config:any) => {
         this.config = config;
         resolve(true);
       });
@@ -37,8 +37,8 @@ export class UIConfigService {
   /**
    * Get Application Routes
    * @returns {any}
-     */
-  getRoutes(): any [] {
+   */
+  getRoutes():any [] {
     const routerItems = [];
     this.config.routes.filter(route => !route.hidden).forEach((route) => {
       if (route.entities && route.entities.length > 0 && route.pageType !== 'custom') {
@@ -63,8 +63,8 @@ export class UIConfigService {
   /**
    * Get Config
    * @returns {T[]}
-     */
-  getConfig(): any[] {
+   */
+  getConfig():any[] {
     return (this.config.routes || []).filter(route => !route.hidden);
   }
 
@@ -72,8 +72,8 @@ export class UIConfigService {
    * Get Config By Route
    * @param route
    * @returns {undefined|T}
-     */
-  getConfigByRoute(route: string): any {
+   */
+  getConfigByRoute(route:string):any {
     return this.config.routes.find((r) => r.route === route || r.routeId === route);
   }
 
@@ -81,8 +81,8 @@ export class UIConfigService {
    * Get Module Information
    * @param module
    * @returns {any}
-     */
-  getModule(module: string){
-    return this.config.modules[module];
+   */
+  getModule(module:string) {
+    return this.config.modules ? this.config.modules[module] : null;
   }
 }

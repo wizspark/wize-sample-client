@@ -19,7 +19,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route) {
-    if (!this.appConfigService.getConfig('auth') || this.authService.isAuthenticated()) {
+    if (this.appConfigService.getConfig('auth') && this.authService.isAuthenticated()) {
+      return true;
+    }
+    else if (!this.appConfigService.getConfig('auth')) {
       return true;
     }
     this.router.navigate(['/login']);
@@ -28,7 +31,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot) {
-    if (!this.appConfigService.getConfig('auth') || this.authService.isAuthenticated()) {
+    if (this.appConfigService.getConfig('auth') && this.authService.isAuthenticated()) {
+      return true;
+    }
+    else if (!this.appConfigService.getConfig('auth')) {
       return true;
     }
     this.router.navigate(['/login']);
