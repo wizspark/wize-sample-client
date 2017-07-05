@@ -1,8 +1,9 @@
 import { Component, ViewEncapsulation, ViewContainerRef } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr';
-import { CoreHttpService } from '../wize-ng2-core/core/shared/services/core.http.service';
+import { CoreHttpService, AppConfigService } from '../wize-ng2-core/core/shared/services/index';
 import { HttpHandlerService } from './services/http.handler.service';
 import { AuthService } from '../user/services/auth.service';
+import { Title }  from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,14 @@ import { AuthService } from '../user/services/auth.service';
 
 
 export class RootComponent {
-  title = 'Root Component (Routing...)';
 
-  constructor(private _httpService: CoreHttpService,
-              private _httpErrorHandler: HttpHandlerService,
-              private _auth: AuthService,
-              private toastr: ToastsManager, private vcr: ViewContainerRef) {
+  constructor(private _httpService:CoreHttpService,
+              private _httpErrorHandler:HttpHandlerService,
+              private _auth:AuthService,
+              private toastr:ToastsManager,
+              private vcr:ViewContainerRef,
+              private appConfigService:AppConfigService, private titleService:Title) {
+    this.titleService.setTitle(this.appConfigService.getConfig('appTitle'));
     this.toastr.setRootViewContainerRef(vcr);
   }
 }
