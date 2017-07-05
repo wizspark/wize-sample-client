@@ -1,18 +1,18 @@
 <aside class="sidebar sidebar-light bg-white">
   <nav class="sidebar-nav">
     <ul>
-      <li class="section-title">ACCESS MANAGEMENT</li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','users']">Users</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','roles']">Roles</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','organization-unit']">Organization Unit</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','email-template']">Email Template</a></li>
-      <li class="section-title">SETTINGS</li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','models']">Models</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-templates']">Pricing Templates</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','settings']">Configuration</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','disclosures']">Disclosures</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-lookups']">Pricing Lookups</a></li>
-      <li routerLinkActive="active"><a [routerLink]="['/wize/admin','reports']">Reports</a></li>
+      <li *ngIf="user?.isAdmin" class="section-title">ACCESS MANAGEMENT</li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','users']">Users</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','roles']">Roles</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','organization-unit']">Organization Unit</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','email-template']">Email Template</a></li>
+      <li *ngIf="user?.isAdmin" class="section-title">SETTINGS</li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','models']">Models</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-templates']">Pricing Templates</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','settings']">Configuration</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','disclosures']">Disclosures</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-lookups']">Pricing Lookups</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','reports']">Reports</a></li>
       <li *ngIf="isAudits" class="section-title" routerLinkActive="active"><a class="header-link" [routerLink]="['/wize/admin','audit']">Audit Trail</a></li>
     </ul>
   </nav>

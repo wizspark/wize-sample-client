@@ -34,6 +34,10 @@ export class UIConfigService {
     });
   }
 
+  /**
+   * Get Application Routes
+   * @returns {any}
+     */
   getRoutes(): any [] {
     const routerItems = [];
     this.config.routes.filter(route => !route.hidden).forEach((route) => {
@@ -56,12 +60,29 @@ export class UIConfigService {
     return orderBy(routerItems, 'index', 'asc');
   }
 
-
+  /**
+   * Get Config
+   * @returns {T[]}
+     */
   getConfig(): any[] {
     return (this.config.routes || []).filter(route => !route.hidden);
   }
 
+  /**
+   * Get Config By Route
+   * @param route
+   * @returns {undefined|T}
+     */
   getConfigByRoute(route: string): any {
     return this.config.routes.find((r) => r.route === route || r.routeId === route);
+  }
+
+  /**
+   * Get Module Information
+   * @param module
+   * @returns {any}
+     */
+  getModule(module: string){
+    return this.config.modules[module];
   }
 }

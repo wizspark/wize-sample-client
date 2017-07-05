@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { UIConfigService } from '../../../../../core/shared/services/index';
+import { AuthService } from '../../../../../../user/services/auth.service';
+
 @Component({
   selector: 'sidebar-layout',
   templateUrl: './sidebar.component.html',
@@ -9,7 +11,7 @@ export class SidebarComponent implements OnInit {
   @Output() private eventEmitter = new EventEmitter();
   private toggle: boolean = false;
   private isAudits: boolean = false;
-  constructor(private uiConfigService:UIConfigService){
+  constructor(private uiConfigService:UIConfigService, private authService: AuthService){
 
   }
   onToggle() {
@@ -18,9 +20,13 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(){
-    let routes = this.uiConfigService.getRoutes();
-    if(routes.find((p) => p.url === '/audit')){
+    const module = this.uiConfigService.getModule('@wizeapps/sequelize-audit');
+    if(module) {
       this.isAudits = true;
     }
+  }
+
+  get user() {
+    return this.authService.user;
   }
 }

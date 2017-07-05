@@ -9,7 +9,8 @@
         <div class="dropdown">
             <a class="nav-link py-1 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user && user.user_metadata && user.user_metadata.name ? user.user_metadata.name: user?.name}}</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" [routerLink]="['/wize/admin/users']" *ngIf="user?.isAdmin && isAdmin"> Admin</a>
+                <a class="dropdown-item" [routerLink]="['/wize/admin/users']" *ngIf="user?.isAdmin && isModuleInstalled('@wizeapps/sequelize-acl')"> Admin</a>
+              <a class="dropdown-item" [routerLink]="['/wize/admin/audit']" *ngIf="isModuleInstalled('@wizeapps/sequelize-audit')"> Audit Trail</a>
                 <div class="dropdown-divider" *ngIf="user?.isAdmin"></div>
                 <a class="dropdown-item" (click)="logout()" href="javascript:;">Logout</a>
             </div>

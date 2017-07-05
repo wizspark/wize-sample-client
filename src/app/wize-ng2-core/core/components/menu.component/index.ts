@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UIConfigService } from '../../shared/services';
+import { UIConfigService } from '../../shared/services/index';
 import { MenuItem } from 'primeng/primeng';
 import { AuthService } from '../../../../user/services/auth.service';
 
@@ -20,10 +20,7 @@ export class MenuBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    let routes = this.uiConfigService.getRoutes();
-    if (routes.find((p) => p.url === '/admin')) {
-      this.isAdmin = true;
-    }
+    const routes = this.uiConfigService.getRoutes();
     this.items = routes.filter((p) => p.pageType !== 'module');
   }
 
@@ -40,9 +37,18 @@ export class MenuBarComponent implements OnInit {
       this.isReport = true;
       var d = new Date();
       var n = d.getTime();
-      this.router.navigate([url], {queryParams: {q: n}, relativeTo: this.route});
+      this.router.navigate([url], { queryParams: {q: n}, relativeTo: this.route });
     } else {
       this.isReport = false;
     }
+  }
+
+  /**
+   * Check Module is installed or not
+   * @param module
+   * @returns {*}
+     */
+  isModuleInstalled(module: string){
+    return this.uiConfigService.getModule(module)
   }
 }

@@ -26,6 +26,9 @@ import {AuditApiService} from './services/audit-api.service';
 import {ReportApiService} from './services/reports-api.service';
 import {DynamicHeight} from './services/reports.service';
 import {SettingsComponent} from './settings/settings.component';
+
+import { AuthService } from '../../../user/services/auth.service';
+
 import {
   MODAL_DIRECTIVES,
   ConfirmationComponent,
@@ -41,7 +44,7 @@ import {OrganizationUsersComponent} from './organization-unit/organization-users
 import {PricingLookupDataComponent} from './pricing-lookups/pricing-lookup-data/pricing-lookup-data.component';
 import {EmailTemplateComponent} from './email-template/email-template.component';
 import {AuditComponent} from './audit/audit.component';
-import { ModalModule } from '../modal';
+import { ModalModule } from '../modal/index';
 
 @NgModule({
   declarations: [
@@ -83,7 +86,7 @@ import { ModalModule } from '../modal';
     CustomFormsModule,
     ModalModule
   ],
-  providers: [DataTableService, PluralService, AdminService, TemplateApiService, SettingsApiService, ConfirmationService, AuditApiService, ReportApiService, DynamicHeight],
+  providers: [AuthService, DataTableService, PluralService, AdminService, TemplateApiService, SettingsApiService, ConfirmationService, AuditApiService, ReportApiService, DynamicHeight],
   exports: [MODAL_DIRECTIVES]
 })
 
