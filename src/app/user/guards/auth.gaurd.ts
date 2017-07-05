@@ -9,16 +9,17 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-
+import { AppConfigService } from '../../wize-ng2-core/core/shared/services/app.config.service';
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(private authService: AuthService,
+              private appConfigService: AppConfigService,
               private router: Router) {
   }
 
   canLoad(route: Route) {
-    if (this.authService.isAuthenticated()) {
+    if (!this.appConfigService.getConfig('auth') || this.authService.isAuthenticated()) {
       return true;
     }
     this.router.navigate(['/login']);
@@ -27,7 +28,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot) {
-    if (this.authService.isAuthenticated()) {
+    if (!this.appConfigService.getConfig('auth') || this.authService.isAuthenticated()) {
       return true;
     }
     this.router.navigate(['/login']);

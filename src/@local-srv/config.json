@@ -1,6 +1,8 @@
 {
   "host":"http://localhost:8080",
   "appTitle":"Loan Pricer",
+  "defaultRoute": "reports",
+  "auth": false,
   "auth0Options":{
     "redirectUrl":"http://localhost:4201",
     "clientId":"jNn1V2ORu1rN1TzgEv1SvDldgnz18W0Y",
