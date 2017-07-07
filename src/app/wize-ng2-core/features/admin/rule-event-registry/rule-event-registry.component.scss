@@ -1,0 +1,38 @@
+
+.dropdown-custom{
+  text-align: left;
+  margin-top: 3px;
+  height: 18px;
+  a.action-dot{
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 0px;
+    &:hover{
+      text-decoration: none;
+    }
+    .dropdown-menu-right{
+
+      .dropdown-item{
+        padding: 3px 1rem;
+        font-size: 13px;
+
+      }
+    }
+
+  }
+
+}
+
+
+
+
+.breadcrumb{
+  background: none;
+  margin-left: 10px;
+  font-size:small;
+}
+
+
+
+
+

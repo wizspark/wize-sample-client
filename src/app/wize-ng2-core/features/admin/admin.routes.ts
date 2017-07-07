@@ -15,6 +15,9 @@ import {PricingLookupDataComponent} from './pricing-lookups/pricing-lookup-data/
 import {EmailTemplateComponent} from './email-template/email-template.component';
 import {AuditComponent} from './audit/audit.component';
 import {ReportCategoryListComponent} from "./reports/index";
+import {RuleEventRegistryComponent} from './rule-event-registry/rule-event-registry.component';
+import {RuleActivitiesComponent} from './rule-event-registry/rule-activities/rule-activities.component';
+import {RuleTasksComponent} from './rule-event-registry/rule-tasks/rule-tasks.component';
 
 @NgModule({
   imports: [
@@ -78,6 +81,18 @@ import {ReportCategoryListComponent} from "./reports/index";
             {
               path: 'audit',
               component: AuditComponent
+            },
+            {
+              path: 'rule-event-registry',
+              component: RuleEventRegistryComponent
+            },
+            {
+              path: 'rule-activities',
+              component: RuleActivitiesComponent
+            },
+            {
+              path: 'rule-tasks',
+              component: RuleTasksComponent
             }
           ]
         }

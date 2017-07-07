@@ -26,6 +26,9 @@ import {AuditApiService} from './services/audit-api.service';
 import {ReportApiService} from './services/reports-api.service';
 import {DynamicHeight} from './services/reports.service';
 import {SettingsComponent} from './settings/settings.component';
+import {RuleEventRegistryComponent} from './rule-event-registry/rule-event-registry.component';
+import {RuleActivitiesComponent} from './rule-event-registry/rule-activities/rule-activities.component';
+import {RuleTasksComponent} from './rule-event-registry/rule-tasks/rule-tasks.component';
 
 import { AuthService } from '../../../user/services/auth.service';
 
@@ -40,6 +43,7 @@ import {AddUserComponent} from './users/add-user/add-user.component';
 import {AddRoleComponent} from './roles/add-role/add-role.component';
 import {AddDisclosureComponent} from './disclosures/add-disclosure/add-disclosure.component';
 import {AddPricingLookupDataComponent} from './pricing-lookups/add-pricing-lookup-data/add-pricing-lookup-data.component';
+import {AddRuleEventRegistryComponent} from './rule-event-registry/add-rule-event-registry/add-rule-event-registry.component';
 import {OrganizationUsersComponent} from './organization-unit/organization-users/users.component';
 import {PricingLookupDataComponent} from './pricing-lookups/pricing-lookup-data/pricing-lookup-data.component';
 import {EmailTemplateComponent} from './email-template/email-template.component';
@@ -60,6 +64,9 @@ import { ModalModule } from '../modal/index';
     ReportCategoryComponent,
     ReportCategoryListComponent,
     SettingsComponent,
+    RuleEventRegistryComponent,
+    RuleActivitiesComponent,
+    RuleTasksComponent,
     RoleUsersComponent,
     MODAL_DIRECTIVES,
     ConfirmationComponent,
@@ -68,6 +75,7 @@ import { ModalModule } from '../modal/index';
     AddRoleComponent,
     AddDisclosureComponent,
     AddPricingLookupDataComponent,
+    AddRuleEventRegistryComponent,
     OrganizationUsersComponent,
     PricingLookupDataComponent,
     EmailTemplateComponent,
