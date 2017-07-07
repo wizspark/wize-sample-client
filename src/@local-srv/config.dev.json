@@ -1,6 +1,6 @@
 {
   "host":"http://localhost:8080",
-  "appTitle":"Loan Pricer",
+  "appTitle":"Loan Pricer DEV",
   "defaultRoute": "/",
   "auth": true,
   "auth0Options":{
