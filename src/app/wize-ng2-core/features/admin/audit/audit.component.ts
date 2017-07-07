@@ -6,7 +6,8 @@ const sortBy = require('lodash/sortBy');
 
 @Component({
   selector: 'audit',
-  templateUrl: './audit.html'
+  templateUrl: './audit.html',
+  styleUrls: ['./audit.component.scss']
 })
 export class AuditComponent implements OnInit {
   private records: any[];
