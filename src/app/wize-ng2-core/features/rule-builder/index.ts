@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RuleInputControlComponent } from './components/rule-input/rule-input.component';
 import { RuleBuilderComponent } from './components/rule-builder/rule-builder.component';
 import { RuleGroupComponent } from './components/rule-group/rule-group.component';
 import { CommonModule } from '@angular/common';
@@ -14,11 +15,13 @@ import { RuleBuilderService } from './services/rule-builder.service';
     ModalModule
   ],
   declarations: [
+    RuleInputControlComponent,
     RuleBuilderComponent,
     RuleGroupComponent,
     FilterWithRulesComponent
   ],
   exports: [
+    RuleInputControlComponent,
     RuleBuilderComponent,
     FilterWithRulesComponent
   ],

@@ -1,7 +1,7 @@
-import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core'
+import {Component, EventEmitter, HostBinding, Input, Output, ViewChild} from '@angular/core'
 import {FormGroup} from '@angular/forms';
 import {Attribute} from './../../interfaces/form.interfaces'
-
+import {RuleInputControlComponent} from '../../../rule-builder/components/rule-input/rule-input.component';
 @Component({
     selector: 'custom-control',
     styleUrls: [ 'control.scss' ],
@@ -22,7 +22,7 @@ export class ControlComponent {
     }
 
     @Output() valueChange: EventEmitter<any> = new EventEmitter();
-
+    @ViewChild(RuleInputControlComponent) ruleInput: RuleInputControlComponent;
     attribute: Attribute;
     form: FormGroup;
 
