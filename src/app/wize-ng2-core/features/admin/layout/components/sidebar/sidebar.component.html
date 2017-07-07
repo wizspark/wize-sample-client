@@ -8,16 +8,16 @@
       <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','email-template']">Email Template</a></li>
       <li *ngIf="user?.isAdmin" class="section-title">SETTINGS</li>
       <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','models']">Models</a></li>
-      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-templates']">Pricing Templates</a></li>
+      <!--<li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-templates']">Pricing Templates</a></li>
       <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','settings']">Configuration</a></li>
       <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','disclosures']">Disclosures</a></li>
-      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-lookups']">Pricing Lookups</a></li>
+      <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','pricing-lookups']">Pricing Lookups</a></li>-->
       <li *ngIf="user?.isAdmin" routerLinkActive="active"><a [routerLink]="['/wize/admin','reports']">Reports</a></li>
-      <li *ngIf="isAudits" class="section-title" routerLinkActive="active"><a class="header-link" [routerLink]="['/wize/admin','audit']">Audit Trail</a></li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" class="section-title">RULES</li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','rule-event-registry']">Events Registration</a></li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','rule-tasks']">Tasks</a></li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','rule-activities']">Activities</a></li>
+      <li *ngIf="isAudits" class="section-title" routerLinkActive="active"><a class="header-link" [routerLink]="['/wize/admin','audit']">Audit Trail</a></li>
     </ul>
   </nav>
 </aside>
