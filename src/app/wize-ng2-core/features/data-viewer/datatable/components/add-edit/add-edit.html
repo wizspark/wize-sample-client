@@ -4,12 +4,17 @@
     </div>
     <div class="app-modal-body">
         <div *ngIf="data">
-            <custom-form *ngIf="data.mode === 'form' && customFormData" [customFormData]="customFormData" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></custom-form>
+            <custom-form [entity]="data.entity" *ngIf="data.mode === 'form' && customFormData"
+                         [customFormData]="customFormData"
+                         (onSubmit)="onSubmit($event)"
+                         (onChanges)="onChanges($event)"
+                         (onRunRule)="onRunRule($event)"
+            ></custom-form>
             <dt-basic *ngIf="data.mode === 'table'" [dataTableInputConfig]="dataTableInputConfig" (associationDataUpdated)="associationDataUpdated($event)"></dt-basic>
         </div>
     </div>
     <div class="app-modal-footer">
-        <button type="button" class="btn btn-primary" (click)="saveModel()">Save</button>
+        <button type="button" class="btn btn-primary" [disabled]="!ruleValidated || !formValid" (click)="saveModel()">Save</button>
         <button type="button" class="btn btn-secondary" (click)="dismissed()">Close</button>
     </div>
 </app-modal>

@@ -1,5 +1,4 @@
 <div [formGroup]="form" class="form-group material-style">
-  <rule-input-control *ngIf="attribute.name === 'ruleCondition'"></rule-input-control>
   <div *ngIf="attribute.name !== 'ruleCondition'" [ngSwitch]="attribute.type">
     <!---->
     <select class="form-control"

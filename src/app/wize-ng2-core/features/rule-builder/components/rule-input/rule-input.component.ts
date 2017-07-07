@@ -2,60 +2,62 @@ import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angu
 import { FilterBuilderService } from '../../services/filter-builder.service';
 import { RuleBuilderService } from '../../services/rule-builder.service';
 import { RuleGroup, RuleField } from '../../interfaces/rule-builder.interface';
-import { ModalComponent } from '../../../modal/modal.component';
 
 @Component({
   selector: 'rule-input-control',
-  templateUrl: 'rule-input.html',
-  providers: [
-    FilterBuilderService,
-    { provide: RuleBuilderService, useClass: FilterBuilderService }
-  ]
+  templateUrl: 'rule-input.html'
 })
 export class RuleInputControlComponent implements OnInit {
-  @ViewChild('modal') modal: ModalComponent;
+  @Input() entity:any;
+  @Input() query:any;
+  @Input() form:any;
+  group:RuleGroup;
+  fields:RuleField[];
+  @Output() runRuleEvent: EventEmitter<any> = new EventEmitter();
+  @Output() ruleQueryGenerateEvent: EventEmitter<any> = new EventEmitter();
+  constructor(private ruleBuilder:RuleBuilderService) {
+  }
 
-  @Input() filterModel: any;
-  @Input() fields: RuleField[];
-
-  @Output() filterModelChange = new EventEmitter<any>();
-
-  group: RuleGroup;
-  query: any;
-  constructor(private filterBuilderService: FilterBuilderService) {
+  mapFactAttributes() {
+    let fields = [];
+    if (this.entity.factSchema) {
+      this.entity.factSchema.attributes.forEach((attr) => {
+        fields.push({field: attr.name, label: attr.displayName, type: attr.type});
+      });
+    }
+    return fields;
   }
 
   ngOnInit() {
-    this.group = <RuleGroup>{ operator: this.filterBuilderService.getGroupOperators()[0], rules: [] };
-    // this.fields = [
-    //   {field: 'a', label: 'a', type: 'STRING'},
-    //   {field: 'b', label: 'b', type: 'INTEGER'},
-    //   {field: 'c', label: 'c', type: 'BOOLEAN'},
-    //   {field: 'd', label: 'd', type: 'DATE'},
-    //   {field: 'e', label: 'e', type: 'WIZE_CODE'},
-    //   {field: 'f', label: 'f', type: 'id'},
-    // ];
-  }
-
-  ngOnChanges() {
-    if (this.filterModel && this.fields) {
-      this.group = this.filterBuilderService.readFilterQuery(this.filterModel, this.fields);
-      this.query = this.filterBuilderService.generateFilterQuery(this.group);
+    this.group = {operator: this.ruleBuilder.getGroupOperators()[0], rules: []};
+    if(this.query) {
+      this.group = this.ruleBuilder.parseQuery(this.query);
     }
+    this.fields = this.mapFactAttributes();
   }
 
-  activate() {
-    this.modal.show();
+  createNewRule() {
+    this.group = {operator: this.ruleBuilder.getGroupOperators()[0], rules: []};
+  }
+
+  activate(query:string) {
+    this.query = query;
+    this.group = this.ruleBuilder.parseQuery(query);
+    return new Promise<string>(resolve => {
+    });
+  }
+
+  getRuntimeQuery() {
+    const queryResult = this.group ? this.ruleBuilder.generateQuery(this.group) : '';
+    this.ruleQueryGenerateEvent.emit(queryResult);
+    return queryResult;
   }
 
   save() {
-    let query = this.filterBuilderService.generateFilterQuery(this.group);
-    console.log(query);
-    this.filterModelChange.emit(query);
-    this.dismissed();
+    this.query = this.group ? this.ruleBuilder.generateQuery(this.group) : this.query;
   }
 
-  dismissed() {
-    this.modal.hide();
+  runRules(){
+    this.runRuleEvent.emit(this.form);
   }
 }

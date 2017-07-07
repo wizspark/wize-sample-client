@@ -161,7 +161,6 @@ export class FilterGroupComponent implements OnInit {
     condition.column = field.columnName;
     condition.table = field.modelName;
     condition.function = field.function;
-    debugger;
   }
 
   onOperatorChange(event,condition){

@@ -32,7 +32,6 @@ export class AppConfigService {
    */
   public load() {
     return new Promise((resolve, reject) => {
-      debugger;
       this._http.get(`@local-srv/config.${environment.name}.json`).map((res) => res.json())
         .catch((error: any): any => {
           console.log('Configuration file "config.json" could not be read');

@@ -78,9 +78,11 @@ export class RuleInputComponent implements OnInit {
 
   executeRules() {
       this.dataTableService.runRules(this.formData.value, this.executionData).subscribe((data) => {
+        this.dataTableService.closeRuleModal(data);
         this.modal.hide();
         this.toastr.success('Successfully executed the rules', 'Success');
       }, err => {
+        this.dataTableService.closeRuleModal(err);
         this.modal.hide();
       });
   }

@@ -155,7 +155,7 @@ export class RoleUsersComponent implements OnInit {
 
     addUsersToRole(){
         this.adminService.updateEnity('/api/wizeuserroles', this.selectedRecords).subscribe(data => {
-            debugger;
+            //debugger;
         });
     }
 }

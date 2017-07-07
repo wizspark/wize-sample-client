@@ -31,15 +31,21 @@ export class FormComponent {
         extraValidation: this._data['settings'].submitButtonExtraValidation || true
       }
     };
+
+    this.ruleAttributes = this.comp.data.attributes.filter((attr)=> attr.name === 'ruleCondition');
+    this.attributes = this.comp.data.attributes.filter((attr)=> attr.name !== 'ruleCondition');
   }
+
+  @Input() entity:any;
 
 
   // Outputs
   @Output() onSubmit:EventEmitter<any> = new EventEmitter();
   @Output() onChanges:EventEmitter<any> = new EventEmitter();
-
+  @Output() onRunRule:EventEmitter<any> = new EventEmitter();
   comp:any;
-
+  attributes: any = [];
+  ruleAttributes:any = [];
   private _data:CustomFormData;
   private _form:FormGroup;
   private _matches:string[];
@@ -72,6 +78,15 @@ export class FormComponent {
     this._data['attributes'].sort((a, b) => a.viewOptions.index - b.viewOptions.index)
   }
 
+  showRuleModal(event){
+    this.onRunRule.emit(event);
+  }
+
+  setRuleConditionValue(value){
+    this._form.controls['ruleCondition'].setValue(value);
+    this._form.controls['ruleCondition'].updateValueAndValidity();
+  }
+
   private _setSettings(settings:Settings) {
     let defaultSettings = {
       submitButton: true,
@@ -89,4 +104,6 @@ export class FormComponent {
 
     return defaultSettings;
   }
+
+
 }
