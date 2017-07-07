@@ -5,7 +5,7 @@ import { RootModule } from './app';
 import { environment } from './environments/environment';
 
 if (environment.production) {
-  enableProdMode();
+  //enableProdMode();
 }
 
 platformBrowserDynamic().bootstrapModule(RootModule);
