@@ -139,7 +139,6 @@ export class DataTableService {
   }
 
   getAPIPath(primaryEntity:any, entity:any, key:string, recordId?:number, isAssociated?:boolean, belongToMany?:boolean) {
-    debugger;
     if (entity.primary) {
       return primaryEntity.apis[key];
     }

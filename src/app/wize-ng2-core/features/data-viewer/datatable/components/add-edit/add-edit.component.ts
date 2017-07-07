@@ -101,7 +101,6 @@ export class AddEditComponent implements OnInit {
       });
     }
     else {
-      debugger;
       if (this.dataTableInputConfig && this.dataTableInputConfig.isAssociation) {
         const apiPath = this.dataTableService.getAPIPath(this.data.primaryEntity, this.data.entity, 'patch', this.id, false);
         this.dataTableService.associateRow(apiPath, this.associationData).subscribe((data) => {
