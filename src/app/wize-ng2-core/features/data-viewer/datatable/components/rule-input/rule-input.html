@@ -1,0 +1,14 @@
+<app-modal #modal [styleClass]="styleClass">
+    <div class="app-modal-header">
+        <h6 class="modal-title text-uppercase weight-400">{{title}}</h6>
+    </div>
+    <div class="app-modal-body">
+        <div *ngIf="data">
+            <custom-form *ngIf="data.mode === 'form' && customFormData" [customFormData]="customFormData" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></custom-form>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="executeRules()">Execute</button>
+        <button type="button" class="btn btn-secondary" (click)="dismissed()">Close</button>
+    </div>
+</app-modal>

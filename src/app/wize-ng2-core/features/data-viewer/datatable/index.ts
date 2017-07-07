@@ -13,6 +13,7 @@ import { RowDetailComponent } from '../row-detail/row-detail';
 import { FilterComponent } from './components/filter/filter.component';
 import { FilterItemComponent } from './components/filter/filter-item/filter-item.component';
 import { HeaderComponent } from './components/dt-header/header.component';
+import { RuleInputComponent } from './components/rule-input/rule-input.component'
 
 import { AddComponent } from './components/dt-header/dt-add/add.component';
 import { ColumnSelectorComponent } from './components/dt-header/dt-column-selector/column-selector.component';
@@ -67,7 +68,8 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     RelationshipComponent,
     FilterItemComponent,
     DataViewComponent,
-    ViewDetailComponent
+    ViewDetailComponent,
+    RuleInputComponent
   ],
   declarations: [
     BasicDataTableComponent,
@@ -89,7 +91,8 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     FilterItemComponent,
     ArrayFilterPipe,
     EllipsisPipe,
-    ViewDetailComponent
+    ViewDetailComponent,
+    RuleInputComponent
   ],
   providers: [DataTableService, PluralService]
 })
