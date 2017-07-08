@@ -1,20 +1,21 @@
-
-
-.ui-inputtext{
-  border:none;
-  padding: 0em;
+.ui-inputtext {
+    border: none;
+    padding: 0em;
 }
 
-
-.nested-table{
-
-  th{
-    border-top:0px solid transparent !important;
-    background: none !important;
-  }
+.nested-table {
+    th {
+        border-top: 0px solid transparent !important;
+        background: none !important;
+    }
 }
 
-.select-filter{
-  border:none; 
-  min-width:195px;
+.select-filter {
+    border: none;
+    min-width: 195px;
+}
+
+.col-height-fix {
+    max-height: 220px;
+    overflow-y: auto;
 }

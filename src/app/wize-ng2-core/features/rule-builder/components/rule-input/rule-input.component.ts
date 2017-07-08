@@ -5,7 +5,8 @@ import { RuleGroup, RuleField } from '../../interfaces/rule-builder.interface';
 
 @Component({
   selector: 'rule-input-control',
-  templateUrl: 'rule-input.html'
+  templateUrl: 'rule-input.html',
+  styleUrls:['rule-input.scss'],
 })
 export class RuleInputControlComponent implements OnInit, OnChanges {
   @Input() entity:any;

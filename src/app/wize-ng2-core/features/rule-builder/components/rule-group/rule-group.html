@@ -1,80 +1,80 @@
 <div class="card group">
 
-  <div class="card-block  pb-0">
-    <div class="row">
-      <div class="col-sm-2">
-        <div class="form-group material-style">
-          <select [(ngModel)]="group.operator" class="form-control" required="required">
+    <div class="card-block  pb-0">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group material-style">
+                    <select [(ngModel)]="group.operator" class="form-control" required="required">
             <option value="" disabled="" hidden="">
             <option *ngFor="let operator of groupOperators" [ngValue]="operator">{{operator.label}}</option>
           </select>
-          <label>Select</label>
-        </div>
-      </div>
-      <div class="col-sm-8 pt-1">
-        <ul class="list-unstyled list-inline">
-          <li class="list-inline-item">
-            <button (click)="addCondition()" class="btn btn-secondary"><span class="fa fa-plus-circle"></span>
+                    <label>Select</label>
+                </div>
+            </div>
+            <div class="col-sm-8 pt-1">
+                <ul class="list-unstyled list-inline">
+                    <li class="list-inline-item">
+                        <button (click)="addCondition()" class="btn btn-secondary"><span class="fa fa-plus-circle"></span>
               Condition
             </button>
-          </li>
-          <li class="list-inline-item">
-            <button (click)="addGroup()" class="btn btn-secondary"><span class="fa fa-plus-circle"></span> Group
+                    </li>
+                    <li class="list-inline-item">
+                        <button (click)="addGroup()" class="btn btn-secondary"><span class="fa fa-plus-circle"></span> Group
             </button>
-          </li>
-          <li class="list-inline-item">
-            <button (click)="removeGroup()" class="btn btn-secondary" *ngIf="!rootLevel"><span
+                    </li>
+                    <li class="list-inline-item">
+                        <button (click)="removeGroup()" class="btn btn-secondary" *ngIf="!rootLevel"><span
               class="fa fa-close"></span></button>
-          </li>
-        </ul>
-      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div *ngFor="let rule of group.rules" c>
-    <div [ngSwitch]="rule.hasOwnProperty('rules')" class="px-1">
-      <div *ngSwitchCase="true">
-        <rule-group [group]="rule" [fields]="fields" (delete)="onRemoveChild(rule)"></rule-group>
-      </div>
-      <div *ngSwitchDefault class="card child">
-        <div class="card-block pt-2  pb-0">
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="form-group material-style">
-                <select [(ngModel)]="rule.field" class="form-control">
+    <div *ngFor="let rule of group.rules" c>
+        <div [ngSwitch]="rule.hasOwnProperty('rules')" class="px-1">
+            <div *ngSwitchCase="true">
+                <rule-group [group]="rule" [fields]="fields" (delete)="onRemoveChild(rule)"></rule-group>
+            </div>
+            <div *ngSwitchDefault class="card child">
+                <div class="card-block pt-2  pb-0">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group material-style">
+                                <select [(ngModel)]="rule.field" class="form-control">
                   <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
                 </select>
-                <label>Field</label>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group material-style">
-                <select [(ngModel)]="rule.operator" class="form-control" style="margin-left: 5px">
+                                <label>Field</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group material-style">
+                                <select [(ngModel)]="rule.operator" class="form-control" style="margin-left: 5px">
                   <option *ngFor="let operator of getFieldOperators(rule.field)" [ngValue]="operator">{{operator.label}}
                   </option>
                 </select>
-                <label>Operator</label>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group material-style">
-                <input type="text" [(ngModel)]="rule.value" class="form-control">
-                <label>Value</label>
-              </div>
-            </div>
+                                <label>Operator</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group material-style">
+                                <input type="text" [(ngModel)]="rule.value" class="form-control">
+                                <label>Value</label>
+                            </div>
+                        </div>
 
-            <div class="col-sm-3 pt-1">
-              <ul class="list-unstyled list-inline">
-                <li class="list-inline-item">
-                  <button (click)="onRemoveChild(rule)" class="btn btn-secondary">
+                        <div class="col-sm-3 pt-1">
+                            <ul class="list-unstyled list-inline">
+                                <li class="list-inline-item">
+                                    <button (click)="onRemoveChild(rule)" class="btn btn-secondary">
                     <span class="fa fa-close"></span>
                   </button>
-                </li>
-              </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

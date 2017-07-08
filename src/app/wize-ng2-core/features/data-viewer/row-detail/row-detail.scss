@@ -170,9 +170,10 @@
 .add-btn {
     position: relative;
     >a {
-        position: absolute;
-        right: 0px;
-        top: -25px;
+        // position: absolute;
+        // right: 0px;
+        // top: -25px;
+        margin-top: -15px;
     }
 }
 
