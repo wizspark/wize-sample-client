@@ -75,7 +75,7 @@ export class DataTableService {
   }
 
   closeRuleModal(item:any) {
-    this.closeAddEditModalSource.next(item);
+    this.closeRuleModalSource.next(item);
   }
 
   showAddEditModal(item:any) {

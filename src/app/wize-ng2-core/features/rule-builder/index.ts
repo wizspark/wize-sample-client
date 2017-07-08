@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterWithRulesComponent } from './components/filters/filter.component';
 import { ModalModule } from '../modal/index';
 import { RuleBuilderService } from './services/rule-builder.service';
-
+import { FilterBuilderService } from './services/filter-builder.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +26,8 @@ import { RuleBuilderService } from './services/rule-builder.service';
     FilterWithRulesComponent
   ],
   providers: [
-    RuleBuilderService
+    RuleBuilderService,
+    FilterBuilderService
   ]
 })
 export class RuleBuilderModule {
