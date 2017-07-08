@@ -3,11 +3,85 @@
     <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} Event Registry</h5>
   </modal-header>
   <modal-body class="edit-rec">
-    <form [formGroup]="form">
+    <form class="p-1" [formGroup]="form">
+
+      <div class="row mb-2">
+        <div class="form-group material-style">
+          <div class="form-group material-style" [class.has-error]="modelName.invalid && modelName.touched">
+            <label for="modelName">Model</label>
+            <select id="modelName" class="form-control" formControlName="modelName" (change)="selectModel($event)">
+              <option value="">Select Model</option>
+              <option *ngFor="let model of models" [value]="model.name">
+                {{model.name}}
+              </option>
+            </select>
+            <small *ngIf="modelName.invalid && modelName.touched" class="form-text">
+              Model is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="form-group material-style">
+          <textarea class="form-control" formControlName="description"></textarea>
+          <label>Description</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="form-group material-style">
+          <div class="form-group material-style" [class.has-error]="evaluationCriteria.invalid && evaluationCriteria.touched">
+            <label for="evaluationCriteria">Evaluation Criteria</label>
+            <select id="evaluationCriteria" class="form-control" formControlName="evaluationCriteria">
+              <option value="">Select Evaluation Criteria</option>
+              <option *ngFor="let criteria of evaluationCriteria1" [value]="criteria">
+                {{ruleMeta.evaluationCriteria[criteria].description}}
+              </option>
+            </select>
+            <small *ngIf="evaluationCriteria.invalid && evaluationCriteria.touched" class="form-text">
+              Evaluation Criteria is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="form-group material-style">
+          <div class="form-group material-style" [class.has-error]="action.invalid && action.touched">
+            <label for="action">Action</label>
+            <select id="action" class="form-control" formControlName="action" (change)="selectAction($event)">
+              <option value="">Select Action</option>
+              <option *ngFor="let action of actions" [value]="action.name">
+              {{action.description}}
+              </option>
+            </select>
+            <small *ngIf="action.invalid && action.touched" class="form-text">
+              Action is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="form-group material-style">
+          <code-editor class="height-auto" [config]="editorConfig" [formControl]="configuration"></code-editor>
+          <label>Configuration</label>
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="entity">
+        <rule-input-control [entity]="entity"
+                            [query]="ruleCriteria.value"
+                            [form]="form"
+                            showRunRule="false"
+                            (ruleQueryGenerateEvent)="setRuleConditionValue($event)"></rule-input-control>
+      </div>
 
     </form>
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
+    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdateRule()">Save</button>
   </modal-footer>
 </modal>

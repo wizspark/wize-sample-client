@@ -29,6 +29,7 @@ import {SettingsComponent} from './settings/settings.component';
 import {RuleEventRegistryComponent} from './rule-event-registry/rule-event-registry.component';
 import {RuleActivitiesComponent} from './rule-event-registry/rule-activities/rule-activities.component';
 import {RuleTasksComponent} from './rule-event-registry/rule-tasks/rule-tasks.component';
+import {RuleBuilderModule} from '../rule-builder/index';
 
 import { AuthService } from '../../../user/services/auth.service';
 
@@ -92,7 +93,8 @@ import { ModalModule } from '../modal/index';
     ReactiveFormsModule,
     CodeEditorModule,
     CustomFormsModule,
-    ModalModule
+    ModalModule,
+    RuleBuilderModule
   ],
   providers: [AuthService, DataTableService, PluralService, AdminService, TemplateApiService, SettingsApiService, ConfirmationService, AuditApiService, ReportApiService, DynamicHeight],
   exports: [MODAL_DIRECTIVES]
