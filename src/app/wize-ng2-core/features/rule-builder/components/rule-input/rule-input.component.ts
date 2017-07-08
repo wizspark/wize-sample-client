@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, OnChanges, Output, EventEmitter, OnInit } from '@angular/core';
 import { FilterBuilderService } from '../../services/filter-builder.service';
 import { RuleBuilderService } from '../../services/rule-builder.service';
 import { RuleGroup, RuleField } from '../../interfaces/rule-builder.interface';
@@ -7,10 +7,11 @@ import { RuleGroup, RuleField } from '../../interfaces/rule-builder.interface';
   selector: 'rule-input-control',
   templateUrl: 'rule-input.html'
 })
-export class RuleInputControlComponent implements OnInit {
+export class RuleInputControlComponent implements OnInit, OnChanges {
   @Input() entity:any;
   @Input() query:any;
   @Input() form:any;
+  @Input() showRunRule: boolean = true;
   group:RuleGroup;
   fields:RuleField[];
   @Output() runRuleEvent: EventEmitter<any> = new EventEmitter();
@@ -35,6 +36,15 @@ export class RuleInputControlComponent implements OnInit {
     }
     this.fields = this.mapFactAttributes();
   }
+
+  ngOnChanges(){
+    this.group = {operator: this.ruleBuilder.getGroupOperators()[0], rules: []};
+    if(this.query) {
+      this.group = this.ruleBuilder.parseQuery(this.query);
+    }
+    this.fields = this.mapFactAttributes();
+  }
+
 
   createNewRule() {
     this.group = {operator: this.ruleBuilder.getGroupOperators()[0], rules: []};
