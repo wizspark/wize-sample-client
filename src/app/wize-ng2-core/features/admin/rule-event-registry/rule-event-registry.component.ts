@@ -47,12 +47,39 @@ export class RuleEventRegistryComponent implements OnInit {
    * Add event registry
    */
   addEventRegistry() {
-    this.addRuleEventRegistryService.activate({
-
-    }).then((data: any) => {
+    this.addRuleEventRegistryService.activate(null).then((data: any) => {
       this.toastr.success('Successfully added event registry.', 'Success');
       this.getRuleEventRegistries();
     });
   }
 
+  /**
+   * Edit event registry
+   */
+  editEventRegistry(eventRegistry: any) {
+    this.addRuleEventRegistryService.activate(eventRegistry).then((data: any) => {
+      this.toastr.success('Successfully updated event registry.', 'Success');
+      this.getRuleEventRegistries();
+    });
+  }
+
+  /**
+   * Delete event registry
+   */
+  deleteEventRegistry(eventRegistry) {
+    let deleteConfirmation: IConfirmation = <IConfirmation>{
+      title: 'Delete Confirmation',
+      message: 'Do you want to delete this Event Registry ?',
+      firstButton: 'Delete',
+      secondButton: 'Cancel'
+    };
+    this.confirmationService.activate(deleteConfirmation).then((responseOK) => {
+      if (responseOK) {
+        this.adminService.deleteRow('/api/wizeeventregistries', eventRegistry).subscribe(data => {
+          this.toastr.success('Successfully deleted event registry.', 'Success');
+          this.getRuleEventRegistries();
+        });
+      }
+    });
+  }
 }
