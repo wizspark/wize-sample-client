@@ -14,30 +14,41 @@ import { CoreToastManager } from '../../../../../../root/services/core-toast-man
   providers: []
 })
 export class AddEditComponent implements OnInit {
-  @ViewChild('modal') modal: ModalComponent;
-  @Input() name: string;
-  @Output() modelChanged: EventEmitter<any> = new EventEmitter();
-  customFormData: any;
-  positiveClick: () => void;
-  wrongAnswer: boolean;
-  title: string = 'Add Record';
-  showAddEditModalSubscription: Subscription;
-  data: any;
-  formData: FormGroup;
-  dataTableInputConfig: IDataTableInputConfig;
-  styleClass: string = 'modal-width-md';
-  edit: boolean = false;
-  associationData: any = [];
-  id: any;
-
-  constructor(private dataTableService: DataTableService,
-              private activatedRoute: ActivatedRoute,
-              private toastr: CoreToastManager) {
+  @ViewChild('modal') modal:ModalComponent;
+  @Input() name:string;
+  @Output() modelChanged:EventEmitter<any> = new EventEmitter();
+  customFormData:any;
+  positiveClick:() => void;
+  wrongAnswer:boolean;
+  title:string = 'Add Record';
+  showAddEditModalSubscription:Subscription;
+  closeRuleModalSubscription:Subscription;
+  data:any;
+  formData:FormGroup;
+  dataTableInputConfig:IDataTableInputConfig;
+  styleClass:string = 'modal-width-md';
+  edit:boolean = false;
+  associationData:any = [];
+  id:any;
+  isRuleModel:boolean = false;
+  ruleValidated:boolean = true;
+  formValid: boolean = false;
+  constructor(private dataTableService:DataTableService,
+              private activatedRoute:ActivatedRoute,
+              private toastr:CoreToastManager) {
     this.showAddEditModalSubscription = this.dataTableService.showAddEditModal$.subscribe(
       item => {
-        if (this.name === item.entity.name)
+        if (this.name === item.entity.name) {
+          if (item.entity.fact) {
+            this.isRuleModel = true;
+            this.ruleValidated = false;
+          }
           this.activate(item);
+        }
       });
+    this.closeRuleModalSubscription = this.dataTableService.closeRuleModal$.subscribe(data => {
+      this.ruleModalClosed(data);
+    });
   }
 
   ngOnInit() {
@@ -47,7 +58,10 @@ export class AddEditComponent implements OnInit {
   ngOnChanges() {
   }
 
-  activate(data: any) {
+  activate(data:any) {
+    if(this.formData){
+      this.formData.reset();
+    }
     this.data = data;
     this.customFormData = data.customFormData;
     this.title = data.title;
@@ -77,13 +91,15 @@ export class AddEditComponent implements OnInit {
   onChanges(event) {
     this.formData = event;
     // Change Validation
+    this.formValid = false;
     if (this.formData.valid) {
-
+      this.formValid = true;
     }
   }
 
   ngOnDestroy() {
     this.showAddEditModalSubscription.unsubscribe();
+    this.closeRuleModalSubscription.unsubscribe();
   }
 
   associationDataUpdated(data) {
@@ -120,6 +136,44 @@ export class AddEditComponent implements OnInit {
           this.modal.hide();
         });
       }
+    }
+  }
+
+  onRunRule(event) {
+    this.dataTableService.showRuleModal({
+      primaryEntity: this.data.entity,
+      entity: this.data.entity,
+      target: this.data.entity.name,
+      title: `Run Rules`,
+      mode: "form",
+      row: {},
+      routes: this.data.routes,
+      executionData: this.formatExecutionData(event.value),
+      customFormData: {
+        attributes: this.data.entity.factSchema.attributes,
+        settings: {}
+      }
+    });
+  }
+
+
+  formatExecutionData(row) {
+    let executionData = [];
+    const item = {
+      id: row.id || null,
+      name: row.ruleName,
+      condition: row.ruleCondition,
+      consequence: row.ruleConsequence
+    }
+    executionData.push(item)
+    return executionData;
+  }
+
+  ruleModalClosed(data) {
+    if (data.matchPath) {
+      this.ruleValidated = true;
+    } else {
+      this.ruleValidated = false;
     }
   }
 

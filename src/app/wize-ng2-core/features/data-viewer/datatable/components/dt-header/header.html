@@ -1,46 +1,49 @@
 <div class="media" style="overflow:visible">
-    <div class="media-body media-middle" style="overflow:visible">
-        <div class="dropdown">
-            <a class="weight-300 h3">
-                <span>{{ name }}</span>
-            </a>
-            <ng-container *ngTemplateOutlet="pageInfoTemplate"></ng-container>
-        </div>
+  <div class="media-body media-middle" style="overflow:visible">
+    <div class="dropdown">
+      <a class="weight-300 h3">
+        <span>{{ name }}</span>
+      </a>
+      <ng-container *ngTemplateOutlet="pageInfoTemplate"></ng-container>
     </div>
-    <div class="media-body media-middle" style="overflow:visible">
-        <ul class="list-unstyled list-inline m-0 text-xs-right">
-            <li *ngIf="!headerOptions.noSearch" class="list-inline-item align-middle primary-search">
-                <dt-search
-                        (searchEvent)="search($event)">
-                </dt-search>
-            </li>
-            <li *ngIf="!headerOptions.noImport || !headerOptions.noExport" class="list-inline-item">
-                <dt-import-export
-                        [noImport]="headerOptions.noImport"
-                        [noExport]="headerOptions.noExport"
-                        (importEvent)="importData($event)"
-                        (exportEvent)="exportData($event)">
-                </dt-import-export>
-            </li>
-            <li *ngIf="!headerOptions.noColumnSelector" class="list-inline-item">
-                <dt-column-selector
-                        [columns]="columns"
-                        (resetColumnsEvent)="resetColumns($event)"
-                        (updateColumnsEvent)="updateColumns($event)">
-                </dt-column-selector>
-            </li>
-            <li *ngIf="!headerOptions.noFilter" class="list-inline-item">
-                <dt-filter (filterEvent)="filter($event)">
-                </dt-filter>
-            </li>
-            <li *ngIf="!headerOptions.noCreate" class="list-inline-item">
-                <dt-add
-                        (addRowEvent)="addRow($event)">
-                </dt-add>
-            </li>
-            <ng-container *ngTemplateOutlet="customHeaderActionTemplate"></ng-container>
-        </ul>
-    </div>
+  </div>
+  <div class="media-body media-middle" style="overflow:visible">
+    <ul class="list-unstyled list-inline m-0 text-xs-right">
+      <li *ngIf="!headerOptions.noSearch" class="list-inline-item align-middle primary-search">
+        <dt-search
+          (searchEvent)="search($event)">
+        </dt-search>
+      </li>
+      <li *ngIf="!headerOptions.noImport || !headerOptions.noExport" class="list-inline-item">
+        <dt-import-export
+          [noImport]="headerOptions.noImport"
+          [noExport]="headerOptions.noExport"
+          (importEvent)="importData($event)"
+          (exportEvent)="exportData($event)">
+        </dt-import-export>
+      </li>
+      <li *ngIf="!headerOptions.noColumnSelector" class="list-inline-item">
+        <dt-column-selector
+          [columns]="columns"
+          (resetColumnsEvent)="resetColumns($event)"
+          (updateColumnsEvent)="updateColumns($event)">
+        </dt-column-selector>
+      </li>
+      <li *ngIf="!headerOptions.noFilter" class="list-inline-item">
+        <dt-filter (filterEvent)="filter($event)">
+        </dt-filter>
+      </li>
+      <li *ngIf="entity.fact" class="list-inline-item">
+        <button class="btn btn-secondary" (click)="runRules()" title="Run Rules" tooltip="Run Rules"><i class="fa fa-play"></i>&nbsp;&nbsp;Run Rules</button>
+      </li>
+      <li *ngIf="!headerOptions.noCreate" class="list-inline-item">
+        <dt-add
+          (addRowEvent)="addRow($event)">
+        </dt-add>
+      </li>
+      <ng-container *ngTemplateOutlet="customHeaderActionTemplate"></ng-container>
+    </ul>
+  </div>
 </div>
 
 

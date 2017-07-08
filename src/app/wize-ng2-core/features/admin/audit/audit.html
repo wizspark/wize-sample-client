@@ -4,7 +4,7 @@
             <div class="media-body media-middle overflow-visible">
                 <h3 class="weight-300 m-0">Audit Trail</h3>
             </div>
-            <div class="media-right media-middle text-truncate">
+            <div class="media-right media-middle text-truncate overflow-visible">
                 <ul class="list-unstyled list-inline m-0 text-xs-right">
                     <li class="list-inline-item align-middle primary-search">
                         <input #gb type="text" class="form-control" pInputText placeholder="Search">
@@ -16,17 +16,13 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="javascript:void(0)" (click)="export()">
-                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;&nbsp;
-                                    Export Data
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;&nbsp; Export Data
                                 </a>
                             </div>
                         </div>
                     </li>
                     <li class="list-inline-item">
-                        <ng-select
-                                [items]="displayModels"
-                                (data)="refreshValue($event)"
-                                placeholder="Choose Model">
+                        <ng-select [items]="displayModels" (data)="refreshValue($event)" placeholder="Choose Model">
                         </ng-select>
                     </li>
                     <li class="list-inline-item">
@@ -42,9 +38,7 @@
     <div class="container-no p-2">
         <div class="card">
             <div class="card-block">
-                <p-dataTable [value]="records"
-                             [scrollable]="true" scrollWidth="100%"
-                             [expandableRows]="true" rowExpandMode="single">
+                <p-dataTable [value]="records" [scrollable]="true" scrollWidth="100%" [expandableRows]="true" rowExpandMode="single">
                     <p-column expander="true" [style]="{'width':'50px'}"></p-column>
                     <p-column header="Identifier">
                         <ng-template let-row="rowData" pTemplate>
@@ -55,7 +49,7 @@
                     <p-column field="email" header="Performed By"></p-column>
                     <p-column field="createdAt" header="Performed On">
                         <ng-template let-row="rowData" pTemplate>
-                            {{row.createdAt  | date:'MMM d, y h:mm a'}}
+                            {{row.createdAt | date:'MMM d, y h:mm a'}}
                         </ng-template>
                     </p-column>
                     <ng-template let-row pTemplate="rowexpansion">

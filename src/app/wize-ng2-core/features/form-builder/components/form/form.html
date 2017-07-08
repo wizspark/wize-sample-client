@@ -1,10 +1,18 @@
 <form (ngSubmit)="submit()" [formGroup]="comp.form" [ngClass]="comp.data.classes?.form">
-    <div class="row mb-2">
-        <div class="col-sm-6" *ngFor="let q of comp.data.attributes">
-                <custom-control
-                        [info]="{attribute: q, form: comp.form, settings: comp.settings}"
-                        (valueChange)="onAttributeValueChange($event)">
-                </custom-control>
-            </div>
+  <div class="row mb-2">
+    <div class="col-sm-6" *ngFor="let q of attributes">
+      <custom-control
+        [info]="{attribute: q, form: comp.form, settings: comp.settings}"
+        [entity]="entity"
+        (valueChange)="onAttributeValueChange($event)">
+      </custom-control>
     </div>
+    <div class="col-sm-12 mb-2" *ngFor="let q of ruleAttributes">
+      <rule-input-control [entity]="entity"
+                          [query]="q.value"
+                          [form]="comp.form"
+                          (runRuleEvent)="showRuleModal($event)"
+                          (ruleQueryGenerateEvent)="setRuleConditionValue($event)"></rule-input-control>
+    </div>
+  </div>
 </form>

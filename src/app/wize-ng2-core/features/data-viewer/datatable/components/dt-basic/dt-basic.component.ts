@@ -20,59 +20,59 @@ import { RuleBuilderComponent } from '../../../../rule-builder/components/rule-b
 })
 
 export class BasicDataTableComponent implements OnChanges, OnDestroy {
-  @ViewChild('ruleBuilder') ruleBuilderModal: RuleBuilderComponent;
+  @ViewChild('ruleBuilder') ruleBuilderModal:RuleBuilderComponent;
 
-  @Input() dataTableInputConfig: IDataTableInputConfig;
-  @Input() templates: QueryList<PrimeTemplate>;
-  @Output() associationDataUpdated: EventEmitter<any> = new EventEmitter();
-  primaryEntity: any;
-  totalRecords: number = 0;
-  paginator: boolean = true;
-  pageLinks: number = 3;
-  rowsPerPageOptions: Array<Number> = [5, 10, 20];
-  limit: number = 15;
-  addSubscription: Subscription;
-  showAddView: boolean = false;
+  @Input() dataTableInputConfig:IDataTableInputConfig;
+  @Input() templates:QueryList<PrimeTemplate>;
+  @Output() associationDataUpdated:EventEmitter<any> = new EventEmitter();
+  primaryEntity:any;
+  totalRecords:number = 0;
+  paginator:boolean = true;
+  pageLinks:number = 3;
+  rowsPerPageOptions:Array<Number> = [5, 10, 20];
+  limit:number = 15;
+  addSubscription:Subscription;
+  showAddView:boolean = false;
 
-  columnSubscription: Subscription;
-  columns: Array<any>;
+  columnSubscription:Subscription;
+  columns:Array<any>;
 
-  importSubscription: Subscription;
-  importModel: string;
+  importSubscription:Subscription;
+  importModel:string;
 
-  exportSubscription: Subscription;
-  exportModel: string;
+  exportSubscription:Subscription;
+  exportModel:string;
 
-  filterSubscription: Subscription;
-  filters: any;
+  filterSubscription:Subscription;
+  filters:any;
 
-  searchSubscription: Subscription;
-  search: any;
+  searchSubscription:Subscription;
+  search:any;
 
-  titleFilterSubscription: Subscription;
-  titleFilter: any;
+  titleFilterSubscription:Subscription;
+  titleFilter:any;
 
-  closeAddEditModalSubscription: Subscription;
+  closeAddEditModalSubscription:Subscription;
 
-  entity: any;
-  rows: any[] = [];
-  activeColumns: any[] = [];
-  allColumns: any[] = [];
-  route: any;
-  id: number;
-  routeData: any;
+  entity:any;
+  rows:any[] = [];
+  activeColumns:any[] = [];
+  allColumns:any[] = [];
+  route:any;
+  id:number;
+  routeData:any;
   // primaryEntity: any;
-  showAddModal: boolean = false;
-  editColumns: Array<any> = [];
+  showAddModal:boolean = false;
+  editColumns:Array<any> = [];
 
-  associatedRows: any;
-  selectedRecords: any = [];
+  associatedRows:any;
+  selectedRecords:any = [];
 
-  constructor(protected router: Router,
-              protected activatedRoute: ActivatedRoute,
-              protected dataTableService: DataTableService,
-              protected pluralService: PluralService,
-              private toastr: CoreToastManager) {
+  constructor(protected router:Router,
+              protected activatedRoute:ActivatedRoute,
+              protected dataTableService:DataTableService,
+              protected pluralService:PluralService,
+              private toastr:CoreToastManager) {
     this.addSubscription = dataTableService.add$.subscribe(
       item => {
         this.showAddView = true;
@@ -127,7 +127,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
   }
 
   searchRecords(searchText) {
-    let searchColumns: Array<any> = this.activeColumns.filter((col) => {
+    let searchColumns:Array<any> = this.activeColumns.filter((col) => {
       return col.type === "STRING" || col.type === 'TEXT'
     });
     let query = {
@@ -163,8 +163,8 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     this.dataTableService.exportData(this.pluralService.pluralize(this.primaryEntity.name));
   }
 
-  showRow(row: any) {
-    if(this.dataTableInputConfig.isHeader) {
+  showRow(row:any) {
+    if (this.dataTableInputConfig.isHeader) {
       this.router.navigate(['wize/page', this.routeData.route, row.id]);
     }
     else {
@@ -203,7 +203,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     });
   }
 
-  editRow(row: any) {
+  editRow(row:any) {
     //TODO - Navigating to detail row
     this.showAddModal = true;
     this.editColumns = this.dataTableService.getColumnsWithValue(this.allColumns, row, true);
@@ -219,7 +219,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     });
   }
 
-  deleteRow(row: any) {
+  deleteRow(row:any) {
     if (this.dataTableInputConfig.belongsToMany) {
       let index = this.rows.indexOf(row, 0);
       if (index > -1) {
@@ -275,7 +275,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     this.getModelData(event);
   }
 
-  showFilterModal(data: any) {
+  showFilterModal(data:any) {
     this.editColumns = this.dataTableService.getColumnsWithValue(this.allColumns, null, false);
     this.dataTableService.showFilterModal({
       entityName: this.entity.name,
@@ -319,9 +319,9 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
   }
 
   getModelData(event) {
-    let modelApiName: string = this.pluralService.pluralize(this.dataTableInputConfig.entityName);
-    let association: Array<any> = null;
-    let path: string;
+    let modelApiName:string = this.pluralService.pluralize(this.dataTableInputConfig.entityName);
+    let association:Array<any> = null;
+    let path:string;
     if (this.primaryEntity.name !== this.dataTableInputConfig.entityName) {
       path = this.dataTableService.getAPIPath(this.primaryEntity, this.entity, 'get', this.id, this.dataTableInputConfig.isAssociation);
       this.dataTableService.getRows(path, event.query, this.entity.apis.association, null, null, event.sortField, event.sortOrder).subscribe((data) => {
@@ -396,11 +396,11 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     this.activeColumns = columns;
   }
 
-  onModalClosed(data: any) {
+  onModalClosed(data:any) {
     this.showAddModal = false;
   }
 
-  getColumnByUnique(unique: boolean) {
+  getColumnByUnique(unique:boolean) {
     return this.activeColumns.filter((c) => {
       return c.viewOptions.noUnique === !unique;
     });
@@ -420,7 +420,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
       }
       return record ? true : false;
     }
-    return false
+    return false;
   }
 
   updateSelectedRecord(row, event) {
@@ -449,7 +449,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
 
   getElementWidth(data) {
     if (data && data.length > 0) {
-      let widthValue: string = '';
+      let widthValue:string = '';
       switch (data.length) {
         case 30:
           widthValue = "120px";
@@ -490,9 +490,9 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     }
   }
 
-  showRuleEditor(row: any, ruleColumn: string) {
+  showRuleEditor(row:any, ruleColumn:string) {
     let rule = row[ruleColumn];
-    this.ruleBuilderModal.activate(rule).then((updatedRule: string) => {
+    this.ruleBuilderModal.activate(rule).then((updatedRule:string) => {
       row[ruleColumn] = updatedRule;
       this.dataTableService.updateRow(this.entity.apis.patch, row.id, row).subscribe((data) => {
         this.toastr.success('Successfully updated record', 'Success');
@@ -500,11 +500,51 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     });
   }
 
-  getStyle(colName){
-    if(colName === 'title' ){
-      return {'width': '180px' };
+  getStyle(colName) {
+    if (colName === 'title') {
+      return {'width': '180px'};
     }
     return "";
+  }
+
+  /**
+   * Run Model Rules
+   */
+  runRules() {
+    this.dataTableService.runRules(null, null).subscribe((data) => {
+      //Console.log('');
+    });
+  }
+
+  showRuleInput(){
+    this.dataTableService.showRuleModal({
+      primaryEntity: this.entity,
+      entity: this.entity,
+      target: this.entity.name,
+      title: `Run Rules`,
+      mode: "form",
+      row: {},
+      routes: this.dataTableInputConfig.routes,
+      executionData: this.formatExecutionData(this.rows),
+      customFormData: {
+        attributes: this.entity.factSchema.attributes,
+        settings: {}
+      }
+    });
+  }
+
+  formatExecutionData(data){
+    let executionData = [];
+    data.forEach((row) => {
+      const item = {
+        id: row.id,
+        name: row.ruleName,
+        condition: row.ruleCondition,
+        consequence: row.ruleConsequence
+      }
+      executionData.push(item)
+    });
+    return executionData;
   }
 }
 

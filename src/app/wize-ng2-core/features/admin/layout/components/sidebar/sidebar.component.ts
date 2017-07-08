@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   @Output() private eventEmitter = new EventEmitter();
   private toggle: boolean = false;
   private isAudits: boolean = false;
+  private isRuleInstalled: boolean = false;
   constructor(private uiConfigService:UIConfigService, private authService: AuthService){
 
   }
@@ -20,10 +21,8 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(){
-    const module = this.uiConfigService.getModule('@wizeapps/sequelize-audit');
-    if(module) {
-      this.isAudits = true;
-    }
+    this.isAudits = !!this.uiConfigService.getModule('@wizeapps/sequelize-audit');
+    this.isRuleInstalled = !!this.uiConfigService.getModule('@wizeapps/rule-engine');
   }
 
   get user() {

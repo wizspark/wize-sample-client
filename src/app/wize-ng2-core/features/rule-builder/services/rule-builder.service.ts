@@ -19,7 +19,45 @@ export class RuleBuilderService {
       {code: 'contains', label: 'contains'},
       {code: 'not_contains', label: 'not contains'}
     ],
+    'STRING': [
+      {code: 'in', label: 'in'},
+      {code: 'not_in', label: 'not in'},
+      {code: 'starts_with', label: 'starts With'},
+      {code: 'ends_with', label: 'ends with'},
+      {code: 'contains', label: 'contains'},
+      {code: 'not_contains', label: 'not contains'}
+    ],
     'number': [
+      {code: '<', label: 'less than'},
+      {code: '<=', label: 'less than or equal to'},
+      {code: '>', label: 'greater than'},
+      {code: '>=', label: 'greater than or equal to'},
+    ],
+    'INTEGER': [
+      {code: '<', label: 'less than'},
+      {code: '<=', label: 'less than or equal to'},
+      {code: '>', label: 'greater than'},
+      {code: '>=', label: 'greater than or equal to'},
+    ],
+    'FLOAT': [
+      {code: '<', label: 'less than'},
+      {code: '<=', label: 'less than or equal to'},
+      {code: '>', label: 'greater than'},
+      {code: '>=', label: 'greater than or equal to'},
+    ],
+    'REAL': [
+      {code: '<', label: 'less than'},
+      {code: '<=', label: 'less than or equal to'},
+      {code: '>', label: 'greater than'},
+      {code: '>=', label: 'greater than or equal to'},
+    ],
+    'DECIMAL': [
+      {code: '<', label: 'less than'},
+      {code: '<=', label: 'less than or equal to'},
+      {code: '>', label: 'greater than'},
+      {code: '>=', label: 'greater than or equal to'},
+    ],
+    'DOUBLE': [
       {code: '<', label: 'less than'},
       {code: '<=', label: 'less than or equal to'},
       {code: '>', label: 'greater than'},
@@ -65,7 +103,7 @@ export class RuleBuilderService {
    */
   parseQuery(query: string): RuleGroup {
     let group = {operator: null, rules: []};
-    query = query.replace(/loanFeature\./g, '');
+    query = query.replace(/this\./g, '');
     if (query) {
       let tokenQueue = this.tokenizeQuery(query);
       try {
@@ -115,7 +153,7 @@ export class RuleBuilderService {
     }
     let queryFragment;
     let valueStr = this.convertValueToString(entry);
-    let fieldStr = 'loanFeature.' + entry.field.field;
+    let fieldStr = 'this.' + entry.field.field;
     switch (entry.operator.code) {
       case 'in':
         queryFragment = valueStr + '.indexOf(' + fieldStr + ') > -1';
@@ -145,7 +183,7 @@ export class RuleBuilderService {
     if (entry.operator.code === 'in' || entry.operator.code === 'not_in') {
       return '[\'' + entry.value.replace(/\s*/g, '').split(',').join('\', \'') + '\']';
     }
-    if (entry.field.type === 'number') {
+    if (entry.field.type === 'INTEGER' || entry.field.type === 'FLOAT'|| entry.field.type === 'DOUBLE') {
       let val = parseFloat(entry.value);
       return isFinite(val) ? val : '';
     }

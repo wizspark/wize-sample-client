@@ -1,106 +1,111 @@
 <div *ngIf="dataTableInputConfig.isHeader && entity"
      class="navbar py-1 px-2 navbar-light bg-faded sub-header">
-    <dt-header
-            [name] = "routeData.name"
-            [entity]="entity"
-            [columns]="allColumns"
-            [headerOptions]="dataTableInputConfig.headerOptions"
-            [templates]="templates"
-            (resetColumnsEvent)="resetColumns($event)"
-            (updateColumnsEvent)="updateColumns($event)"
-            (searchEvent)="searchRecords($event)"
-            (addRowEvent)="addRow($event)"
-            (importEvent)="importData($event)"
-            (exportEvent)="exportData($event)"
-            (filterEvent)="showFilterModal($event)">
-    </dt-header>
+  <dt-header
+    [name]="routeData.name"
+    [entity]="entity"
+    [columns]="allColumns"
+    [headerOptions]="dataTableInputConfig.headerOptions"
+    [templates]="templates"
+    (resetColumnsEvent)="resetColumns($event)"
+    (updateColumnsEvent)="updateColumns($event)"
+    (searchEvent)="searchRecords($event)"
+    (addRowEvent)="addRow($event)"
+    (importEvent)="importData($event)"
+    (exportEvent)="exportData($event)"
+    (filterEvent)="showFilterModal($event)"
+    (runRulesEvent)="showRuleInput()">
+  </dt-header>
 </div>
 <div [ngClass]="{ 'p-2' : dataTableInputConfig.isHeader }">
-    <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">
-        <div [ngClass]="{ 'card-block' : dataTableInputConfig.isHeader}">
-            <p-dataTable #dataTableComponent
-                    *ngIf="entity"
-                    styleClass="c-grid"
-                    [value]="rows"
-                    [lazy]="true"
-                    (onLazyLoad)="getModelData($event)"
-                    [totalRecords]="totalRecords"
-                    [rows]="limit"
-                    [paginator]="paginator"
-                    [responsive]="true"
-                    [expandableRows]="entity.viewOptions.expandableRows"
-                    [reorderableColumns]="entity.viewOptions.reorderableColumns"
-                    scrollable="true"
-                    resizableColumns="true"
-                    [scrollHeight]="dataTableInputConfig.isHeader ? '600px' : '600px'">
-                <p-column *ngIf="dataTableInputConfig.isSelection" header="">
-                    <ng-template  let-row="rowData" pTemplate="body">
-                        <label class="c-lblvalue d-block mb-0" >
+  <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">
+    <div [ngClass]="{ 'card-block' : dataTableInputConfig.isHeader}">
+      <p-dataTable #dataTableComponent
+                   *ngIf="entity"
+                   styleClass="c-grid"
+                   [value]="rows"
+                   [lazy]="true"
+                   (onLazyLoad)="getModelData($event)"
+                   [totalRecords]="totalRecords"
+                   [rows]="limit"
+                   [paginator]="paginator"
+                   [responsive]="true"
+                   [expandableRows]="entity.viewOptions.expandableRows"
+                   [reorderableColumns]="entity.viewOptions.reorderableColumns"
+                   scrollable="true"
+                   resizableColumns="true"
+                   [scrollHeight]="dataTableInputConfig.isHeader ? '600px' : '600px'">
+        <p-column *ngIf="dataTableInputConfig.isSelection" header="">
+          <ng-template let-row="rowData" pTemplate="body">
+            <label class="c-lblvalue d-block mb-0">
                             <span class="ch-rd">
-                                <input class="has-value"  type="checkbox" [checked]="checkRecordAssociated(row)" (change)="updateSelectedRecord(row, $event)">
+                                <input class="has-value" type="checkbox" [checked]="checkRecordAssociated(row)"
+                                       (change)="updateSelectedRecord(row, $event)">
                                 <span class="dummy-ele"></span>
                             </span>
-                        </label>
+            </label>
 
 
-                    </ng-template>
-                </p-column>
-                <p-column *ngFor="let col of getColumnByUnique(true)" [field]="col.name" [header]="col.displayName || col.name"
-                          [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)" [style]="{'width':'230px'}">
-                    <ng-template let-row="rowData" pTemplate="body">
-                        <div [ngSwitch]="col.type">
-                            <a *ngSwitchCase="'DATE'" (click)="showRow(row)" href="javascript:;">{{row[col.name] |
-                                date:'MMM d, y h:mm a'}}</a>
-                            <a *ngSwitchCase="'WIZE_MONEY'" (click)="showRow(row)" href="javascript:;">{{row[col.name]
-                                | currency:'USD':true }}</a>
-                          <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;" (click)="showRuleEditor(row, col.name)">
-                            <span class="fa fa-sitemap"></span>
-                          </a>
-                            <a *ngSwitchDefault (click)="showRow(row)" href="javascript:;">
-                                <span [innerHTML]="row[col.name] | ellipsis : 25"></span>
-                            </a>
-                        </div>
-                    </ng-template>
-                </p-column>
-                <p-column *ngFor="let col of getColumnByUnique(false)" [field]="col.name" [header]="col.displayName || col.name"
-                          [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)" [style]="getStyle(col.name)">
-                    <ng-template let-row="rowData" pTemplate="body" >
+          </ng-template>
+        </p-column>
+        <p-column *ngFor="let col of getColumnByUnique(true)" [field]="col.name" [header]="col.displayName || col.name"
+                  [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)"
+                  [style]="{'width':'230px'}">
+          <ng-template let-row="rowData" pTemplate="body">
+            <div [ngSwitch]="col.type">
+              <a *ngSwitchCase="'DATE'" (click)="showRow(row)" href="javascript:;">{{row[col.name] |
+                date:'MMM d, y h:mm a'}}</a>
+              <a *ngSwitchCase="'WIZE_MONEY'" (click)="showRow(row)" href="javascript:;">{{row[col.name]
+                | currency:'USD':true }}</a>
+              <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;" (click)="showRuleEditor(row, col.name)">
+                <span class="fa fa-sitemap"></span>
+              </a>
+              <a *ngSwitchDefault (click)="showRow(row)" href="javascript:;">
+                <span [innerHTML]="row[col.name] | ellipsis : 25"></span>
+              </a>
+            </div>
+          </ng-template>
+        </p-column>
+        <p-column *ngFor="let col of getColumnByUnique(false)" [field]="col.name" [header]="col.displayName || col.name"
+                  [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)"
+                  [style]="getStyle(col.name)">
+          <ng-template let-row="rowData" pTemplate="body">
                         <span [ngSwitch]="col.type">
                             <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'MMM d, y h:mm a'}}</span>
                             <span *ngSwitchCase="'WIZE_MONEY'">{{row[col.name] | currency:'USD':true }}</span>
                             <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;">
-                                <span class="fa fa-sitemap" (click)="showRuleEditor(row, col.name)"></span>
+                              <span class="fa fa-sitemap" (click)="showRuleEditor(row, col.name)"></span>
                             </a>
                             <span *ngSwitchDefault>
                                 <span [innerHTML]="row[col.name] | ellipsis : 20"></span>
                             </span>
                         </span>
-                    </ng-template>
-                </p-column>
-                <p-column *ngIf="!dataTableInputConfig.isAssociation" header="Actions"  [style]="{'width':'180px'}">
-                    <ng-template let-row="rowData" pTemplate="body">
-                        <div class="dropdown dropdown-custom">
-                            <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                &#8226;&#8226;&#8226;
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a *ngIf="dataTableInputConfig.isHeader" href="javascript:void(0)" class="dropdown-item"
-                                   (click)="showRow(row)"><i aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
-                                <a class="dropdown-item" href="javascript:void(0)" (click)="editRow(row)"><i
-                                        aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0)" (click)="deleteRow(row)"><i
-                                        aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
-                            </div>
-                        </div>
-                    </ng-template>
-                </p-column>
-            </p-dataTable>
-        </div>
+          </ng-template>
+        </p-column>
+        <p-column *ngIf="!dataTableInputConfig.isAssociation" header="Actions" [style]="{'width':'180px'}">
+          <ng-template let-row="rowData" pTemplate="body">
+            <div class="dropdown dropdown-custom">
+              <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                &#8226;&#8226;&#8226;
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a *ngIf="dataTableInputConfig.isHeader" href="javascript:void(0)" class="dropdown-item"
+                   (click)="showRow(row)"><i aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="editRow(row)"><i
+                  aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="deleteRow(row)"><i
+                  aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
+              </div>
+            </div>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
     </div>
+  </div>
 </div>
 
 <add-edit [name]="entity.name" (modelChanged)="refreshModel($event)"></add-edit>
+<rule-input [name]="entity.name" (modelChanged)="refreshModel($event)"></rule-input>
 <import-data></import-data>
 <filter [name]="entity.name" (applyFilterEvent)="applyFilter($event)"></filter>
 <rule-builder #ruleBuilder></rule-builder>

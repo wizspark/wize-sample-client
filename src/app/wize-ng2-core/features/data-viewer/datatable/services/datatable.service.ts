@@ -5,7 +5,7 @@ import { CoreHttpService, UIConfigService, AppConfigService, PluralService } fro
 
 @Injectable()
 export class DataTableService {
-  apiUrl: string;
+  apiUrl:string;
   // Observable sources
   private searchSource = new Subject<any>();
   private importSource = new Subject<any>();
@@ -20,6 +20,8 @@ export class DataTableService {
   private showImportModalSource = new Subject<any>();
   private showFilterModalSource = new Subject<any>();
   private showDetailsModalSource = new Subject<any>();
+  private showRuleModalSource = new Subject<any>();
+  private closeRuleModalSource = new Subject<any>();
   // Observable streams
   search$ = this.searchSource.asObservable();
   import$ = this.importSource.asObservable();
@@ -34,107 +36,123 @@ export class DataTableService {
   showImportModal$ = this.showImportModalSource.asObservable();
   showFilterModal$ = this.showFilterModalSource.asObservable();
   showDetailsModal$ = this.showDetailsModalSource.asObservable();
+
+  // Rule Input Modal Open/Close
+  showRuleModal$ = this.showRuleModalSource.asObservable();
+  closeRuleModal$ = this.closeRuleModalSource.asObservable();
+
   // Service commands
-  search(text: string) {
+  search(text:string) {
     this.searchSource.next(text);
   }
 
-  import(fileName: string) {
+  import(fileName:string) {
     this.importSource.next(fileName);
   }
 
-  export(fileName: string){
+  export(fileName:string) {
     this.exportSource.next(fileName);
   }
 
-  columns(column: any){
+  columns(column:any) {
     this.columnSource.next(column);
   }
 
-  filter(item: any){
+  filter(item:any) {
     this.filterSource.next(item);
   }
 
-  add(item: any) {
+  add(item:any) {
     this.addSource.next(item);
   }
 
-  titleFilter(item: any){
+  titleFilter(item:any) {
     this.titleFilterSource.next(item);
   }
 
-  showAddEditModal(item: any){
+  showRuleModal(item:any) {
+    this.showRuleModalSource.next(item);
+  }
+
+  closeRuleModal(item:any) {
+    this.closeRuleModalSource.next(item);
+  }
+
+  showAddEditModal(item:any) {
     this.showAddEditModalSource.next(item);
   }
 
-  showViewDetails(item: any){
+  showViewDetails(item:any) {
     this.showDetailsModalSource.next(item);
   }
 
-  closeModal(item: any){
+  closeModal(item:any) {
     this.closeAddEditModalSource.next(item);
   }
 
-  showImportDataModal(data:any){
+  showImportDataModal(data:any) {
     this.showImportModalSource.next(data)
   }
 
-  showFilterModal(data: any){
+  showFilterModal(data:any) {
     this.showFilterModalSource.next(data);
   }
 
-  constructor(
-      private _http: CoreHttpService,
-      private _appConfigService: AppConfigService,
-      private _uiConfigService: UIConfigService,
-      private _pluralService: PluralService) {
-        this.apiUrl = `${this._appConfigService.getConfig('host')}`;
+  constructor(private _http:CoreHttpService,
+              private _appConfigService:AppConfigService,
+              private _uiConfigService:UIConfigService,
+              private _pluralService:PluralService) {
+    this.apiUrl = `${this._appConfigService.getConfig('host')}`;
   }
 
-  getColumns(entity: any, filter?: any ) {
-    let columns: any[] = [];
-     entity.attributes.forEach((p) =>  {
-        let column: any = p;
-        column['value'] = null;
-        column['displayName'] = p.displayName || p.name;
-        column['noView'] = p.viewOptions.noView;
-        columns.push(column);
+  getColumns(entity:any, filter?:any) {
+    let columns:any[] = [];
+    entity.attributes.forEach((p) => {
+      let column:any = p;
+      column['value'] = null;
+      column['displayName'] = p.displayName || p.name;
+      column['noView'] = p.viewOptions.noView;
+      columns.push(column);
     });
     if (filter)
-        return columns.filter((c) => {return c['viewOptions']['noView'] === !filter});
+      return columns.filter((c) => {
+        return c['viewOptions']['noView'] === !filter
+      });
     return columns;
   }
 
-  getRelationships(entity:any){
+  getRelationships(entity:any) {
     return entity.relationships;
   }
 
-  getColumnsWithValue(columns, row, isEdit){
+  getColumnsWithValue(columns, row, isEdit) {
     columns.forEach((c) => {
       c.value = isEdit ? row[c.name] : null;
     });
-    return columns.filter((c) => { return c.name !== 'id' && c.name !== 'createdAt' && c.name !== 'updatedAt' && c.name !== 'createdBy' && c.name !== 'modifiedBy' });
+    return columns.filter((c) => {
+      return c.name !== 'id' && c.name !== 'createdAt' && c.name !== 'updatedAt' && c.name !== 'createdBy' && c.name !== 'modifiedBy'
+    });
   }
 
-  getDataFromJSON(path){
+  getDataFromJSON(path) {
     return this._http.get(`@local-srv/${path}`).map((res) => res.json());
   }
 
-  getAPIPath(primaryEntity:any, entity:any, key: string, recordId?: number, isAssociated?: boolean, belongToMany?: boolean){
-    if(entity.primary) {
+  getAPIPath(primaryEntity:any, entity:any, key:string, recordId?:number, isAssociated?:boolean, belongToMany?:boolean) {
+    if (entity.primary) {
       return primaryEntity.apis[key];
     }
     else {
       let apiPath;
-      switch (key){
+      switch (key) {
         case "get":
-            if(isAssociated)
-              apiPath = entity.apis[key];
-            else
-              apiPath = `${primaryEntity.apis[key]}/${recordId}/get${this._pluralService.pluralize(entity.name)}`;
+          if (isAssociated)
+            apiPath = entity.apis[key];
+          else
+            apiPath = `${primaryEntity.apis[key]}/${recordId}/get${this._pluralService.pluralize(entity.name)}`;
           break;
         case "post":
-          if(isAssociated)
+          if (isAssociated)
             apiPath = `${primaryEntity.apis[key]}/${recordId}/add${this._pluralService.pluralize(entity.name)}`;
           else
             apiPath = `${primaryEntity.apis[key]}/${recordId}/create${entity.name}`;
@@ -143,10 +161,10 @@ export class DataTableService {
           apiPath = `${primaryEntity.apis[key]}/${recordId}/set${this._pluralService.pluralize(entity.name)}`;
           break;
         case "delete":
-            if(belongToMany)
-              apiPath = `${primaryEntity.apis[key]}/${recordId}/set${this._pluralService.pluralize(entity.name)}`;
-                else
-              apiPath = `${primaryEntity.apis[key]}/${recordId}/remove${this._pluralService.pluralize(entity.name)}`;
+          if (belongToMany)
+            apiPath = `${primaryEntity.apis[key]}/${recordId}/set${this._pluralService.pluralize(entity.name)}`;
+          else
+            apiPath = `${primaryEntity.apis[key]}/${recordId}/remove${this._pluralService.pluralize(entity.name)}`;
           break;
       }
       return apiPath;
@@ -154,9 +172,9 @@ export class DataTableService {
   }
 
   // APIs for CRUD
-  getRows(model: string, query?: string, association?: Array<any>, offset?:number, limit?:number, sortField?:string, sortOrder?:number, groupOrderQuery?: any){
-    let params: URLSearchParams = new URLSearchParams();
-    if(association && association.length > 1) {
+  getRows(model:string, query?:string, association?:Array<any>, offset?:number, limit?:number, sortField?:string, sortOrder?:number, groupOrderQuery?:any) {
+    let params:URLSearchParams = new URLSearchParams();
+    if (association && association.length > 1) {
       params.set('association', JSON.parse(JSON.stringify(association)));
     }
     if (query) {
@@ -164,11 +182,11 @@ export class DataTableService {
     }
     if (sortField && sortOrder) {
       let sortBy = {};
-      sortBy[sortField] = (sortOrder === 1)  ? 'ASC' : 'DESC';
-      if(groupOrderQuery){
+      sortBy[sortField] = (sortOrder === 1) ? 'ASC' : 'DESC';
+      if (groupOrderQuery) {
         params.set('order', JSON.parse(JSON.stringify(groupOrderQuery)));
       }
-      else{
+      else {
         params.set('order', JSON.stringify(sortBy));
       }
     }
@@ -181,82 +199,82 @@ export class DataTableService {
     }
 
     return this._http
-        .get(``, <RequestOptionsArgs>{
-          url: `${this.apiUrl}${model}`, search: params
-        }, true)
-        .map((response: any) => response.json())
+      .get(``, <RequestOptionsArgs>{
+        url: `${this.apiUrl}${model}`, search: params
+      }, true)
+      .map((response:any) => response.json())
 
   }
 
-  getRowDetail(path: string, id: string){
+  getRowDetail(path:string, id:string) {
     //let params: URLSearchParams = new URLSearchParams();
     //urlSearchParams.set('association', JSON.stringify([{all: true}]));
     //params.set('where', JSON.stringify({ id: id }));
     return this._http
-        .get(``, <RequestOptionsArgs>{
-          url: `${this.apiUrl}${path}/${id}`
-        }, true)
-        .map((response: any) => response.json());
+      .get(``, <RequestOptionsArgs>{
+        url: `${this.apiUrl}${path}/${id}`
+      }, true)
+      .map((response:any) => response.json());
 
   }
 
-  addRow(api: string, row: any){
+  addRow(api:string, row:any) {
     let body = JSON.stringify(row);
     return this._http
-        .post(``, body, <RequestOptionsArgs>{
-          url: `${this.apiUrl}${api}`
-        }, true)
-        .map(res => res.json());
+      .post(``, body, <RequestOptionsArgs>{
+        url: `${this.apiUrl}${api}`
+      }, true)
+      .map(res => res.json());
   }
 
-  associateRow(api: string, row: any){
+  associateRow(api:string, row:any) {
     let body = JSON.stringify(row);
     return this._http
-        .patch(``, body, <RequestOptionsArgs>{
-          url: `${this.apiUrl}${api}`
-        }, true)
-        .map(res => res.json());
+      .patch(``, body, <RequestOptionsArgs>{
+        url: `${this.apiUrl}${api}`
+      }, true)
+      .map(res => res.json());
   }
 
-  deleteRow(api:string, rows:any, belongsToMany?: boolean){
-    if(belongsToMany){
+  deleteRow(api:string, rows:any, belongsToMany?:boolean) {
+    if (belongsToMany) {
       return this._http
-          .patch(``, rows, <RequestOptionsArgs>{
-            url: `${this.apiUrl}${api}`
-          }, true)
-          .map((response: any) => response.json());
+        .patch(``, rows, <RequestOptionsArgs>{
+          url: `${this.apiUrl}${api}`
+        }, true)
+        .map((response:any) => response.json());
     }
     else {
       return this._http
-          .delete(``, <RequestOptionsArgs>{
-            url: `${this.apiUrl}${api}/${rows.id}`
-          }, true)
-          .map((response: any) => response.json());
+        .delete(``, <RequestOptionsArgs>{
+          url: `${this.apiUrl}${api}/${rows.id}`
+        }, true)
+        .map((response:any) => response.json());
     }
   }
 
-  updateRow(api: string, id: any, row: any){
+  updateRow(api:string, id:any, row:any) {
     row.id = id;
     let body = JSON.stringify(row);
     return this._http
-        .patch(``, body, <RequestOptionsArgs>{
-          url: `${this.apiUrl}${api}/${id}`
-        }, true);
+      .patch(``, body, <RequestOptionsArgs>{
+        url: `${this.apiUrl}${api}/${id}`
+      }, true);
   }
 
-  addAssociatedEntity(entity:string){
-
-  }
-
-  removeAssociatedEntity(entity:string){
+  addAssociatedEntity(entity:string) {
 
   }
 
+  removeAssociatedEntity(entity:string) {
 
-  exportData(modelName: string, filter?: Object, sort?: String, columns?: string) {
+  }
+
+
+  exportData(modelName:string, filter?:Object, sort?:String, columns?:string) {
     let _this = this,
-        xhr = new XMLHttpRequest(),
-        url = `${this.apiUrl}export/${modelName}?association=false`;
+      xhr = new XMLHttpRequest(),
+      url = `${this.apiUrl}export/${modelName}?association=false`;
     if (filter && filter !== '') {
       url = `${url}&where=${JSON.stringify(filter)}`;
     }
@@ -276,6 +294,15 @@ export class DataTableService {
       }
     };
     xhr.send();
+  }
+
+  runRules(fact:any, jsonRules:any) {
+    let body = JSON.stringify({fact: fact, jsonRules: jsonRules});
+    return this._http
+      .post(``, body, <RequestOptionsArgs>{
+        url: `${this.apiUrl}/api/execute-rules`
+      }, true)
+      .map(res => res.json());
   }
 
 }

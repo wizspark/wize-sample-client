@@ -1,7 +1,7 @@
-import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core'
+import {Component, EventEmitter, HostBinding, Input, Output, ViewChild} from '@angular/core'
 import {FormGroup} from '@angular/forms';
 import {Attribute} from './../../interfaces/form.interfaces'
-
+import {RuleInputControlComponent} from '../../../rule-builder/components/rule-input/rule-input.component';
 @Component({
     selector: 'custom-control',
     styleUrls: [ 'control.scss' ],
@@ -15,14 +15,14 @@ export class ControlComponent {
         this.form = value.form;
         this.settings = value.settings;
 
-        if (this.attribute.type === 'checkbox') {
-            this.attribute.value = !this.attribute.value ? [] : this.attribute.value;
-            this.checkboxIsRequired = (this.attribute.validation && this.attribute.validation.find(a => a.type === 'required')) ? true : false;
-        }
+        //if (this.attribute.type === 'checkbox') {
+        //    this.attribute.value = !this.attribute.value ? [] : this.attribute.value;
+        //    this.checkboxIsRequired = (this.attribute.validation && this.attribute.validation.find(a => a.type === 'required')) ? true : false;
+        //}
     }
-
+    @Input() entity:any;
     @Output() valueChange: EventEmitter<any> = new EventEmitter();
-
+    @ViewChild(RuleInputControlComponent) ruleInput: RuleInputControlComponent;
     attribute: Attribute;
     form: FormGroup;
 
@@ -61,7 +61,7 @@ export class ControlComponent {
         else this.attribute.value.push(option.value);
 
         this.form.controls[this.attribute.name].setValue(this.attribute.value);
-        this.onValueChange(this.attribute.value)
+        this.onValueChange(this.attribute.value);
     }
 
     chackboxValueChange() {

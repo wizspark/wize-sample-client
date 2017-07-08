@@ -1,23 +1,32 @@
 <ul class="nav navbar-nav">
-    <li><div class="float-xs-left logo mr-1"><a (click)="navigateToHome()" href="javascript:void(0);"><img src="/assets/img/wize-logo.png" alt=""></a></div></li>
-    <li *ngFor="let page of items" class="nav-item mr-2">
-      <a *ngIf="(page.url === '/reports')" class="nav-link py-1" [ngClass]="isReport ? 'active' : ''" (click)="redirectURL(page.url)" routerLinkActive="active">{{page.label}}</a>
-      <a *ngIf="(page.url !== '/reports')" class="nav-link py-1" (click)="redirectURL(page.url)" [routerLink]="page.url" routerLinkActive="active">{{page.label}}</a>
-    </li>
+  <li>
+    <div class="float-xs-left logo mr-1"><a (click)="navigateToHome()" href="javascript:void(0);"><img
+      src="/assets/img/wize-logo.png" alt=""></a></div>
+  </li>
+  <li *ngFor="let page of userMenuItems" class="nav-item mr-2">
+    <a *ngIf="(page.url === '/reports')" class="nav-link py-1" [ngClass]="isReport ? 'active' : ''"
+       (click)="redirectURL(page.url)" routerLinkActive="active">{{page.label}}</a>
+    <a *ngIf="(page.url !== '/reports')" class="nav-link py-1" (click)="redirectURL(page.url)" [routerLink]="page.url"
+       routerLinkActive="active">{{page.label}}</a>
+  </li>
 
-    <li class="nav-item user float-lg-right">
-        <div class="dropdown">
-            <a class="nav-link py-1 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user && user.user_metadata && user.user_metadata.name ? user.user_metadata.name: user?.name}}</a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" [routerLink]="['/wize/admin/users']" *ngIf="user?.isAdmin && isModuleInstalled('@wizeapps/sequelize-acl')"> Admin</a>
-              <a class="dropdown-item" [routerLink]="['/wize/admin/audit']" *ngIf="isModuleInstalled('@wizeapps/sequelize-audit')"> Audit Trail</a>
-                <div class="dropdown-divider" *ngIf="user?.isAdmin"></div>
-                <a class="dropdown-item" (click)="logout()" href="javascript:;">Logout</a>
-            </div>
+  <li class="nav-item user float-lg-right">
+    <div class="dropdown">
+      <a class="nav-link py-1 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user
+        && user.user_metadata && user.user_metadata.name ? user.user_metadata.name: user?.name}}</a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        <div *ngFor="let i of systemMenuItems">
+          <a class="dropdown-item" [routerLink]="[i.url]"> {{ i.label }}</a>
+        </div>
+        <!--<a class="dropdown-item" [routerLink]="['/wize/admin/audit']"-->
+           <!--*ngIf="isModuleInstalled('@wizeapps/sequelize-audit')"> Audit Trail</a>-->
+        <div class="dropdown-divider" *ngIf="user?.isAdmin"></div>
+        <a class="dropdown-item" (click)="logout()" href="javascript:;">Logout</a>
+      </div>
     </div>
-    </li>
-    <li class="nav-item float-lg-right pr-1">
-        <a class="nav-link py-1" routerLinkActive="active"> <i class="fa fa-question-circle" style="font-size: 18px;
-    vertical-align: middle;"aria-hidden="true"></i></a>
-    </li>
+  </li>
+  <li class="nav-item float-lg-right pr-1">
+    <a class="nav-link py-1" routerLinkActive="active"> <i class="fa fa-question-circle" style="font-size: 18px;
+    vertical-align: middle;" aria-hidden="true"></i></a>
+  </li>
 </ul>

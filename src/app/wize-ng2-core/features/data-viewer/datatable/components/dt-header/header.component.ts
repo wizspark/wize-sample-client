@@ -20,7 +20,7 @@ export class HeaderComponent implements OnChanges, OnDestroy {
   @Output() importEvent: EventEmitter<any> = new EventEmitter();
   @Output() exportEvent: EventEmitter<any> = new EventEmitter();
   @Output() filterEvent: EventEmitter<any> = new EventEmitter();
-
+  @Output() runRulesEvent: EventEmitter<any> = new EventEmitter();
   customHeaderActionTemplate: TemplateRef<any>;
   pageInfoTemplate: TemplateRef<any>;
 
@@ -36,17 +36,19 @@ export class HeaderComponent implements OnChanges, OnDestroy {
   }
 
   ngAfterContentInit() {
-    this.templates.forEach((item) => {
-      switch (item.getType()) {
-        case 'customHeaderAction':
-          this.customHeaderActionTemplate = item.template;
-          break;
+    if(this.templates) {
+      this.templates.forEach((item) => {
+        switch (item.getType()) {
+          case 'customHeaderAction':
+            this.customHeaderActionTemplate = item.template;
+            break;
 
-        case 'pageInfo':
-          this.pageInfoTemplate = item.template;
-          break;
-      }
-    });
+          case 'pageInfo':
+            this.pageInfoTemplate = item.template;
+            break;
+        }
+      });
+    }
   }
 
   search(data) {
@@ -75,5 +77,9 @@ export class HeaderComponent implements OnChanges, OnDestroy {
 
   filter(data) {
     this.filterEvent.emit(data);
+  }
+
+  runRules(){
+    this.runRulesEvent.emit();
   }
 }

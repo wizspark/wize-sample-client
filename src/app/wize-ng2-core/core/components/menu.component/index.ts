@@ -12,19 +12,21 @@ import { AppConfigService } from '../../shared/services/app.config.service';
 })
 
 export class MenuBarComponent implements OnInit {
-  private items:MenuItem[];
-  private isReport:boolean = false;
-  private isAdmin:boolean = false;
+  public userMenuItems:MenuItem[];
+  public systemMenuItems:MenuItem[];
+  public isReport:boolean = false;
+  public isAdmin:boolean = false;
 
   constructor(private uiConfigService:UIConfigService,
               private authService:AuthService,
               private router:Router,
-              private route:ActivatedRoute, private appConfigService: AppConfigService) {
+              private route:ActivatedRoute, private appConfigService:AppConfigService) {
   }
 
   ngOnInit() {
     const routes = this.uiConfigService.getRoutes();
-    this.items = routes.filter((p) => p.pageType !== 'module');
+    this.userMenuItems = routes.filter((p) => p.layout === 'USER');
+    this.systemMenuItems = routes.filter((p) => p.layout === 'SYSTEM');
   }
 
   get user() {
@@ -40,7 +42,7 @@ export class MenuBarComponent implements OnInit {
       this.isReport = true;
       var d = new Date();
       var n = d.getTime();
-      this.router.navigate([url], { queryParams: {q: n}, relativeTo: this.route });
+      this.router.navigate([url], {queryParams: {q: n}, relativeTo: this.route});
     } else {
       this.isReport = false;
     }
@@ -50,8 +52,8 @@ export class MenuBarComponent implements OnInit {
    * Check Module is installed or not
    * @param module
    * @returns {*}
-     */
-  isModuleInstalled(module: string){
+   */
+  isModuleInstalled(module:string) {
     return this.uiConfigService.getModule(module)
   }
 

@@ -46,14 +46,16 @@ export class UIConfigService {
           index: route.index,
           url: `/wize/page/${route.route}`,
           label: route.name,
-          pageType: route.pageType
+          pageType: route.pageType,
+          layout: route.layout
         });
       } else {
         routerItems.push({
           index: route.index,
           url: `/${route.route}`,
           label: route.title || route.name,
-          pageType: route.pageType
+          pageType: route.pageType,
+          layout: route.layout
         });
       }
     });
