@@ -9,7 +9,7 @@
         <div class="form-group material-style">
           <div class="form-group material-style" [class.has-error]="modelName.invalid && modelName.touched">
             <label for="modelName">Model</label>
-            <select id="modelName" class="form-control" formControlName="modelName">
+            <select id="modelName" class="form-control" formControlName="modelName" (change)="selectModel($event)">
               <option value="">Select Model</option>
               <option *ngFor="let model of models" [value]="model.name">
                 {{model.name}}
@@ -46,13 +46,6 @@
         </div>
       </div>
 
-      <div class="row mb-1">
-        <div class="form-group material-style">
-          <code-editor id="ruleCriteria" class="height-auto" [config]="editorConfig" [formControl]="ruleCriteria"></code-editor>
-          <label>Rule/Condition</label>
-        </div>
-      </div>
-
       <div class="row mb-2">
         <div class="form-group material-style">
           <div class="form-group material-style" [class.has-error]="action.invalid && action.touched">
@@ -75,6 +68,14 @@
           <code-editor class="height-auto" [config]="editorConfig" [formControl]="configuration"></code-editor>
           <label>Configuration</label>
         </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="entity">
+        <rule-input-control [entity]="entity"
+                            [query]="ruleCriteria.value"
+                            [form]="form"
+                            showRunRule="false"
+                            (ruleQueryGenerateEvent)="setRuleConditionValue($event)"></rule-input-control>
       </div>
 
     </form>

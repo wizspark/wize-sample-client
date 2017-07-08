@@ -18,6 +18,7 @@ export class AddRuleEventRegistryComponent implements OnInit {
   public data : any;
   private isEditMode: boolean;
   public models : any;
+  public entity : any;
   public ruleMeta : any;
 
   constructor(private addRuleEventRegistryService: AddRuleEventRegistryService,
@@ -68,11 +69,11 @@ export class AddRuleEventRegistryComponent implements OnInit {
     this.form = this.formBuilder.group({
       modelName: [data ? data.modelName :'', [Validators.required]],
       evaluationCriteria: [data ? data.evaluationCriteria :'', [Validators.required]],
-      ruleCriteria: [data ? data.ruleCriteria :'', [Validators.required]],
+      ruleCriteria: data ? data.ruleCriteria :'',
       action: [data ? data.action :'', [Validators.required]],
       //name: [data ? data.name :'', [Validators.required]],
       description: data ? data.description :'',
-      configuration: data ? data.configuration :''
+      configuration: data ? data.configuration :'{}'
     });
   }
 
@@ -192,6 +193,40 @@ export class AddRuleEventRegistryComponent implements OnInit {
           this.form.controls['configuration'].setValue(JSON.stringify(obj, null, 4));
         }
       }
+    } else {
+      this.form.controls['configuration'].setValue("{}");
     }
+  }
+
+  public selectModel(event) {
+    event.preventDefault();
+    this.entity = null;
+    let modelName = event.currentTarget.value;
+    if(modelName) {
+      this.adminService.getRows('/api/metadata/models/' + modelName).subscribe(data => {
+        this.entity = {};
+        this.entity["name"] = modelName;
+        this.entity["fact"] = modelName;
+        this.entity["factSchema"] = {};
+        this.entity["factSchema"]["name"] = modelName;
+        this.entity["factSchema"]["attributes"] = [];
+        if(data && data.schemaDef) {
+          let attributes = [];
+          Object.keys(data.schemaDef).forEach(column => {
+            let obj = {};
+            obj["name"] = column;
+            obj["type"] = data.schemaDef[column].type;
+            obj["displayName"] = data.schemaDef[column].displayName;
+            attributes.push(obj);
+          });
+          this.entity["factSchema"]["attributes"] = attributes;
+        }
+      });
+    }
+  }
+
+  setRuleConditionValue(value){
+    this.form.controls['ruleCriteria'].setValue(value);
+    this.form.controls['ruleCriteria'].updateValueAndValidity();
   }
 }
