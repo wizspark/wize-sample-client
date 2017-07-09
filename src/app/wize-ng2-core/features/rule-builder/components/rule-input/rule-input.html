@@ -1,32 +1,31 @@
 <div class="row">
-  <div class="col-sm-10">
-    <div class="form-group material-style" *ngIf="group">
-      <p class="form-control">
-        {{getRuntimeQuery()}}&nbsp;
-      </p>
-      <label>Generated Rule</label>
-    </div>
+    <div class="col-sm-11">
+        <div class="form-group material-style" *ngIf="group">
+            <p class="form-control">
+                {{getRuntimeQuery()}}&nbsp;
+            </p>
+            <label>Generated Rule</label>
+        </div>
 
-  </div>
-  <div class="col-sm-2" *ngIf="showRunRule">
-    <div *ngIf="group">
-      <button class="btn btn-secondary btn-sm " (click)="runRules()" [disabled]="!form.valid">
+    </div>
+    <div class="col-sm-1" *ngIf="showRunRule">
+        <div *ngIf="group" class="play-btn-container">
+            <button class="btn btn-secondary btn-sm " (click)="runRules()" [disabled]="!form.valid">
         <i class="fa fa-play align-bottom" aria-hidden="true"></i>
       </button>
+        </div>
     </div>
-  </div>
 </div>
 
 <rule-group [group]="group" [fields]="fields" [rootLevel]="true" *ngIf="group"></rule-group>
 <div *ngIf="!group">
-  <div class="form-group material-style">
-    <input type="text" class="form-control" [(ngModel)]="query" placeholder=" " required autofocus>
-    <label>Rule</label>
-  </div>
-  <p class="pt-2">
-    This rule can not be edited using rule editor but you can still edit the rule query above.
-    <br>
-    If you want to create a new rule instead, please click below button.
-  </p>
-  <button type="button" class="btn btn-secondary" (click)="createNewRule()">Create New Rule</button>
+    <div class="form-group material-style">
+        <input type="text" class="form-control" [(ngModel)]="query" placeholder=" " required autofocus>
+        <label>Rule</label>
+    </div>
+    <p class="pt-2">
+        This rule can not be edited using rule editor but you can still edit the rule query above.
+        <br> If you want to create a new rule instead, please click below button.
+    </p>
+    <button type="button" class="btn btn-secondary" (click)="createNewRule()">Create New Rule</button>
 </div>

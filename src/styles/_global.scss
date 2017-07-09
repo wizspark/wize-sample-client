@@ -688,12 +688,14 @@ li.ui-state-default.ui-corner-top.ui-tabview-selected.ui-state-active a {
 
 .btn-secondary {
     .fa-plus,
-    .fa-close {
+    .fa-close,
+    .fa-play {
         color: #999;
     }
     &:hover {
         .fa-plus,
-        .fa-close {
+        .fa-close,
+        .fa-play {
             color: #373a3c;
         }
     }
@@ -707,5 +709,17 @@ ng-select {
         .form-control {
             padding: 0.5rem 1rem;
         }
+    }
+}
+
+code-editor {
+    min-height: 36px;
+}
+
+// TO visible Action Popup
+.c-grid {
+    overflow: visible;
+    .ui-datatable-scrollable-body {
+        overflow: visible;
     }
 }
