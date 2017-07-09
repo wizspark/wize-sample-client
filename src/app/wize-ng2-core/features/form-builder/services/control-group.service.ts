@@ -9,11 +9,13 @@ export class ControlGroupService {
     let controlGroup = {},
       toReturn = {},
       matches = [];
-
     attributes.forEach(a => {
       let val = a.value || '',
         validators = null;
-
+      // Parse Data Type
+      //a.type = this.parseDataType(a.type);
+      //a.value = this.parseDataTypeValues(a.type, a.value);
+      //a.options = this.parseDataTypeValues(a.type, a.options);
       if (a.validation || a.required) {
 
         if (Array.isArray(a.validation)) {

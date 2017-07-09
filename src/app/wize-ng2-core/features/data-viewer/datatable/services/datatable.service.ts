@@ -105,6 +105,49 @@ export class DataTableService {
     this.apiUrl = `${this._appConfigService.getConfig('host')}`;
   }
 
+
+  parseDataType(dataType) {
+    if (dataType.indexOf('ENUM') > -1) {
+      return 'ENUM';
+    }
+    if (dataType.indexOf('ARRAY') > -1) {
+      return 'ARRAY'
+    }
+    return dataType;
+  }
+
+  parseDataTypeValues(dataType:string, value:any) {
+    if (dataType.indexOf('ENUM') > -1) {
+      return dataType.replace('ENUM(', '').replace(')', '').split(',');
+    }
+    if (dataType.indexOf('ARRAY') > -1) {
+      return dataType.replace('ARRAY(', '').replace(')', '').split(',');
+    }
+    return value ? value.split(',') : null;
+  }
+
+  parseDataTypeOptions(dataType:string, value:any) {
+    if (dataType.indexOf('ENUM') > -1) {
+      return this.cleanVaules(dataType.replace('ENUM(', '').replace(')', '').split(','));
+    }
+    if (dataType.indexOf('ARRAY') > -1) {
+      return this.cleanVaules(dataType.replace('ARRAY(', '').replace(')', '').split(','));
+    }
+    return value;
+  }
+
+  cleanVaules(values){
+    let newValues = [];
+    if(values){
+      values.forEach(v => {
+        const value = v.replace(new RegExp("'", "g"), "");
+        const valueObj = { id: value, text: value };
+        newValues.push(valueObj);
+      });
+    }
+    return newValues;
+  }
+
   getColumns(entity:any, filter?:any) {
     let columns:any[] = [];
     entity.attributes.forEach((p) => {
@@ -112,6 +155,8 @@ export class DataTableService {
       column['value'] = null;
       column['displayName'] = p.displayName || p.name;
       column['noView'] = p.viewOptions.noView;
+      column['dataType'] = this.parseDataType(p.type);
+      column['options'] = this.parseDataTypeOptions(p.type, null);
       columns.push(column);
     });
     if (filter)
@@ -128,6 +173,10 @@ export class DataTableService {
   getColumnsWithValue(columns, row, isEdit) {
     columns.forEach((c) => {
       c.value = isEdit ? row[c.name] : null;
+      if (c.type === 'ENUM' || c.type === 'ARRAY') {
+        c.value = this.parseDataTypeValues(c.type, c.value);
+      }
+      c['options'] = this.parseDataTypeOptions(c.type, null);
     });
     return columns.filter((c) => {
       return c.name !== 'id' && c.name !== 'createdAt' && c.name !== 'updatedAt' && c.name !== 'createdBy' && c.name !== 'modifiedBy'

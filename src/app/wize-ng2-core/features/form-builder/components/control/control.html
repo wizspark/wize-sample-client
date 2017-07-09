@@ -1,50 +1,172 @@
 <div [formGroup]="form" class="form-group material-style">
-  <div *ngIf="attribute.name !== 'ruleCondition'" [ngSwitch]="attribute.type">
-    <!---->
+  <div [ngSwitch]="attribute.dataType">
+
+    <!--TEXT-->
+    <textarea class="form-control"
+              *ngSwitchCase="'TEXT'"
+              [formControlName]="attribute.name"
+              placeholder=" "
+              (ngModelChange)="onValueChange($event)"
+              [ngClass]="attribute.classes?.attribute"
+              [id]="attribute.key"></textarea>
+
+    <!--INTEGER-->
+    <input class="form-control"
+           *ngSwitchCase="'INTEGER'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--BIGINT-->
+    <input class="form-control"
+           *ngSwitchCase="'BIGINT'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--FLOAT-->
+    <input class="form-control"
+           *ngSwitchCase="'FLOAT'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--REAL-->
+    <input class="form-control"
+           *ngSwitchCase="'REAL'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--BIGINT-->
+    <input class="form-control"
+           *ngSwitchCase="'BIGINT'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--DOUBLE-->
+    <input class="form-control"
+           *ngSwitchCase="'DOUBLE'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--DECIMAL-->
+    <input class="form-control"
+           *ngSwitchCase="'DECIMAL'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--BOOLEAN-->
     <select class="form-control"
-            *ngSwitchCase="'dropdown'"
+            *ngSwitchCase="'BOOLEAN'"
             [formControlName]="attribute.name"
             (ngModelChange)="onValueChange($event)"
             [ngClass]="attribute.classes?.attribute"
             [id]="attribute.key">
-      <option *ngFor="let o of attribute.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
+      <option [value]="false">false</option>
+      <option [value]="true">true</option>
     </select>
-    <!---->
-    <div *ngSwitchCase="'checkbox'" [ngClass]="attribute.classes?.attribute">
-      <div class="checkbox" *ngFor="let o of attribute.options">
-        <input class="form-control"
-               [type]="attribute.type"
-               [formControlName]="attribute.name"
-               [name]="attribute.name"
-               [value]="o.value"
-               [checked]="isSelectActive(o)"
-               (change)="chackboxValueChange()"
-               [disabled]="o.disabled"
-               (click)="setCheckbox(o)">
-        <span>{{o.displayName ? o.displayName : o.value}}</span>
-      </div>
-    </div>
-    <!---->
-    <textarea class="form-control"
-            *ngSwitchCase="'textarea'"
-            [formControlName]="attribute.name"
-            (ngModelChange)="onValueChange($event)"
-            [id]="attribute.key"
-            [ngClass]="attribute.classes?.attribute">
-                </textarea>
-    <!---->
-    <div *ngSwitchCase="'radio'" [ngClass]="attribute.classes?.attribute">
-      <div class="radio" *ngFor="let o of attribute.options">
-        <input class="form-control"
-               [type]="attribute.type"
-               [formControlName]="attribute.name"
-               [name]="attribute.name"
-               [value]="o.value"
-               [checked]="attribute.value === o.value"
-               (click)="setRadio(o)">
-        <span>{{o.displayName ? o.displayName : o.value}}</span>
-      </div>
-    </div>
+
+    <!--DATE-->
+    <input class="form-control"
+           *ngSwitchCase="'DECIMAL'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="datetime"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--DATEONLY-->
+    <input class="form-control"
+           *ngSwitchCase="'DECIMAL'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="date"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--JSON-->
+    <code-editor *ngSwitchCase="'JSON'"
+                 class="height-auto"
+                 [formControl]="form.controls[attribute.name]"
+                 (ngModelChange)="onValueChange($event)"
+                 [ngClass]="attribute.classes?.attribute"
+                 [id]="attribute.key">
+    </code-editor>
+
+    <!--JSONB-->
+    <code-editor *ngSwitchCase="'JSONB'"
+                 class="height-auto"
+                 [formControl]="form.controls[attribute.name]"
+                 (ngModelChange)="onValueChange($event)"
+                 [ngClass]="attribute.classes?.attribute"
+                 [id]="attribute.key">
+    </code-editor>
+
+    <!--ENUM-->
+    <ng-select *ngSwitchCase="'ENUM'"
+               [active]="attribute.value"
+               [multiple]="false"
+               [items]="attribute.options"
+               (data)="refreshValue($event)"
+               placeholder="Choose Item(s)">
+    </ng-select>
+
+    <!--ARRAY-->
+    <ng-select *ngSwitchCase="'ARRAY'"
+               [active]="attribute.value"
+               [multiple]="false"
+               [items]="attribute.options"
+               (data)="refreshValue($event)"
+               placeholder="Choose Item(s)">
+    </ng-select>
+
+    <!--WIZE_CODE-->
+    <code-editor *ngSwitchCase="'WIZE_CODE'"
+                 class="height-auto"
+                 [formControl]="form.controls[attribute.name]"
+                 (ngModelChange)="onValueChange($event)"
+                 [ngClass]="attribute.classes?.attribute"
+                 [id]="attribute.key">
+    </code-editor>
+
+    <!--WIZE_MONEY-->
+    <input class="form-control"
+           *ngSwitchCase="'WIZE_MONEY'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="number"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--WIZE_MONEY-->
     <input class="form-control"
            *ngSwitchCase="'WIZE_TIME'"
            [formControlName]="attribute.name"
@@ -53,28 +175,32 @@
            (ngModelChange)="onValueChange($event)"
            [ngClass]="attribute.classes?.attribute"
            [id]="attribute.key">
-    <!---->
-    <code-editor *ngSwitchCase="'WIZE_CODE'"
-                 class="height-auto"
-                 [formControl]="form.controls[attribute.name]"
-                 (ngModelChange)="onValueChange($event)"
-                 [ngClass]="attribute.classes?.attribute"
-                 [id]="attribute.key">
-    </code-editor>
-    <!---->
+
+    <!--WIZE_MONEY-->
+    <input class="form-control"
+           *ngSwitchCase="'WIZE_URL'"
+           [formControlName]="attribute.name"
+           placeholder=" "
+           type="url"
+           (ngModelChange)="onValueChange($event)"
+           [ngClass]="attribute.classes?.attribute"
+           [id]="attribute.key">
+
+    <!--DEFAULT (STRING)-->
     <input class="form-control"
            *ngSwitchDefault
            [formControlName]="attribute.name"
            placeholder=" "
-           [type]="attribute.type"
+           type="text"
            (ngModelChange)="onValueChange($event)"
            [ngClass]="attribute.classes?.attribute"
            [id]="attribute.key">
-    <!---->
+
     <label
       *ngIf="attribute.displayName"
       [attr.for]="attribute.name">
       {{attribute.displayName}}
     </label>
+
   </div>
 </div>
