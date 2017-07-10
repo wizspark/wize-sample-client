@@ -70,6 +70,8 @@ export class AddEditComponent implements OnInit {
     if (this.data.mode === 'table') {
       this.styleClass = 'modal-width-lg';
       this.dataTableInputConfig = new DataTableInputConfig(this.data.routes, this.data.target, false, true, null, true);
+    } else {
+      this.dataTableInputConfig = new DataTableInputConfig(this.data.routes, this.data.target, false, true, null, false);
     }
     this.modal.show();
   }
@@ -117,6 +119,7 @@ export class AddEditComponent implements OnInit {
       });
     }
     else {
+      //debugger;
       if (this.dataTableInputConfig && this.dataTableInputConfig.isAssociation) {
         const apiPath = this.dataTableService.getAPIPath(this.data.primaryEntity, this.data.entity, 'patch', this.id, false);
         this.dataTableService.associateRow(apiPath, this.associationData).subscribe((data) => {
@@ -128,7 +131,11 @@ export class AddEditComponent implements OnInit {
         });
       }
       else {
-        this.dataTableService.addRow(this.data.entity.apis.post, this.formData.value).subscribe((data) => {
+        let apiPath = this.data.entity.apis.post
+        if(this.data.primaryEntity && this.data.primaryEntity.name !== this.data.entity.name){
+          apiPath =this.dataTableService.getAPIPath(this.data.primaryEntity, this.data.entity, 'post', this.id, false, false);
+        }
+        this.dataTableService.addRow(apiPath, this.formData.value).subscribe((data) => {
           this.toastr.success('Successfully added record', 'Success');
           this.modelChanged.emit({name: this.data.entity.name});
           this.modal.hide();

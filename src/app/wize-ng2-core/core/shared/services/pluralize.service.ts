@@ -6,4 +6,8 @@ export class PluralService {
   pluralize(value: string) {
    return inflection.pluralize(value);
   }
+
+  singularize(value: string){
+    return inflection.singularize(value);
+  }
 }
