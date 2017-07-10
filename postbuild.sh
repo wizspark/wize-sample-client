@@ -1,5 +1,5 @@
 #!/bin/bash
-cat > dist/@local-srv/config.json  << EOF
+cat > dist/@local-srv/config.dev.json  << EOF
 {
   "host":"${HOST_APIURL}",
   "auth0Options":{
@@ -8,3 +8,5 @@ cat > dist/@local-srv/config.json  << EOF
   }
 }
 EOF
+cp dist/@local-srv/config.dev.json dist/@local-srv/config.prod.json
+cp dist/@local-srv/config.dev.json dist/@local-srv/config.qa.json
