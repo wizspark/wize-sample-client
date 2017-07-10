@@ -227,7 +227,7 @@ export class DataTableService {
           if (isAssociated)
             apiPath = `${primaryEntity.apis[key]}/${recordId}/add${this._pluralService.pluralize(entity.name)}`;
           else
-            apiPath = `${primaryEntity.apis[key]}/${recordId}/create${entity.name}`;
+            apiPath = `${primaryEntity.apis[key]}/${recordId}/create${this._pluralService.singularize(entity.name)}`;
           break;
         case "patch":
           apiPath = `${primaryEntity.apis[key]}/${recordId}/set${this._pluralService.pluralize(entity.name)}`;

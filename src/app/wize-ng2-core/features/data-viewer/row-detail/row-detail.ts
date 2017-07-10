@@ -48,7 +48,6 @@ export class RowDetailComponent implements OnInit {
               private pluralService:PluralService,
               private uiConfigService:UIConfigService,
               private sanitizer:DomSanitizer) {
-
     this.route = this.activatedRoute.snapshot.params['route'];
     this.id = this.activatedRoute.snapshot.params['id'];
     this.routes = this.uiConfigService.getConfig();
