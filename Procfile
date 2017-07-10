@@ -1,1 +1,1 @@
-web: ./postbuild.sh && bin/boot
+web: ./postbuild.sh && bin/boot 
