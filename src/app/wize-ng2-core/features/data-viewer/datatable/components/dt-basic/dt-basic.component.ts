@@ -310,7 +310,6 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     this.filterSubscription.unsubscribe();
     this.searchSubscription.unsubscribe();
     this.closeAddEditModalSubscription.unsubscribe();
-
   }
 
   getColumns() {
