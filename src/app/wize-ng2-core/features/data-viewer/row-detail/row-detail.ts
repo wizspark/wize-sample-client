@@ -21,6 +21,7 @@ export class RowDetailComponent implements OnInit {
   route:string;
   columns:any[] = [];
   relationships:any[] = [];
+  singleRelationship: any[] = [];
   rowData:any;
   filter:any = [];
   entity:any;
@@ -78,6 +79,7 @@ export class RowDetailComponent implements OnInit {
     });
     this.getColumns();
     this.getRelationships();
+    this.getSingleRelationships();
     this.getRowDetail();
   }
 
@@ -135,7 +137,13 @@ export class RowDetailComponent implements OnInit {
   }
 
   getRelationships() {
-    this.relationships = this.dataTableService.getRelationships(this.entity);
+    const rels = this.dataTableService.getRelationships(this.entity);
+    this.relationships = rels.filter((r) => r.type !== 'hasOne' && r.type !== 'belongsTo');
+  }
+
+  getSingleRelationships() {
+    const rels = this.dataTableService.getRelationships(this.entity);
+    this.singleRelationship = rels.filter((r) => r.type === 'hasOne' || r.type !== 'belongsTo');
   }
 
   getRelationshipOptions(route:string) {
