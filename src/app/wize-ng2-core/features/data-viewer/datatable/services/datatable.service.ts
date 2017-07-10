@@ -105,6 +105,72 @@ export class DataTableService {
     this.apiUrl = `${this._appConfigService.getConfig('host')}`;
   }
 
+
+  parseDataType(dataType) {
+    if (dataType.indexOf('ENUM') > -1) {
+      return 'ENUM';
+    }
+    if (dataType.indexOf('ARRAY') > -1) {
+      return 'ARRAY'
+    }
+    return dataType;
+  }
+
+  parseDataTypeValues(dataType:string, value:any) {
+    if (dataType.indexOf('ENUM') > -1) {
+      return this.cleanVaules(dataType.replace('ENUM(', '').replace(')', '').split(','), 'ENUM');
+    }
+    if (dataType.indexOf('ARRAY') > -1) {
+      return this.cleanVaules(dataType.replace('ARRAY(', '').replace(')', '').split(','), 'ARRAY');
+    }
+    return value ? value.split(',') : null;
+  }
+
+  parseValueForEdit(value:any, dataType:string) {
+    if (value) {
+      if (dataType === 'ENUM') {
+        return [{id: value, text: value}];
+      }
+      else {
+        let arrayValues = [];
+        value.forEach((p) => {
+          arrayValues.push({value: p, display: p});
+        });
+        return arrayValues;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  parseDataTypeOptions(dataType:string, value:any) {
+    if (dataType.indexOf('ENUM') > -1) {
+      return this.cleanVaules(dataType.replace('ENUM(', '').replace(')', '').split(','), 'ENUM');
+    }
+    if (dataType.indexOf('ARRAY') > -1) {
+      return this.cleanVaules(dataType.replace('ARRAY(', '').replace(')', '').split(','), 'ARRAY');
+    }
+    return value;
+  }
+
+  cleanVaules(values, dataType:string) {
+    let newValues = [];
+    if (values) {
+      values.forEach(v => {
+        let valueObj:any;
+        const value = v.replace(new RegExp("'", "g"), "");
+        if (dataType === 'ENUM') {
+          valueObj = {id: value, text: value};
+        }
+        if (dataType === 'ARRAY') {
+          valueObj = {value: value, display: value};
+        }
+        newValues.push(valueObj);
+      });
+    }
+    return newValues;
+  }
+
   getColumns(entity:any, filter?:any) {
     let columns:any[] = [];
     entity.attributes.forEach((p) => {
@@ -112,6 +178,8 @@ export class DataTableService {
       column['value'] = null;
       column['displayName'] = p.displayName || p.name;
       column['noView'] = p.viewOptions.noView;
+      column['dataType'] = this.parseDataType(p.type);
+      column['options'] = this.parseDataTypeOptions(p.type, null);
       columns.push(column);
     });
     if (filter)
@@ -128,6 +196,10 @@ export class DataTableService {
   getColumnsWithValue(columns, row, isEdit) {
     columns.forEach((c) => {
       c.value = isEdit ? row[c.name] : null;
+      if (c.dataType === 'ENUM' || c.dataType === 'ARRAY') {
+        c.value = this.parseValueForEdit(c.value, c.dataType);
+      }
+      c['options'] = this.parseDataTypeOptions(c.type, null);
     });
     return columns.filter((c) => {
       return c.name !== 'id' && c.name !== 'createdAt' && c.name !== 'updatedAt' && c.name !== 'createdBy' && c.name !== 'modifiedBy'

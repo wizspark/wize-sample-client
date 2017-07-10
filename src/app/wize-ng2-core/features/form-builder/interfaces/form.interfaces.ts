@@ -15,6 +15,7 @@ export interface Attribute {
   options?: Array<{value: string | number, name: string, disabled: boolean}>
   validation?: Array<Validation>
   required:boolean
+  dataType: string
 }
 
 export interface Settings {
