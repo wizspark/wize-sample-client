@@ -8,8 +8,10 @@ import {RuleBuilderModule} from '../rule-builder/index';
 import {CodeEditorModule} from '../../../editor/index';
 import {SelectModule} from 'ng2-select';
 import {CustomFormsModule} from 'ng2-validation';
+import {TagInputModule} from 'ngx-chips';
+
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, CodeEditorModule, RuleBuilderModule, SelectModule, CustomFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, CodeEditorModule, RuleBuilderModule, SelectModule, CustomFormsModule, TagInputModule],
   declarations: [FormComponent, ControlComponent],
   providers: [ControlGroupService],
   exports: [FormComponent]

@@ -139,13 +139,14 @@
     </ng-select>
 
     <!--ARRAY-->
-    <ng-select *ngSwitchCase="'ARRAY'"
-               [active]="attribute.value"
-               [multiple]="false"
-               [items]="attribute.options"
-               (data)="refreshValue($event)"
-               placeholder="Choose Item(s)">
-    </ng-select>
+    <tag-input *ngSwitchCase="'ARRAY'" [(ngModel)]='attribute.value'
+               [ngModelOptions]="{standalone: true}"
+               [editable]="false"
+               [trimTags]="true"
+               (onAdd)="onAdd($event)"
+               (onRemove)="onRemove($event)"
+               [placeholder]="'Add ' + attribute.name"
+               [secondaryPlaceholder]="'Enter ' + attribute.name "></tag-input>
 
     <!--WIZE_CODE-->
     <code-editor *ngSwitchCase="'WIZE_CODE'"
@@ -195,6 +196,9 @@
            (ngModelChange)="onValueChange($event)"
            [ngClass]="attribute.classes?.attribute"
            [id]="attribute.key">
+    <small *ngIf="form.controls[attribute.name].invalid && form.controls[attribute.name].touched" class="form-text">
+      {{attribute.displayName}} is invalid.
+    </small>
 
     <label
       *ngIf="attribute.displayName"

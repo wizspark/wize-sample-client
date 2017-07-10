@@ -2,6 +2,7 @@ import {Component, EventEmitter, HostBinding, Input, Output, ViewChild, AfterVie
 import {FormGroup} from '@angular/forms';
 import {Attribute} from './../../interfaces/form.interfaces'
 import {RuleInputControlComponent} from '../../../rule-builder/components/rule-input/rule-input.component';
+
 @Component({
   selector: 'custom-control',
   styleUrls: ['control.scss'],
@@ -14,11 +15,16 @@ export class ControlComponent implements AfterViewInit {
     this.attribute = value.attribute;
     this.form = value.form;
     this.settings = value.settings;
-
-    //if (this.attribute.type === 'checkbox') {
-    //    this.attribute.value = !this.attribute.value ? [] : this.attribute.value;
-    //    this.checkboxIsRequired = (this.attribute.validation && this.attribute.validation.find(a => a.type === 'required')) ? true : false;
-    //}
+    this.selectedValues = [];
+    if (this.attribute.dataType === 'ENUM' && this.attribute.value) {
+      this.form.controls[this.attribute.name].setValue(this.attribute.value.id);
+    }
+    if (this.attribute.dataType === 'ARRAY' && this.attribute.value) {
+      this.attribute.value.forEach(p => {
+        this.selectedValues.push(p.value);
+      });
+      this.form.controls[this.attribute.name].setValue(this.selectedValues);
+    }
   }
 
   @Input() entity:any;
@@ -28,8 +34,8 @@ export class ControlComponent implements AfterViewInit {
   form:FormGroup;
   initEnum:any = [];
   enumsValues:any = [];
-  selectedValues: any = [];
-  private resetSelect: boolean = true;
+  selectedValues:any = [];
+  private resetSelect:boolean = true;
   private checkboxIsRequired:boolean = false;
   private settings:any;
 
@@ -39,7 +45,8 @@ export class ControlComponent implements AfterViewInit {
       !this.form.controls[this.attribute.name].valid
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
+    this.onValueChange(null);
   }
 
   errors() {
@@ -57,7 +64,7 @@ export class ControlComponent implements AfterViewInit {
 
   setRadio(option) {
     this.form.controls[this.attribute.name].setValue(option.value);
-    this.onValueChange(option.value)
+    this.onValueChange(option.value);
   }
 
   setCheckbox(option) {
@@ -85,7 +92,7 @@ export class ControlComponent implements AfterViewInit {
     return this.attribute.value.find(a => a === option.value) ? true : false
   }
 
-  private _setError(item, errors) {
+  public _setError(item, errors) {
     let errorMsg:string = this.attribute.validation.find(a => a.type.toLowerCase() === item).message,
       tag:string = this.attribute.title || this.attribute.name;
 
@@ -120,5 +127,20 @@ export class ControlComponent implements AfterViewInit {
   public refreshValue(value:any):void {
     this.form.controls[this.attribute.name].setValue(value.id);
     this.onValueChange(value.id);
+  }
+
+  public onAdd(event) {
+    this.selectedValues.push(event.value);
+    this.form.controls[this.attribute.name].setValue(this.selectedValues);
+    this.onValueChange(this.selectedValues);
+  }
+
+  public onRemove(event) {
+    let index = this.selectedValues.indexOf(event.value);
+    if (index > -1) {
+      this.selectedValues.splice(index, 1);
+    }
+    this.form.controls[this.attribute.name].setValue(this.selectedValues);
+    this.onValueChange(this.selectedValues);
   }
 }

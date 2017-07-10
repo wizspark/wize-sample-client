@@ -118,30 +118,53 @@ export class DataTableService {
 
   parseDataTypeValues(dataType:string, value:any) {
     if (dataType.indexOf('ENUM') > -1) {
-      return dataType.replace('ENUM(', '').replace(')', '').split(',');
+      return this.cleanVaules(dataType.replace('ENUM(', '').replace(')', '').split(','), 'ENUM');
     }
     if (dataType.indexOf('ARRAY') > -1) {
-      return dataType.replace('ARRAY(', '').replace(')', '').split(',');
+      return this.cleanVaules(dataType.replace('ARRAY(', '').replace(')', '').split(','), 'ARRAY');
     }
     return value ? value.split(',') : null;
   }
 
+  parseValueForEdit(value:any, dataType:string) {
+    if (value) {
+      if (dataType === 'ENUM') {
+        return [{id: value, text: value}];
+      }
+      else {
+        let arrayValues = [];
+        value.forEach((p) => {
+          arrayValues.push({value: p, display: p});
+        });
+        return arrayValues;
+      }
+    } else {
+      return null;
+    }
+  }
+
   parseDataTypeOptions(dataType:string, value:any) {
     if (dataType.indexOf('ENUM') > -1) {
-      return this.cleanVaules(dataType.replace('ENUM(', '').replace(')', '').split(','));
+      return this.cleanVaules(dataType.replace('ENUM(', '').replace(')', '').split(','), 'ENUM');
     }
     if (dataType.indexOf('ARRAY') > -1) {
-      return this.cleanVaules(dataType.replace('ARRAY(', '').replace(')', '').split(','));
+      return this.cleanVaules(dataType.replace('ARRAY(', '').replace(')', '').split(','), 'ARRAY');
     }
     return value;
   }
 
-  cleanVaules(values){
+  cleanVaules(values, dataType:string) {
     let newValues = [];
-    if(values){
+    if (values) {
       values.forEach(v => {
+        let valueObj:any;
         const value = v.replace(new RegExp("'", "g"), "");
-        const valueObj = { id: value, text: value };
+        if (dataType === 'ENUM') {
+          valueObj = {id: value, text: value};
+        }
+        if (dataType === 'ARRAY') {
+          valueObj = {value: value, display: value};
+        }
         newValues.push(valueObj);
       });
     }
@@ -173,8 +196,8 @@ export class DataTableService {
   getColumnsWithValue(columns, row, isEdit) {
     columns.forEach((c) => {
       c.value = isEdit ? row[c.name] : null;
-      if (c.type === 'ENUM' || c.type === 'ARRAY') {
-        c.value = this.parseDataTypeValues(c.type, c.value);
+      if (c.dataType === 'ENUM' || c.dataType === 'ARRAY') {
+        c.value = this.parseValueForEdit(c.value, c.dataType);
       }
       c['options'] = this.parseDataTypeOptions(c.type, null);
     });

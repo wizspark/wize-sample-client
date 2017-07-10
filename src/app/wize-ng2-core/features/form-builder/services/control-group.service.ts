@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core'
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Attribute, Validation} from './../interfaces/form.interfaces'
-import {CustomValidators} from './../validator/custom.validator'
+//import {CustomValidators} from './../validator/custom.validator';
+import { CustomValidators } from 'ng2-validation';
 
 @Injectable()
 export class ControlGroupService {
@@ -11,22 +12,10 @@ export class ControlGroupService {
       matches = [];
     attributes.forEach(a => {
       let val = a.value || '',
-        validators = null;
-      // Parse Data Type
-      //a.type = this.parseDataType(a.type);
-      //a.value = this.parseDataTypeValues(a.type, a.value);
-      //a.options = this.parseDataTypeValues(a.type, a.options);
-      if (a.validation || a.required) {
-
-        if (Array.isArray(a.validation)) {
-          validators = [];
-          a.validation.forEach(i => validators.push(setValidator(i, a)));
-        }
-        else if (a.required) {
-          validators = [Validators.required];
-        }
-        else validators = setValidator(a.validation)
-      }
+        validators = [];
+      // Parse Validators
+      //a.validation = setValidator(a);
+      validators = setValidator(a);
       controlGroup[a.name] = new FormControl(val, validators);
     });
 
@@ -37,22 +26,46 @@ export class ControlGroupService {
 
     return toReturn;
 
-    function setValidator(item:Validation, original?) {
-      switch (item.type) {
-        case 'required':
-          return Validators.required;
-        case 'minLength':
-          return Validators.minLength(item.value);
-        case 'maxLength':
-          return Validators.maxLength(item.value);
-        case 'pattern':
-          return Validators.pattern(item.value);
-        case 'custom':
-          return item.value;
-        case 'match':
-          matches.push({toMatch: item.value, model: original.name});
-          return CustomValidators.match(item.value);
+    function setValidator(attr:Attribute, original?) {
+      let attrValidators = [];
+      if (attr.required) {
+        attrValidators.push(Validators.required);
       }
+      switch (attr.dataType) {
+        case 'INTEGER':
+          attrValidators.push(CustomValidators.digits);
+          break;
+        case 'BIGINT':
+          attrValidators.push(CustomValidators.digits);
+          break;
+        case 'FLOAT':
+          attrValidators.push(Validators.pattern(/^[+-]?\d+(\.\d+)?$/));
+          break;
+        case 'REAL':
+          attrValidators.push(CustomValidators.number);
+          break;
+        case 'DOUBLE':
+          attrValidators.push(Validators.pattern(/^\d{0,2}(\.\d{0,2}){0,1}$/));
+          break;
+        case 'DECIMAL':
+          attrValidators.push(Validators.pattern(/^\d+\.\d{0,2}$/));
+          break;
+        case 'WIZE_MONEY':
+          attrValidators.push(Validators.pattern(/(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/));
+          break;
+        case 'WIZE_URL':
+          attrValidators.push(CustomValidators.url);
+          break;
+        case 'JSON':
+          attrValidators.push(CustomValidators.json);
+          break;
+        case 'JSONB':
+          attrValidators.push(CustomValidators.json);
+          break;
+
+      }
+
+      return attrValidators;
     }
   }
 }
