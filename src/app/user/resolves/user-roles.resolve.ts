@@ -18,7 +18,7 @@ export class UserRolesResolve implements CanActivate, Resolve<boolean> {
     if(auth) {
       return this.permissionService.getRoles()
         .map(rolesMap => {
-          if (!rolesMap || rolesMap.length === 0 || rolesMap['roles'].length === 0) {
+          if (!rolesMap || rolesMap.length === 0 || !rolesMap['roles'] || rolesMap['roles'].length === 0) {
             // Forcefully remove auth0 authentication info
             this.authService.user = null;
             localStorage.removeItem('id_token');
