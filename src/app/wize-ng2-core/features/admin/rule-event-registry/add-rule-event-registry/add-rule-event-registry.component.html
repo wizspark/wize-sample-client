@@ -63,13 +63,6 @@
         </div>
       </div>
 
-      <div class="row mb-1">
-        <div class="form-group material-style">
-          <code-editor class="height-auto" [config]="editorConfig" [formControl]="configuration"></code-editor>
-          <label>Configuration</label>
-        </div>
-      </div>
-
       <div class="row mb-1" *ngIf="entity && !isEditMode">
         <rule-input-control [entity]="entity"
                             [query]="ruleCriteria.value"
@@ -82,6 +75,13 @@
         <div class="form-group material-style">
           <input type="text" class="form-control" [value]="ruleCriteria.value" disabled="true">
           <label>Rule</label>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="form-group material-style">
+          <code-editor class="height-auto" [config]="editorConfig" [formControl]="configuration"></code-editor>
+          <label>Configuration</label>
         </div>
       </div>
 
