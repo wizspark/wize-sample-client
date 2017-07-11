@@ -62,16 +62,8 @@ export class FormComponent {
   }
 
   onAttributeValueChange(event) {
-    if (this._matches) {
-      let key = Object.keys(event)[0],
-      // See if we should check for matches
-        mat = this._matches.find(a => a['toMatch'] === key);
 
-      // Update the cg if we found a matcher
-      if (mat) this._form.controls[mat['model']].updateValueAndValidity();
-    }
-
-    this.onChanges.emit(this._form);
+    this.onChanges.emit(event);
   }
 
   sortAttributes() {
