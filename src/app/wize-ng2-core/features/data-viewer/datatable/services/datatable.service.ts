@@ -399,23 +399,23 @@ export class DataTableService {
       let body = JSON.stringify(bodyData);
       return this._http
         .post(``, body, <RequestOptionsArgs>{
-          url: `${this.apiUrl}/api/${apiPath}`
+          url: `${this.apiUrl}/api${apiPath}`
         }, true)
-        .map(res => res.json());
+        .map(res => res);
     }
     else if (method === "PATCH") {
       let body = JSON.stringify(bodyData);
       return this._http
         .patch(``, body, <RequestOptionsArgs>{
-          url: `${this.apiUrl}${apiPath}/${id}`
-        }, true);
+          url: `${this.apiUrl}/api${apiPath}`
+        }, true).map(res => res);
     }
     else{
       return this._http
         .get(``, <RequestOptionsArgs>{
           url: `${this.apiUrl}/api${apiPath}`
         }, true)
-        .map((response:any) => response.json());
+        .map((response:any) => response);
     }
   }
 

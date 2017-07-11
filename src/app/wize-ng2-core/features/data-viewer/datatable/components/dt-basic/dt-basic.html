@@ -96,6 +96,8 @@
                    (click)="showRow(row)"><i aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
                 <a class="dropdown-item" href="javascript:void(0)" (click)="editRow(row)"><i
                   aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                <a *ngFor="let action of actions" class="dropdown-item" href="javascript:void(0)" (click)="executeCustomAction(action, row)"><i
+                  aria-hidden="true" class="fa fa-paw"></i> &nbsp;&nbsp;{{action.name}}</a>
                 <a class="dropdown-item" href="javascript:void(0)" (click)="deleteRow(row)"><i
                   aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
               </div>
