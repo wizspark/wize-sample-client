@@ -1,13 +1,13 @@
 <div *ngIf="dataTableInputConfig.isHeader && entity" class="navbar py-1 px-2 navbar-light bg-faded sub-header">
-  <dt-header [name]="routeData.name" [entity]="entity" [columns]="allColumns" [headerOptions]="dataTableInputConfig.headerOptions" [templates]="templates" [customActions]="routeData.actions?.customActions" (resetColumnsEvent)="resetColumns($event)" (updateColumnsEvent)="updateColumns($event)"
-             (searchEvent)="searchRecords($event)" (addRowEvent)="addRow($event)" (importEvent)="importData($event)" (exportEvent)="exportData($event)" (filterEvent)="showFilterModal($event)" (runRulesEvent)="showRuleInput()" (updateEvent)="refreshModel(entity)">
-  </dt-header>
+    <dt-header [name]="routeData.name" [entity]="entity" [columns]="allColumns" [headerOptions]="dataTableInputConfig.headerOptions" [templates]="templates" [customActions]="routeData.actions?.customActions" (resetColumnsEvent)="resetColumns($event)" (updateColumnsEvent)="updateColumns($event)"
+        (searchEvent)="searchRecords($event)" (addRowEvent)="addRow($event)" (importEvent)="importData($event)" (exportEvent)="exportData($event)" (filterEvent)="showFilterModal($event)" (runRulesEvent)="showRuleInput()" (updateEvent)="refreshModel(entity)">
+    </dt-header>
 </div>
 <div [ngClass]="{ 'p-2' : dataTableInputConfig.isHeader }">
     <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">
         <div [ngClass]="{ 'card-block' : dataTableInputConfig.isHeader}">
             <p-dataTable styleClass="c-grid" [value]="rows" [lazy]="true" (onLazyLoad)="getModelData($event)" expandableRows="true" [totalRecords]="totalRecords" [rows]="limit" [paginator]="paginator" [stacked]="stacked" [responsive]="false" expandableRows="true">
-                <p-column expander="true" styleClass="col-icon"></p-column>
+                <p-column expander="true" styleClass="col-icon" [style]="{'width':'50px'}"></p-column>
                 <p-column *ngFor="let col of activeColumns" [field]="col.name" [header]="col.displayName" [sortable]="true">
                     <ng-template let-row="rowData" pTemplate>
                         <span [ngSwitch]="col.type">
@@ -32,7 +32,7 @@
                   aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
                                 <a class="dropdown-item" href="javascript:;" (click)="editRow(row)"><i
                   aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
-                              <a *ngFor="let action of actions" class="dropdown-item" href="javascript:void(0)" (click)="executeCustomAction(action, row)"><i
+                                <a *ngFor="let action of actions" class="dropdown-item" href="javascript:void(0)" (click)="executeCustomAction(action, row)"><i
                                 aria-hidden="true" class="fa fa-paper-plane"></i> &nbsp;&nbsp;{{action.name}}</a>
                                 <a class="dropdown-item" href="javascript:;" (click)="deleteRow(row)"><i
                   aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
