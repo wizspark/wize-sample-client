@@ -7,7 +7,8 @@
           <div class="row">
             <div class="col-xs-2 pr-0">
               <div class="form-group chk-group">
-                <i class="fa icn-integer"  *ngIf="field.dataType != 'DATE'">#</i>
+                <i class="fa icn-integer"  *ngIf="field.dataType == 'INTEGER' || field.dataType == 'DOUBLE' || field.dataType == 'FLOAT'">#</i>
+                <i class="fa fa-font" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN' || field.dataType == 'ENUM'"></i>
                 <i class="fa fa-clock-o" *ngIf="field.dataType == 'DATE'"></i>
                 <label class="g-handpointer">
                     <span class="ch-rd">
@@ -84,7 +85,8 @@
           <div class="row">
             <div class="col-xs-2 pr-0">
               <div class="form-group chk-group">
-                <i class="fa icn-integer"  *ngIf="field.dataType != 'DATE'">#</i>
+                <i class="fa icn-integer"  *ngIf="field.dataType == 'INTEGER' || field.dataType == 'DOUBLE' || field.dataType == 'FLOAT'">#</i>
+                <i class="fa fa-font" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN' || field.dataType == 'ENUM'"></i>
                 <i class="fa fa-clock-o" *ngIf="field.dataType == 'DATE'"></i>
                 <label class="g-handpointer">
                     <span class="ch-rd">
