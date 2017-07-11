@@ -184,7 +184,8 @@ export class ReportsParamService {
             } else {
               return '$' + value;
             }
-          }
+          },
+          beginAtZero: true
         };
       } else if(chartData.yAxisFormat && chartData.yAxisFormat == "$,.2f") {
         scale.ticks = {
@@ -197,8 +198,13 @@ export class ReportsParamService {
             } else {
               return '$' + value;
             }
-          }
+          },
+          beginAtZero: true
         };
+      } else {
+        scale.ticks = {
+          beginAtZero: true
+        }
       }
 
       chartData.options.scales.yAxes = [];
