@@ -68,9 +68,9 @@
             <p-dataTable [value]="category.ReportCategoryFields" [style]="{}" styleClass="nested-table">
               <p-column [style]="{'width':'50px'}">
                 <ng-template let-col let-row="rowData" pTemplate="body">
-                  <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'INTEGER' || row['dataType'] == 'FLOAT' || row['dataType'] == 'DOUBLE'">#</i>
+                  <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'INTEGER' || row['dataType'] == 'FLOAT' || row['dataType'] == 'DOUBLE' || row['dataType'] == 'WIZE_MONEY'">#</i>
                   <i class="fa fa-clock-o" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'DATE'"></i>
-                  <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'STRING' || row['dataType'] == 'BOOLEAN'"></i>
+                  <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'STRING' || row['dataType'] == 'BOOLEAN' || row['dataType'] == 'ENUM'"></i>
                 </ng-template>
               </p-column>
               <p-column field="name" header="Field Name">

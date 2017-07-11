@@ -40,6 +40,10 @@ export class FilterGroupComponent implements OnInit {
         {name:"equals", value:"="},
         {name:"does not equal", value:"!="}
       ],
+      "ENUM":[
+        {name:"equals", value:"="},
+        {name:"does not equal", value:"!="}
+      ],
       "NUMBER":[
         {name:"exists", value:"EXIST"},
         {name:"does not exist", value:"NOT_EXIST"},

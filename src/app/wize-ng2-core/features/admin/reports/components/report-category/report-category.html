@@ -136,9 +136,9 @@
                     </label>
                   </td>
                   <td text-center="">
-                    <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'INTEGER' || col['dataType'] == 'FLOAT' || col['dataType'] == 'DOUBLE'" title="{{col['dataType']}}">#</i>
+                    <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'INTEGER' || col['dataType'] == 'FLOAT' || col['dataType'] == 'DOUBLE' || col['dataType'] == 'WIZE_MONEY'" title="{{col['dataType']}}">#</i>
                     <i class="fa fa-clock-o" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'DATE'" title="{{col['dataType']}}"></i>
-                    <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'STRING' || col['dataType'] == 'BOOLEAN'" title="{{col['dataType']}}"></i>
+                    <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="col['dataType'] == 'STRING' || col['dataType'] == 'BOOLEAN' || col['dataType'] == 'ENUM'" title="{{col['dataType']}}"></i>
                   </td>
                   <td>
                     {{col['columnName']}}

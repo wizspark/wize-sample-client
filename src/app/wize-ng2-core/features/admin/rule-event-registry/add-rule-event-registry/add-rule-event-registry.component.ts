@@ -196,7 +196,7 @@ export class AddRuleEventRegistryComponent implements OnInit {
       evaluationCriteria : this.form.controls['evaluationCriteria'].value,
       ruleCriteria : this.form.controls['ruleCriteria'].value,
       action : this.form.controls['action'].value,
-      configuration : this.form.controls['configuration'].value,
+      configuration : JSON.parse(this.form.controls['configuration'].value),
       isActive : true
     };
     if(this.isEditMode){
