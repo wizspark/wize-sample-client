@@ -196,14 +196,15 @@
                   </div>
                 </div>
                 <div *ngIf="!(chartType === 'bignumber' || chartType === 'table')">
-                  <p-chart *ngIf="previewChart" #reportChart [type]="chartType" [data]="chartData" [options]="chartData.options" [height]="600"></p-chart>
+                  <p-chart *ngIf="previewChart" #reportChart [type]="chartType" [data]="chartData" [options]="chartData.options" [height]="100"></p-chart>
+                  <!--<p-chart type="bar" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'bar' && previewChart" [height]="100" #reportChart></p-chart>-->
+                  <!--<p-chart type="pie" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'pie' && previewChart" [height]="100" #reportChart></p-chart>-->
+                  <!--<p-chart type="line" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'line' && previewChart" [height]="100" #reportChart></p-chart>-->
+                  <!--<p-chart type="polarArea" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'polarArea' && previewChart" [height]="100" #reportChart></p-chart>-->
+                  <!--<p-chart type="doughnut" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'doughnut' && previewChart" [height]="100" #reportChart></p-chart>-->
+                  <!--<p-chart type="radar" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'radar' && previewChart" [height]="100" #reportChart></p-chart>-->
                 </div>
-                <!--<p-chart type="bar" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'bar' && previewChart" height="600"></p-chart>-->
-                <!--<p-chart type="pie" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'pie' && previewChart" height="600"></p-chart>-->
-                <!--<p-chart type="line" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'line' && previewChart" height="600"></p-chart>-->
-                <!--<p-chart type="polarArea" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'polararea' && previewChart" height="600"></p-chart>-->
-                <!--<p-chart type="doughnut" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'doughnut' && previewChart" height="600"></p-chart>-->
-                <!--<p-chart type="radar" [data]="chartData" [options]="chartData.options" *ngIf="chartData && chartData.initialized && chartType === 'radar' && previewChart" height="600"></p-chart>-->
+
             </div>
             <div class="col-md-12" *ngIf="chartData.chartErrorFlag">
               <div>

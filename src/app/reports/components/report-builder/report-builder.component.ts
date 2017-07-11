@@ -10,7 +10,9 @@ import {ReportsApiService} from '../../services/reports-api.service';
 import {ReportsParamService} from  '../../services/reports-params.service';
 import {PivotGroup, FilterGroup} from "../../interfaces/filter-group";
 import {ChartSettings} from "../../interfaces/chartSettings";
-import { UIChart} from 'primeng/primeng'
+import { UIChart} from 'primeng/primeng';
+const Chart = require('chart.js');
+
 //import {setTimeout} from "timers";
 
 @Component({
