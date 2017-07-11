@@ -5,7 +5,7 @@
   "auth": false,
   "auth0Options":{
     "redirectUrl":"http://localhost:4201",
-    "clientId":"jNn1V2ORu1rN1TzgEv1SvDldgnz18W0Y",
-    "domain":"anjanikumar2109.auth0.com"
+    "clientId":"0FOjYyRcwBKuJMsf8D2RN27fVMzaj1Ij",
+    "domain":"wize.auth0.com"
   }
 }
