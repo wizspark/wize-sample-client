@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, Input, Output, ViewChild, AfterViewInit, AfterContentChecked, OnChanges} from '@angular/core'
+import {Component, EventEmitter, HostBinding, Input, Output, ViewChild,ChangeDetectorRef,AfterViewChecked, AfterViewInit, AfterContentChecked, OnChanges} from '@angular/core'
 import {FormGroup} from '@angular/forms';
 import {Attribute} from './../../interfaces/form.interfaces'
 import {RuleInputControlComponent} from '../../../rule-builder/components/rule-input/rule-input.component';
@@ -9,7 +9,7 @@ import {RuleInputControlComponent} from '../../../rule-builder/components/rule-i
   templateUrl: './control.html'
 })
 
-export class ControlComponent implements AfterViewInit, AfterContentChecked, OnChanges {
+export class ControlComponent implements AfterContentChecked, OnChanges, AfterViewChecked {
 
   @Input() set info(value) {
     this.attribute = value.attribute;
@@ -17,13 +17,12 @@ export class ControlComponent implements AfterViewInit, AfterContentChecked, OnC
     this.settings = value.settings;
     this.selectedValues = [];
     if (this.attribute.dataType === 'ENUM' && this.attribute.value) {
-      this.form.controls[this.attribute.name].setValue(this.attribute.value.id);
+      this.enumValue = [{id: this.attribute.value, text: this.attribute.value}];
     }
     if (this.attribute.dataType === 'ARRAY' && this.attribute.value) {
       this.attribute.value.forEach(p => {
-        this.selectedValues.push(p.value);
+        this.selectedValues.push({display: p, value: p});
       });
-      this.form.controls[this.attribute.name].setValue(this.selectedValues);
     }
   }
 
@@ -38,6 +37,9 @@ export class ControlComponent implements AfterViewInit, AfterContentChecked, OnC
   private resetSelect:boolean = true;
   private checkboxIsRequired:boolean = false;
   private settings:any;
+  private enumValue:any;
+  private arrayValue:any;
+  private isInit:boolean = false;
 
   get showErrorMsg() {
     return this.settings.errorOnDirty ?
@@ -45,110 +47,67 @@ export class ControlComponent implements AfterViewInit, AfterContentChecked, OnC
       !this.form.controls[this.attribute.name].valid
   }
 
-  ngAfterViewInit() {
-    this.onValueChange(this.form);
+  constructor(private cdRef:ChangeDetectorRef) {
+
   }
 
-  ngAfterContentChecked(){
-    this.onValueChange(this.form);
-  }
 
-  ngOnChanges(){
-    this.onValueChange(this.form);
-  }
-
-  errors() {
-    if (this.attribute.validation && !this.form.controls[this.attribute.name].valid) {
-      let temp:any = [],
-        errors = this.form.controls[this.attribute.name].errors,
-        errorKeys = Object.keys(errors);
-
-      if (this.settings.singleErrorMessage) temp.push(this._setError(errorKeys[errorKeys.length - 1], errors));
-      else errorKeys.forEach(a => temp.push(this._setError(a, errors)));
-
-      return temp;
+  ngAfterViewChecked() {
+    if(!this.isInit) {
+      if (this.attribute.dataType === 'ENUM' && this.attribute.value) {
+        this.enumValue = [{id: this.attribute.value, text: this.attribute.value}];
+      }
+      if (this.attribute.dataType === 'ARRAY' && this.attribute.value) {
+        this.attribute.value.forEach(p => {
+          this.selectedValues.push({display: p, value: p});
+        });
+      }
     }
+    this.isInit = true;
+    this.onValueChange(this.form);
+    this.cdRef.detectChanges();
   }
 
-  setRadio(option) {
-    this.form.controls[this.attribute.name].setValue(option.value);
-    this.onValueChange(option.value);
+  ngAfterContentChecked() {
+    this.onValueChange(this.form);
   }
 
-  setCheckbox(option) {
-    let index = this.attribute.value.indexOf(option.value);
-
-    if (index !== -1) this.attribute.value.splice(index, 1);
-    else this.attribute.value.push(option.value);
-
-    this.form.controls[this.attribute.name].setValue(this.attribute.value);
-    this.onValueChange(this.attribute.value);
-  }
-
-  chackboxValueChange() {
-    if (this.checkboxIsRequired) {
-      if (this.attribute.value.length === 1) this.attribute.options.find(a => a.value === this.attribute.value[0]).disabled = true;
-      else this.attribute.options.forEach(a => a.disabled = false)
-    }
+  ngOnChanges() {
+    this.enumValue = [];
+    this.selectedValues = [];
+    this.isInit = false;
+    this.onValueChange(this.form);
   }
 
   onValueChange(event) {
     this.valueChange.emit(this.form);
   }
 
-  isSelectActive(option) {
-    return this.attribute.value.find(a => a === option.value) ? true : false
-  }
-
-  public _setError(item, errors) {
-    let errorMsg:string = this.attribute.validation.find(a => a.type.toLowerCase() === item).message,
-      tag:string = this.attribute.title || this.attribute.name;
-
-    if (!errorMsg) {
-      switch (item) {
-        // Set error messages
-        case 'required':
-          errorMsg = `${tag} is required.`;
-          break;
-
-        case 'minlength':
-          errorMsg = `${tag} has to be at least ${errors[item].requiredLength} characters long.`;
-          break;
-
-        case 'maxlength':
-          errorMsg = `${tag} can't be longer then ${errors[item].requiredLength} characters.`;
-          break;
-
-        case 'pattern':
-          errorMsg = `${tag} must match this pattern: ${errors[item].requiredPattern}.`;
-          break;
-
-        case 'match':
-          errorMsg = `${tag} must match the ${errors[item].mustMatchField} field.`;
-          break;
-      }
-    }
-
-    return errorMsg;
-  }
-
   public refreshValue(value:any):void {
     this.form.controls[this.attribute.name].setValue(value.id);
-    this.onValueChange(value.id);
+    this.onValueChange(this.form);
   }
 
   public onAdd(event) {
-    this.selectedValues.push(event.value);
-    this.form.controls[this.attribute.name].setValue(this.selectedValues);
-    this.onValueChange(this.selectedValues);
+    this.selectedValues.push(event);
+    let values = [];
+    this.selectedValues.forEach((data)=> {
+      values.push(data.value);
+    });
+    this.form.controls[this.attribute.name].setValue(values);
+    this.onValueChange(this.form);
   }
 
   public onRemove(event) {
-    let index = this.selectedValues.indexOf(event.value);
+    let index = this.selectedValues.indexOf(event);
     if (index > -1) {
       this.selectedValues.splice(index, 1);
     }
-    this.form.controls[this.attribute.name].setValue(this.selectedValues);
-    this.onValueChange(this.selectedValues);
+    let values = [];
+    this.selectedValues.forEach((data)=> {
+      values.push(data.value);
+    });
+    this.form.controls[this.attribute.name].setValue(values);
+    this.onValueChange(this.form);
   }
 }
