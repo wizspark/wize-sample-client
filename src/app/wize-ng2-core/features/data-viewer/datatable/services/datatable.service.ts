@@ -218,10 +218,17 @@ export class DataTableService {
       let apiPath;
       switch (key) {
         case "get":
-          if (isAssociated)
+          if (isAssociated) {
             apiPath = entity.apis[key];
-          else
-            apiPath = `${primaryEntity.apis[key]}/${recordId}/get${this._pluralService.pluralize(entity.name)}`;
+          }
+          else {
+            const relType = primaryEntity.relationships.find(p=> p.target === entity.name).type;
+            if (relType === 'hasOne' || relType === 'belongsTo') {
+              apiPath = `${primaryEntity.apis[key]}/${recordId}/get${this._pluralService.singularize(entity.name)}`;
+            } else {
+              apiPath = `${primaryEntity.apis[key]}/${recordId}/get${this._pluralService.pluralize(entity.name)}`;
+            }
+          }
           break;
         case "post":
           if (isAssociated)
@@ -285,6 +292,15 @@ export class DataTableService {
     return this._http
       .get(``, <RequestOptionsArgs>{
         url: `${this.apiUrl}${path}/${id}`
+      }, true)
+      .map((response:any) => response.json());
+
+  }
+
+  getSingleRelationshipDetail(path:string) {
+    return this._http
+      .get(``, <RequestOptionsArgs>{
+        url: `${this.apiUrl}${path}`
       }, true)
       .map((response:any) => response.json());
 

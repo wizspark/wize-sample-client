@@ -28,7 +28,7 @@ export class ControlGroupService {
 
     function setValidator(attr:Attribute, original?) {
       let attrValidators = [];
-      if (attr.required) {
+      if (attr.required || !attr.allowNull) {
         attrValidators.push(Validators.required);
       }
       switch (attr.dataType) {

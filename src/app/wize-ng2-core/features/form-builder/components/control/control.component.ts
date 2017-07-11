@@ -85,7 +85,9 @@ export class ControlComponent implements AfterViewInit {
   }
 
   onValueChange(event) {
-    if (this.attribute.emitChanges !== false) this.valueChange.emit({[this.attribute.name]: event})
+    if (this.attribute.emitChanges !== false) {
+      this.valueChange.emit({[this.attribute.name]: event});
+    }
   }
 
   isSelectActive(option) {

@@ -28,11 +28,9 @@
                    [totalRecords]="totalRecords"
                    [rows]="limit"
                    [paginator]="paginator"
-                   [responsive]="true"
+                   [responsive]="false"
                    [expandableRows]="entity.viewOptions.expandableRows"
-                   [reorderableColumns]="entity.viewOptions.reorderableColumns"
-                   scrollable="true"
-                   resizableColumns="true"
+                   [style]="{'overflow': 'inherit'}"
                    [scrollHeight]="dataTableInputConfig.isHeader ? '600px' : '600px'">
         <p-column *ngIf="dataTableInputConfig.isSelection" header="">
           <ng-template let-row="rowData" pTemplate="body">
@@ -48,8 +46,7 @@
           </ng-template>
         </p-column>
         <p-column *ngFor="let col of getColumnByUnique(true)" [field]="col.name" [header]="col.displayName || col.name"
-                  [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)"
-                  [style]="{'width':'230px'}">
+                  [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)">
           <ng-template let-row="rowData" pTemplate="body">
             <div [ngSwitch]="col.type">
               <a *ngSwitchCase="'DATE'" (click)="showRow(row)" href="javascript:;">{{row[col.name] |
@@ -81,7 +78,7 @@
                         </span>
           </ng-template>
         </p-column>
-        <p-column *ngIf="!dataTableInputConfig.isAssociation" header="Actions" [style]="{'width':'180px'}">
+        <p-column *ngIf="!dataTableInputConfig.isAssociation" header="Actions">
           <ng-template let-row="rowData" pTemplate="body">
             <div class="dropdown dropdown-custom">
               <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown"
