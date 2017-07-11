@@ -36,7 +36,7 @@
                     <a class="dropdown-item" (click)="setFunction('avg', field)">Average Of {{field.name}}</a>
                   </div>
                 </div>
-                <div class="dropdown" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                <div class="dropdown" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN' || field.dataType == 'ENUM'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
                   <button class="btn btn-secondary" type="button" id="dropdownMenuButtonStr" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
                     <div class="row">
                       <div class="col-md-10">
@@ -113,7 +113,7 @@
                     <a class="dropdown-item" (click)="setFunction('avg', field)">Average Of {{field.name}}</a>
                   </div>
                 </div>
-                <div class="dropdown" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
+                <div class="dropdown" *ngIf="field.dataType == 'STRING' || field.dataType == 'BOOLEAN' || field.dataType == 'ENUM'" [class.disabled]="!field.isDefault" style="width: 90%;display: block;">
                   <button class="btn btn-secondary" type="button" id="dropdownMenuButtonStr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;border-color: white;border-bottom-color: #ccc;">
                     <div class="row">
                       <div class="col-xs-10">

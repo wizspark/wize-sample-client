@@ -333,7 +333,7 @@ export class ReportBuilderComponent implements OnInit {
 
     for(let j=0;j<this.reportCategoryFields.length;j++) {
       let field = this.reportCategoryFields[j];
-      if (field.isDefault == true && (field.dataType == 'STRING' || field.dataType == 'BOOLEAN')) {
+      if (field.isDefault == true && (field.dataType == 'STRING' || field.dataType == 'BOOLEAN' || field.dataType == 'ENUM')) {
         if(field.function) {
           let obj = {};
           obj["function"] = field.function;

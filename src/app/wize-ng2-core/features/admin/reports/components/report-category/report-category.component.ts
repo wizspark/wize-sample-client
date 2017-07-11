@@ -43,7 +43,7 @@ export class ReportCategoryComponent implements OnInit {
     relational:{}
   };
   datatypes: string[] = ["STRING", "TEXT", "INTEGER", "BOOLEAN", "DATE", "WIZE_CODE", "JSONB", "FLOAT", "WIZE_TIME"];
-  validDatatypes: string[] = ["STRING", "INTEGER", "BOOLEAN", "DATE", "FLOAT", ];
+  validDatatypes: string[] = ["STRING", "INTEGER", "BOOLEAN", "DATE", "FLOAT", "ENUM", "WIZE_MONEY"];
   constructor(private reportService: ReportApiService,
               private confirmationService: ConfirmationService,
               private dynamicHeight: DynamicHeight
@@ -112,6 +112,9 @@ export class ReportCategoryComponent implements OnInit {
         categoryFld.columnName = key;
         categoryFld.name = (model.schemaDef[key].displayName)?(model.schemaDef[key].displayName):key;
         categoryFld.dataType = model.schemaDef[key].type;
+        if(categoryFld.dataType.startsWith("ENUM") || categoryFld.dataType.startsWith("WIZE_MONEY")) {
+          categoryFld.dataType = categoryFld.dataType.startsWith("ENUM")?"ENUM":"FLOAT";
+        }
         if(this.validDatatypes.indexOf(categoryFld.dataType)!=-1){
           categoryMdl.ReportCategoryFields.push(categoryFld);
         }

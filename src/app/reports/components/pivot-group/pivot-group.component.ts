@@ -38,6 +38,10 @@ export class PivotGroupComponent implements OnInit {
         {name:"between", value:"><"},
         {name:"between or equal", value:">=<="}
       ],
+      "ENUM":[
+        {name:"equals", value:"="},
+        {name:"does not equal", value:"!="}
+      ],
       "BOOLEAN":[
         {name:"equals", value:"="},
         {name:"does not equal", value:"!="}
