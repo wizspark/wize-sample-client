@@ -1,102 +1,102 @@
 <nav class="navbar py-1 px-2 navbar-light bg-white sub-header">
-  <div class="container-no">
-    <div class="media overflow-visible">
-      <div class="media-body media-middle overflow-visible">
-        <h3 class="weight-300 m-0">Reports</h3>
-      </div>
-      <div class="media-right media-middle text-truncate">
-        <ul class="list-unstyled list-inline mb-0">
-          <li class="list-inline-item" *ngIf="(pageStatus=='list')">
-            <button class="btn btn-primary" (click)="changeView($event,'create')"><span aria-hidden="true" class="fa fa-plus"></span>&nbsp;&nbsp;<span>Create New</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='create')">
-            <button class="btn btn-secondary"  (click)="cancelSaveReportCategory()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='create' || pageStatus=='edit' || pageStatus=='clone')">
-            <button class="btn btn-secondary"  (click)="resetReportCategory()"><span aria-hidden="true" class="fa fa-refresh"></span>&nbsp;&nbsp;<span>Reset</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='create')">
-            <button class="btn btn-primary" [ngClass]="{disabled : !isReportSaveActivate}" (click)="isReportSaveActivate && saveReportCategory()"><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Save</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='edit')">
-            <button class="btn btn-secondary" (click)="cancelUpdateReportCategory()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='edit')">
-            <button class="btn btn-primary" [ngClass]="{disabled : !isReportSaveActivate}" (click)="isReportSaveActivate && updateReportCategory()"><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Update</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='clone')">
-            <button class="btn btn-secondary" (click)="cancelUpdateReportCategory()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
-          </li>
-          <li class="list-inline-item" *ngIf="(pageStatus=='clone')">
-            <button class="btn btn-primary" [ngClass]="{disabled : !isReportSaveActivate}" (click)="isReportSaveActivate && saveReportCategory()"><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Create</span></button>
-          </li>
-        </ul>
-      </div>
+    <div class="container-no">
+        <div class="media overflow-visible">
+            <div class="media-body media-middle overflow-visible">
+                <h3 class="weight-300 m-0">Reports</h3>
+            </div>
+            <div class="media-right media-middle text-truncate">
+                <ul class="list-unstyled list-inline mb-0">
+                    <li class="list-inline-item" *ngIf="(pageStatus=='list')">
+                        <button class="btn btn-primary" (click)="changeView($event,'create')"><span aria-hidden="true" class="fa fa-plus"></span>&nbsp;&nbsp;<span>Create New</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='create')">
+                        <button class="btn btn-secondary" (click)="cancelSaveReportCategory()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='create' || pageStatus=='edit' || pageStatus=='clone')">
+                        <button class="btn btn-secondary" (click)="resetReportCategory()"><span aria-hidden="true" class="fa fa-refresh"></span>&nbsp;&nbsp;<span>Reset</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='create')">
+                        <button class="btn btn-primary" [ngClass]="{disabled : !isReportSaveActivate}" (click)="isReportSaveActivate && saveReportCategory()"><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Save</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='edit')">
+                        <button class="btn btn-secondary" (click)="cancelUpdateReportCategory()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='edit')">
+                        <button class="btn btn-primary" [ngClass]="{disabled : !isReportSaveActivate}" (click)="isReportSaveActivate && updateReportCategory()"><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Update</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='clone')">
+                        <button class="btn btn-secondary" (click)="cancelUpdateReportCategory()"><span aria-hidden="true" class="fa fa-close"></span>&nbsp;&nbsp;<span>Cancel</span></button>
+                    </li>
+                    <li class="list-inline-item" *ngIf="(pageStatus=='clone')">
+                        <button class="btn btn-primary" [ngClass]="{disabled : !isReportSaveActivate}" (click)="isReportSaveActivate && saveReportCategory()"><span aria-hidden="true" class="fa fa-save"></span>&nbsp;&nbsp;<span>Create</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 
 <div class="admin-wrapper">
-  <div class="container-no p-2">
-    <div class="card">
-      <div class="card-block">
-        <p-dataTable [value]="reportCategories" scrollable="true" scrollWidth="100%" [scrollHeight]="(dynamicHeight.scrollHeight(230)+'px')" expandableRows="true" styleClass="c-grid" *ngIf="pageStatus=='list' && reportCategories">
-          <p-column expander="true" [style]="{'width':'50px'}"></p-column>
-          <p-column field="name" header="Report Category"></p-column>
-          <p-column field="description" header="Report Category Description"></p-column>
-          <p-column field="createdBy" header="Created By"></p-column>
-          <!--<p-column field="createdAt" header="Create Date">-->
-            <!--<ng-template let-node="rowData" pTemplate="body">-->
-              <!--{{node.createdAt | date:'short'}}-->
-            <!--</ng-template>-->
-          <!--</p-column>-->
-          <p-column header="Actions" [style]="{'width':'150px'}">
-            <ng-template let-col let-row="rowData"  pTemplate="body" >
-              <div class="dropdown dropdown-custom">
-                <a class="action-dot" href="javascript:void(0);" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="container-no p-2">
+        <div class="card">
+            <div class="card-block">
+                <p-dataTable [value]="reportCategories" scrollable="true" scrollWidth="100%" [scrollHeight]="(dynamicHeight.scrollHeight(230)+'px')" expandableRows="true" styleClass="c-grid" *ngIf="pageStatus=='list' && reportCategories">
+                    <p-column expander="true" [style]="{'width':'50px'}"></p-column>
+                    <p-column field="name" header="Report Category"></p-column>
+                    <p-column field="description" header="Report Category Description"></p-column>
+                    <p-column field="createdBy" header="Created By"></p-column>
+                    <!--<p-column field="createdAt" header="Create Date">-->
+                    <!--<ng-template let-node="rowData" pTemplate="body">-->
+                    <!--{{node.createdAt | date:'short'}}-->
+                    <!--</ng-template>-->
+                    <!--</p-column>-->
+                    <p-column header="Actions" [style]="{'width':'180px'}">
+                        <ng-template let-col let-row="rowData" pTemplate="body">
+                            <div class="dropdown dropdown-custom">
+                                <a class="action-dot" href="javascript:void(0);" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   &#8226;&#8226;&#8226;
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="javascript:void(0);" (click)="changeView($event,'edit', row)" ><i aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
-                  <a class="dropdown-item" href="javascript:void(0);" (click)="changeView($event,'clone', row)"><i aria-hidden="true" class="fa fa-clone"></i> &nbsp;&nbsp;Clone</a>
-                  <a class="dropdown-item" href="javascript:void(0);" (click)="changeView($event,'delete', row)"><i aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
-                </div>
-              </div>
-            </ng-template>
-          </p-column>
-          <ng-template let-category pTemplate="rowexpansion">
-            <p-dataTable [value]="category.ReportCategoryFields" [style]="{}" styleClass="nested-table">
-              <p-column [style]="{'width':'50px'}">
-                <ng-template let-col let-row="rowData" pTemplate="body">
-                  <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'INTEGER' || row['dataType'] == 'FLOAT' || row['dataType'] == 'DOUBLE' || row['dataType'] == 'WIZE_MONEY'">#</i>
-                  <i class="fa fa-clock-o" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'DATE'"></i>
-                  <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'STRING' || row['dataType'] == 'BOOLEAN' || row['dataType'] == 'ENUM'"></i>
-                </ng-template>
-              </p-column>
-              <p-column field="name" header="Field Name">
-                <ng-template let-col let-row="rowData" pTemplate="body">
-                  {{row[col.field]}}
-                </ng-template>
-              </p-column>
-              <p-column field="description" header="Field description"></p-column>
-              <p-column field="isMeasure" header="Measure Or Dimension">
-                <ng-template let-col let-row="rowData" pTemplate="body">
-                  {{row[col.field]?"Measure":"Dimension"}}
-                </ng-template>
-              </p-column>
-              <p-column field="isDefault" header="Default Display">
-                <ng-template let-col let-row="rowData" pTemplate="body">
-                  {{row[col.field]?"Yes":"No"}}
-                </ng-template>
-              </p-column>
-            </p-dataTable>
-          </ng-template>
-        </p-dataTable>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="javascript:void(0);" (click)="changeView($event,'edit', row)"><i aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" (click)="changeView($event,'clone', row)"><i aria-hidden="true" class="fa fa-clone"></i> &nbsp;&nbsp;Clone</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" (click)="changeView($event,'delete', row)"><i aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                    <ng-template let-category pTemplate="rowexpansion">
+                        <p-dataTable [value]="category.ReportCategoryFields" [style]="{}" styleClass="nested-table">
+                            <p-column [style]="{'width':'50px'}">
+                                <ng-template let-col let-row="rowData" pTemplate="body">
+                                    <i class="fa icn-integer" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'INTEGER' || row['dataType'] == 'FLOAT' || row['dataType'] == 'DOUBLE' || row['dataType'] == 'WIZE_MONEY'">#</i>
+                                    <i class="fa fa-clock-o" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'DATE'"></i>
+                                    <i class="fa fa-font" style="width: 30px;display: table-cell;" *ngIf="row['dataType'] == 'STRING' || row['dataType'] == 'BOOLEAN' || row['dataType'] == 'ENUM'"></i>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="name" header="Field Name">
+                                <ng-template let-col let-row="rowData" pTemplate="body">
+                                    {{row[col.field]}}
+                                </ng-template>
+                            </p-column>
+                            <p-column field="description" header="Field description"></p-column>
+                            <p-column field="isMeasure" header="Measure Or Dimension">
+                                <ng-template let-col let-row="rowData" pTemplate="body">
+                                    {{row[col.field]?"Measure":"Dimension"}}
+                                </ng-template>
+                            </p-column>
+                            <p-column field="isDefault" header="Default Display">
+                                <ng-template let-col let-row="rowData" pTemplate="body">
+                                    {{row[col.field]?"Yes":"No"}}
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </ng-template>
+                </p-dataTable>
 
-        <report-category [reportCategory]="reportCategory" *ngIf="pageStatus == 'create' || pageStatus == 'edit' || pageStatus == 'clone'" [isClone]="isCloneReport" (onChange)="onReportCategoryChange($event)" (onSaveActivate)="onReportSaveActivate($event)" #reportCategoryInstance></report-category>
+                <report-category [reportCategory]="reportCategory" *ngIf="pageStatus == 'create' || pageStatus == 'edit' || pageStatus == 'clone'" [isClone]="isCloneReport" (onChange)="onReportCategoryChange($event)" (onSaveActivate)="onReportSaveActivate($event)" #reportCategoryInstance></report-category>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <confirmation></confirmation>

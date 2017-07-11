@@ -36,7 +36,7 @@
                             {{ row.createdAt | date:'MMM d, y h:mm a'}}
                         </ng-template>
                     </p-column>
-                    <p-column header="Actions">
+                    <p-column header="Actions" [style]="{'width':'180px'}">
                         <ng-template let-row="rowData" pTemplate="body">
                             <div class="dropdown dropdown-custom pl-1">
                                 <a class="action-dot" href="javascript:;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
