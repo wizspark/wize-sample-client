@@ -29,6 +29,8 @@ export class AuditComponent implements OnInit {
   private displayModels: any = [];
   private query: {'createdAt': 'desc'};
   private selectedModel: any;
+  private fromDate: any = moment().startOf('day').add(-180, 'd');
+  private toDate: any = moment().endOf('day');
   constructor(private auditApiService: AuditApiService) {
 
   }
@@ -39,9 +41,7 @@ export class AuditComponent implements OnInit {
   }
 
   private getAuditHistoryWithSchema(hasSchema: boolean, model?: string) {
-    let fromDate = moment().startOf('day').add(-180, 'd');
-    let toDate = moment().endOf('day');
-    this.getAuditHistory(fromDate, toDate, hasSchema, model);
+    this.getAuditHistory(this.fromDate, this.toDate, hasSchema, model);
   }
 
   private getAuditHistory(fromDate: any, toDate: any, hasSchema: boolean, model?: any) {
@@ -61,7 +61,9 @@ export class AuditComponent implements OnInit {
       obj[row.modelName].push(row.displayField);
     });
     this.uniqueColumns = obj;
-    console.log(this.uniqueColumns);
+    data.rows.forEach((item) => {
+      this.displayModels.push({id: item.modelName, text: item.modelName});
+    });
   }
 
   private populateData(data, hasSchema) {
@@ -69,10 +71,9 @@ export class AuditComponent implements OnInit {
     let self = this;
     data.rows.forEach((item) => {
       if (hasSchema) {
-        self.models.push({id: item.name, name: item.name});
-        self.displayModels.push({id: item.name, text: item.name});
+        self.models.push({id: item.model, name: item.model});
       }
-      if (item.history) {
+      if (item) {
         let uniqueColumn = {'name': 'id'};
         let columns = {};
         for (let idx in item.properties) { // tslint:disable-line
@@ -82,19 +83,16 @@ export class AuditComponent implements OnInit {
           }
           columns[idx] = col.displayName;
         }
-        item.history.forEach((hist: any) => {
-          hist.model = item.name;
-          hist.uniqueColumn = uniqueColumn;
-          hist.columnsList = columns;
-          hist.createdAt = Date.parse(hist.createdAt);
+        item.uniqueColumn = uniqueColumn;
+        item.columnsList = columns;
+        item.createdAt = Date.parse(item.createdAt);
           try {
-            hist.diff = JSON.parse(hist.diff);
-            hist.oldValue = JSON.parse(hist.oldValue);
+            item.diff = item.diff;
+            item.oldValue = item.oldValue;
           } catch (e) {
             console.log('Audit History: Error while parsing JSON');
           }
-          historyData.push(hist);
-        });
+          historyData.push(item);
       }
     });
     this.records = sortBy(historyData, 'createdAt').reverse();
@@ -109,8 +107,14 @@ export class AuditComponent implements OnInit {
   }
 
   private onDateRangeChange({from, to}) {
-    console.log(from);
-    console.log(to);
+    this.fromDate = from;
+    this.toDate = to;
+    if(this.selectedModel) {
+      this.getAuditHistoryWithSchema(false, this.selectedModel.text);
+    } else {
+      this.getAuditHistoryWithSchema(false);
+    }
+
   }
 
   private refreshValue(value:any):void {

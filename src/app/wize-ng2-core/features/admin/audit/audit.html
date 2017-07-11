@@ -20,9 +20,11 @@
                                 </a>
                             </div>
                         </div>
-                    </li>
-                    <li class="list-inline-item">
-                        <ng-select [items]="displayModels" (data)="refreshValue($event)" placeholder="Choose Model">
+                    <li class="list-inline-item" *ngIf="displayModels && displayModels.length > 0">
+                        <ng-select
+                                [items]="displayModels"
+                                (data)="refreshValue($event)"
+                                placeholder="Choose Model">
                         </ng-select>
                     </li>
                     <li class="list-inline-item">
@@ -33,7 +35,6 @@
         </div>
     </div>
 </nav>
-
 <div class="admin-wrapper">
     <div class="container-no p-2">
         <div class="card">

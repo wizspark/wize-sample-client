@@ -31,7 +31,7 @@
                         </ng-template>
                     </p-column>
                     <p-column field="description" header="Description" [style]="{width: '420px'}"></p-column>
-                    <p-column header="Versioning" [style]="{width: '100px'}">
+                    <p-column *ngIf="isAuditsInstalled" header="Versioning" [style]="{width: '100px'}">
                         <ng-template  let-row="rowData" pTemplate="body">
                             <label class="switch material m-0">
                                 <input type="checkbox" (change)="updateVersionModel(row, 'versioning', $event)" [checked]="isVersioned(row.name)">

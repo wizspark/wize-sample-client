@@ -15,11 +15,14 @@ export class AuditApiService {
 
   getAuditHistory(model: any, fromDate: any, toDate: any, sortQuery: any): Observable<any[]> {
     let params: URLSearchParams = new URLSearchParams();
-    params.set('fromDate', (+fromDate).toString());
-    params.set('toDate', (+toDate).toString());
+    let firmFilter: any = { };
     if (model) {
-      params.set('model', model);
+      firmFilter = {oldValue: {"createdAt" : { $lt: toDate, $gte: fromDate } },
+        "model" : model };
+    } else {
+      firmFilter = {oldValue: {"createdAt" : { $lt: toDate, $gte: fromDate } } };
     }
+    params.set('where', JSON.stringify(firmFilter));
     if (sortQuery) {
       params.set('sort', JSON.stringify(sortQuery));
     }

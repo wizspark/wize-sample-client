@@ -135,19 +135,30 @@ export class AdminService {
 
   // Models
 
-  getScopedAndVersionedModels() {
-    return Observable.forkJoin(
-      this._http
-        .get(``, <RequestOptionsArgs>{
-          url: `${this.apiUrl}/api/wizescopemodels`
-        }, true)
-        .map((response: any) => response.json()),
-      this._http
-        .get(``, <RequestOptionsArgs>{
-          url: `${this.apiUrl}/api/wizeauditmodels`
-        }, true)
-        .map((response: any) => response.json())
-    );
+  getScopedAndVersionedModels(fetchAuditInfo) {
+    if (fetchAuditInfo) {
+      return Observable.forkJoin(
+        this._http
+          .get(``, <RequestOptionsArgs>{
+            url: `${this.apiUrl}/api/wizescopemodels`
+          }, true)
+          .map((response: any) => response.json()),
+        this._http
+          .get(``, <RequestOptionsArgs>{
+            url: `${this.apiUrl}/api/wizeauditmodels`
+          }, true)
+          .map((response: any) => response.json())
+      );
+    } else {
+      // Fetch ACL info only
+      return Observable.forkJoin(
+        this._http
+          .get(``, <RequestOptionsArgs>{
+            url: `${this.apiUrl}/api/wizescopemodels`
+          }, true)
+          .map((response: any) => response.json())
+      );
+    }
   }
 
   getScopeModels() {
