@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<rule-group [group]="group" [fields]="fields" [rootLevel]="true" *ngIf="group"></rule-group>
+<rule-group [group]="group" [fields]="fields" [rootLevel]="true" *ngIf="group" (change)="onValueChange()"></rule-group>
 <div *ngIf="!group">
     <div class="form-group material-style">
         <input type="text" class="form-control" [(ngModel)]="query" placeholder=" " required autofocus>

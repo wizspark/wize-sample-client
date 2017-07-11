@@ -1,6 +1,6 @@
 <modal [animation]="true" #modal (onDismiss)="dismiss()" class="panel-right">
   <modal-header [showClose]="true">
-    <h5 class="modal-title">{{isEditMode ? 'Edit' : 'Add'}} Event Registry</h5>
+`    <h5 class="modal-title">{{isEditMode ? 'View' : 'Add'}} Event Registry</h5>
   </modal-header>
   <modal-body class="edit-rec">
     <form class="p-1" [formGroup]="form">
@@ -24,7 +24,7 @@
 
       <div class="row mb-1">
         <div class="form-group material-style">
-          <textarea class="form-control" formControlName="description"></textarea>
+          <textarea class="form-control" formControlName="description" [readonly]="isEditMode"></textarea>
           <label>Description</label>
         </div>
       </div>
@@ -70,18 +70,25 @@
         </div>
       </div>
 
-      <div class="row mb-1" *ngIf="entity">
+      <div class="row mb-1" *ngIf="entity && !isEditMode">
         <rule-input-control [entity]="entity"
                             [query]="ruleCriteria.value"
                             [form]="form"
-                            showRunRule="false"
+                            [showRunRule]="false"
                             (ruleQueryGenerateEvent)="setRuleConditionValue($event)"></rule-input-control>
+      </div>
+
+      <div class="row mb-1" *ngIf="entity && isEditMode">
+        <div class="form-group material-style">
+          <input type="text" class="form-control" [value]="ruleCriteria.value" disabled="true">
+          <label>Rule</label>
+        </div>
       </div>
 
     </form>
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-secondary" (click)="dismiss()">Close</button>
-    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdateRule()">Save</button>
+    <button type="button" class="btn btn-primary" [disabled]="!form.valid" (click)="addUpdateRule()" *ngIf="!isEditMode">Save</button>
   </modal-footer>
 </modal>

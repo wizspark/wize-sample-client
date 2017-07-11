@@ -15,6 +15,7 @@ export class RuleInputControlComponent implements OnInit, OnChanges {
   @Input() showRunRule: boolean = true;
   group:RuleGroup;
   fields:RuleField[];
+  queryResult: string = "";
   @Output() runRuleEvent: EventEmitter<any> = new EventEmitter();
   @Output() ruleQueryGenerateEvent: EventEmitter<any> = new EventEmitter();
   constructor(private ruleBuilder:RuleBuilderService) {
@@ -39,11 +40,11 @@ export class RuleInputControlComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(){
-    this.group = {operator: this.ruleBuilder.getGroupOperators()[0], rules: []};
-    if(this.query) {
-      this.group = this.ruleBuilder.parseQuery(this.query);
-    }
-    this.fields = this.mapFactAttributes();
+    // this.group = {operator: this.ruleBuilder.getGroupOperators()[0], rules: []};
+    // if(this.query) {
+    //   this.group = this.ruleBuilder.parseQuery(this.query);
+    // }
+    // this.fields = this.mapFactAttributes();
   }
 
 
@@ -59,9 +60,7 @@ export class RuleInputControlComponent implements OnInit, OnChanges {
   }
 
   getRuntimeQuery() {
-    const queryResult = this.group ? this.ruleBuilder.generateQuery(this.group) : '';
-    this.ruleQueryGenerateEvent.emit(queryResult);
-    return queryResult;
+    return this.queryResult;
   }
 
   save() {
@@ -70,5 +69,10 @@ export class RuleInputControlComponent implements OnInit, OnChanges {
 
   runRules(){
     this.runRuleEvent.emit(this.form);
+  }
+
+  onValueChange() {
+    this.queryResult = this.group ? this.ruleBuilder.generateQuery(this.group) : '';
+    this.ruleQueryGenerateEvent.emit(this.queryResult);
   }
 }

@@ -13,6 +13,7 @@ export class RuleGroupComponent implements OnInit {
   @Input() fields: RuleField[];
 
   @Output('delete') deleteEmitter = new EventEmitter<boolean>();
+  @Output('change') changeEmitter = new EventEmitter<boolean>();
 
   groupOperators: GroupOperator[];
 
@@ -39,6 +40,7 @@ export class RuleGroupComponent implements OnInit {
       operator: null,
       value: ''
     });
+    this.onValueChange();
   }
 
   addGroup() {
@@ -46,6 +48,7 @@ export class RuleGroupComponent implements OnInit {
       operator: this.ruleBuilder.getGroupOperators()[0],
       rules: []
     });
+    this.onValueChange();
   }
 
   onRemoveChild(child: RuleGroup | RuleEntry) {
@@ -53,9 +56,15 @@ export class RuleGroupComponent implements OnInit {
     if (index >= 0) {
       this.group.rules.splice(index, 1);
     }
+    this.onValueChange();
   }
 
   removeGroup() {
     this.deleteEmitter.emit(true);
+    this.onValueChange();
+  }
+
+  onValueChange() {
+    this.changeEmitter.emit(true);
   }
 }
