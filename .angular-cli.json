@@ -45,8 +45,7 @@
         "../node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
         "../node_modules/codemirror/mode/markdown/markdown.js",
         "../node_modules/moment/moment.js",
-        "../node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js",
-        "../node_modules/chart.js/dist/Chart.js"
+        "../node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

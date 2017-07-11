@@ -3,19 +3,19 @@ import { Resolve, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Rout
 import { Observable } from 'rxjs';
 import { PermissionService } from '../services/permission.service';
 import { AuthService } from '../services/auth.service';
-import { AppConfigService } from '../../wize-ng2-core/core/shared/services/app.config.service';
+import { AppConfigService, UIConfigService } from '../../wize-ng2-core/core/shared/services/index';
 
 @Injectable()
 export class UserRolesResolve implements CanActivate, Resolve<boolean> {
   constructor(private authService: AuthService,
               private permissionService: PermissionService,
               private router: Router,
-              private appConfigService: AppConfigService) {
+              private appConfigService: AppConfigService, private uiConfigService: UIConfigService) {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
-    if(this.appConfigService.getConfig('auth')) {
-
+    const auth = !!this.uiConfigService.getModule('@wizeapps/sequelize-acl');
+    if(auth) {
       return this.permissionService.getRoles()
         .map(rolesMap => {
           if (!rolesMap || rolesMap.length === 0 || rolesMap['roles'].length === 0) {

@@ -62,7 +62,13 @@
           <div class="card-block">
             <h4 class="weight-300 mb-1">Chart Data</h4>
             <div *ngIf="isReady && chartData && chartData.options">
-              <p-chart class="report-chart" [type]="chartData.chartType" [data]="chartData" [options]="chartData.options" height="400" #reportChart></p-chart>
+              <p-chart class="report-chart" [type]="chartData.chartType" [data]="chartData" [options]="chartData.options" [height]="100" #reportChart></p-chart>
+              <!--<p-chart type="bar" [data]="chartData" [options]="chartData.options" *ngIf="chartData  && chartData.chartType === 'bar' " [height]="100"></p-chart>-->
+              <!--<p-chart type="pie" [data]="chartData" [options]="chartData.options" *ngIf="chartData  && chartData.chartType === 'pie' " [height]="100"></p-chart>-->
+              <!--<p-chart type="line" [data]="chartData" [options]="chartData.options" *ngIf="chartData  && chartData.chartType === 'line' " [height]="100"></p-chart>-->
+              <!--<p-chart type="polarArea" [data]="chartData" [options]="chartData.options" *ngIf="chartData  && chartData.chartType === 'polarArea' " [height]="100"></p-chart>-->
+              <!--<p-chart type="doughnut" [data]="chartData" [options]="chartData.options" *ngIf="chartData  && chartData.chartType === 'doughnut' " [height]="100"></p-chart>-->
+              <!--<p-chart type="radar" [data]="chartData" [options]="chartData.options" *ngIf="chartData  && chartData.chartType === 'radar' " [height]="100"></p-chart>-->
             </div>
           </div>
         </div>

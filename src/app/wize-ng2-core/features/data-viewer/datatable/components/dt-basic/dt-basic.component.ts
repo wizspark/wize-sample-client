@@ -67,6 +67,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
 
   associatedRows:any;
   selectedRecords:any = [];
+  actions: any = [];
 
   constructor(protected router:Router,
               protected activatedRoute:ActivatedRoute,
@@ -308,6 +309,9 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     });
     this.getColumns();
     this.associatedRows = null;
+    if(this.routeData.actions.customActions){
+      this.actions = this.routeData.actions.customActions.filter((action) => action.layout === 'RECORD');
+    }
     // Commented because of lazy load calling the service
     //this.getModelData(null);
   }
@@ -554,6 +558,27 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
       executionData.push(item)
     });
     return executionData;
+  }
+
+  executeCustomAction(action: any, row: any){
+    try {
+      const apiPath = this.parseAPIPath(action, row);
+      this.dataTableService.executeCustomAction(action.api.method, apiPath, row).subscribe((data) => {
+        this.toastr.success(`Successfully executed ${action.name} action.`, 'Success');
+        this.refreshModel(this.entity);
+      }, err => this.toastr.error(`Something went wrong while executing ${action.name} action.`, 'Success'))
+    }
+    catch (e){
+      this.toastr.error(`Something went wrong while executing ${action.name} action.`, 'Success');
+    }
+  }
+
+  parseAPIPath(action:any, row: any){
+    let path = action.api.path;
+    action.parameters.forEach((p)=>{
+      path = path.replace(`:${p.param}`, row[p.attribute]);
+    });
+    return path;
   }
 }
 
