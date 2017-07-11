@@ -108,9 +108,20 @@ export class AddEditComponent implements OnInit {
     this.associationData = data;
   }
 
+  formatFormValues(){
+    let formDataValues = this.formData.value;
+    Object.keys(formDataValues).forEach((key) => {
+      if(!this.formData.value[key] || this.formData.value[key] === ''){
+        formDataValues[key] = null;
+      }
+    });
+    return formDataValues;
+  }
+
   saveModel() {
+    const formValues = this.formatFormValues();
     if (this.edit) {
-      this.dataTableService.updateRow(this.data.entity.apis.patch, this.data.row.id, this.formData.value).subscribe((data) => {
+      this.dataTableService.updateRow(this.data.entity.apis.patch, this.data.row.id, formValues).subscribe((data) => {
         this.modal.hide();
         this.modelChanged.emit({name: this.data.entity.name});
         this.toastr.success('Successfully updated record', 'Success');
@@ -135,7 +146,7 @@ export class AddEditComponent implements OnInit {
         if(this.data.primaryEntity && this.data.primaryEntity.name !== this.data.entity.name){
           apiPath =this.dataTableService.getAPIPath(this.data.primaryEntity, this.data.entity, 'post', this.id, false, false);
         }
-        this.dataTableService.addRow(apiPath, this.formData.value).subscribe((data) => {
+        this.dataTableService.addRow(apiPath, formValues).subscribe((data) => {
           this.toastr.success('Successfully added record', 'Success');
           this.modelChanged.emit({name: this.data.entity.name});
           this.modal.hide();

@@ -23,6 +23,7 @@ import { ImportDataComponent } from './components/import-data/import-data.compon
 import { HeaderFilterComponent } from './components/dt-header/dt-filter/filter.component';
 
 import { RelationshipComponent } from '../row-detail/relationship/relationship.component';
+import { SingleRelationshipComponent } from '../row-detail/single-relation/single-relation.component';
 import { ViewDetailComponent } from './components/view-details/view-details.component'
 import { DataTableService } from './services/datatable.service';
 import { PluralService } from '../../../../wize-ng2-core/core/shared/services/pluralize.service';
@@ -36,6 +37,13 @@ import { CodeEditorModule } from "../../../../editor/index";
 import { ArrayFilterPipe } from './pipes/array-filter.pipe';
 import { EllipsisPipe } from './pipes/ellipses.pipe';
 import { RuleBuilderModule } from '../../rule-builder/index';
+
+import {
+  MODAL_DIRECTIVES,
+  ConfirmationComponent,
+  ConfirmationService,
+  DateRangeSelectorComponent
+} from '../shared/index';
 
 @NgModule({
   imports: [
@@ -69,7 +77,9 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     FilterItemComponent,
     DataViewComponent,
     ViewDetailComponent,
-    RuleInputComponent
+    RuleInputComponent,
+    SingleRelationshipComponent,
+    ConfirmationComponent
   ],
   declarations: [
     BasicDataTableComponent,
@@ -92,9 +102,16 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     ArrayFilterPipe,
     EllipsisPipe,
     ViewDetailComponent,
-    RuleInputComponent
+    RuleInputComponent,
+    SingleRelationshipComponent,
+    MODAL_DIRECTIVES,
+    ConfirmationComponent,
+    DateRangeSelectorComponent
   ],
-  providers: [DataTableService, PluralService]
+  providers: [
+    DataTableService,
+    PluralService,
+    ConfirmationService]
 })
 
 export class WizeDataTableModule {

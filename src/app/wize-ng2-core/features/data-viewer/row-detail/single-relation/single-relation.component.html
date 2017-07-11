@@ -1,0 +1,18 @@
+<div class="card mb-2" *ngIf="rowData">
+  <div class="card-block">
+    <h5 class="weight-300 mb-1 h4">General Info</h5>
+    <div class="row">
+      <div *ngFor="let column of columns" class="col-sm-2 c-pricercol">
+        <div class="form-group material-style">
+          <div [ngSwitch]="column.type">
+            <span *ngSwitchCase="'DATE'">{{rowData[column.name] | date:'MMM d, y h:mm a'}}</span>
+            <span *ngSwitchCase="'WIZE_MONEY'">{{rowData[column.name] | currency:'USD':true }}</span>
+            <code *ngSwitchCase="'WIZE_CODE'">{{rowData[column.name]}}</code>
+            <span *ngSwitchDefault>{{rowData[column.name]}}</span>
+          </div>
+          <label>{{ column.displayName }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

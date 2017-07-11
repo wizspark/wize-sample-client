@@ -1,72 +1,74 @@
 <div class="navbar navbar-full py-1 px-2 navbar-light bg-faded sub-header">
-    <div class="media">
-        <div class="media-body media-middle">
-            <h3 class=" weight-300 h3 m-0">{{options.name}}
+  <div class="media">
+    <div class="media-body media-middle">
+      <h3 class=" weight-300 h3 m-0">{{options.name}}
                 <span style="font-size: 16px; font-weight: 300;">
             :&nbsp;<span class="text-sm-center text-muted text-uppercase">{{ getIdentifier()}}</span>
                 </span>
-            </h3>
+      </h3>
 
-        </div>
-        <div class="media-body media-middle">
-            <ul class="list-unstyled list-inline m-0 text-xs-right">
-                <li class="list-inline-item">
-                    <button class="btn btn-secondary" (click)="editRecord()"><i class="fa fa-pencil"></i> <span
-            class="hidden-sm-down">&nbsp; Edit</span></button>
-                </li>
-            </ul>
-        </div>
     </div>
+    <div class="media-body media-middle">
+      <ul class="list-unstyled list-inline m-0 text-xs-right">
+        <li class="list-inline-item">
+          <button class="btn btn-secondary" (click)="editRecord()"><i class="fa fa-pencil"></i> <span
+            class="hidden-sm-down">&nbsp; Edit</span></button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <section class="row-details p-2">
-    <div *ngIf="!rowData" class="py-2 px-2" aria-labelledby="rowdetails">Fetching Data...</div>
-    <div class="card mb-2" *ngIf="rowData">
-        <div class="card-block">
-            <h5 class="weight-300 mb-1 h4">General Info</h5>
-            <div class="row">
-                <div *ngFor="let column of columns" class="col-sm-2 c-pricercol">
-                    <div class="form-group material-style">
-                        <div [ngSwitch]="column.type">
-                            <span *ngSwitchCase="'DATE'">{{rowData[column.name] | date:'MMM d, y h:mm a'}}</span>
-                            <span *ngSwitchCase="'WIZE_MONEY'">{{rowData[column.name] | currency:'USD':true }}</span>
-                            <code *ngSwitchCase="'WIZE_CODE'">{{rowData[column.name]}}</code>
-                            <span *ngSwitchDefault>{{rowData[column.name]}}</span>
-                        </div>
-                        <label>{{ column.displayName }}</label>
-                    </div>
-                </div>
+  <div *ngIf="!rowData" class="py-2 px-2" aria-labelledby="rowdetails">Fetching Data...</div>
+  <div class="card mb-2" *ngIf="rowData">
+    <div class="card-block">
+      <h5 class="weight-300 mb-1 h4">General Info</h5>
+      <div class="row">
+        <div *ngFor="let column of columns" class="col-sm-2 c-pricercol">
+          <div class="form-group material-style">
+            <div [ngSwitch]="column.type">
+              <span *ngSwitchCase="'DATE'">{{rowData[column.name] | date:'MMM d, y h:mm a'}}</span>
+              <span *ngSwitchCase="'WIZE_MONEY'">{{rowData[column.name] | currency:'USD':true }}</span>
+              <code *ngSwitchCase="'WIZE_CODE'">{{rowData[column.name]}}</code>
+              <span *ngSwitchDefault>{{rowData[column.name]}}</span>
             </div>
+            <label>{{ column.displayName }}</label>
+          </div>
         </div>
+      </div>
     </div>
-
-
-    <div *ngFor="let relationship of relationships | arrayFilter : [ 'viewOptions', 'disabled', false]">
-        <div class="card mb-2">
-            <div class="card-block">
-                <div class="media mb-0" style="overflow:visible">
-                    <div class="media-body media-middle" style="overflow:visible">
-                        <h5 class="weight-300 h4">{{ relationship.target }} </h5>
-                    </div>
-                    <div class="media-body media-middle" style="overflow:visible">
-                        <ul class="list-unstyled list-inline m-0 text-xs-right ">
-                            <li class="list-inline-item add-btn">
-                                <a href="javascript:;" class="btn btn-secondary btn-sm " (click)="runRules(relationship.target)">
-                                    <i class="fa fa-play align-bottom" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item add-btn">
-                                <a href="javascript:;" class="btn btn-secondary btn-sm " (click)="addRecord(relationship.target, relationship.type)">
-                                    <i class="fa fa-plus align-bottom" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <hr class="mb-0" style="margin-top: 0.5em !important;">
-                <relationship [relationship]="relationship" [dataTableInputConfig]="dataTableInputConfig"></relationship>
-            </div>
+  </div>
+  <div *ngFor="let relationship of singleRelationship">
+    <single-relationship [id]="id" [entityName]="relationship.target" [primaryEntityName]="entity.name" [routes]="options"></single-relationship>
+  </div>
+  <div *ngFor="let relationship of relationships | arrayFilter : [ 'viewOptions', 'disabled', false]">
+    <div class="card mb-2">
+      <div class="card-block">
+        <div class="media mb-0" style="overflow:visible">
+          <div class="media-body media-middle" style="overflow:visible">
+            <h5 class="weight-300 h4">{{ relationship.target }} </h5>
+          </div>
+          <div class="media-body media-middle" style="overflow:visible">
+            <ul class="list-unstyled list-inline m-0 text-xs-right ">
+              <li class="list-inline-item add-btn" >
+                <a href="javascript:;" class="btn btn-secondary btn-sm " (click)="runRules(relationship.target)">
+                  <i class="fa fa-play align-bottom" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="list-inline-item add-btn">
+                <a href="javascript:;" class="btn btn-secondary btn-sm "
+                   (click)="addRecord(relationship.target, relationship.type)">
+                  <i class="fa fa-plus align-bottom" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+        <hr class="mb-0" style="margin-top: 0.5em !important;">
+        <relationship [relationship]="relationship" [dataTableInputConfig]="dataTableInputConfig"></relationship>
+      </div>
     </div>
+  </div>
 </section>
 <add-edit [name]="entity.name" (modelChanged)="refreshModel($event)"></add-edit>

@@ -93,7 +93,7 @@
 
     <!--DATE-->
     <input class="form-control"
-           *ngSwitchCase="'DECIMAL'"
+           *ngSwitchCase="'DATE'"
            [formControlName]="attribute.name"
            placeholder=" "
            type="datetime"
@@ -103,7 +103,7 @@
 
     <!--DATEONLY-->
     <input class="form-control"
-           *ngSwitchCase="'DECIMAL'"
+           *ngSwitchCase="'DATEONLY'"
            [formControlName]="attribute.name"
            placeholder=" "
            type="date"
@@ -167,7 +167,7 @@
            [ngClass]="attribute.classes?.attribute"
            [id]="attribute.key">
 
-    <!--WIZE_MONEY-->
+    <!--WIZE_TIME-->
     <input class="form-control"
            *ngSwitchCase="'WIZE_TIME'"
            [formControlName]="attribute.name"
@@ -177,7 +177,7 @@
            [ngClass]="attribute.classes?.attribute"
            [id]="attribute.key">
 
-    <!--WIZE_MONEY-->
+    <!--WIZE_URL-->
     <input class="form-control"
            *ngSwitchCase="'WIZE_URL'"
            [formControlName]="attribute.name"
