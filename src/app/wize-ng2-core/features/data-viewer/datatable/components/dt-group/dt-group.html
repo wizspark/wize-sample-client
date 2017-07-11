@@ -14,7 +14,8 @@
                 <p-column *ngFor="let col of activeColumns" [field]="col.name" [header]="col.displayName" [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)">
                     <template let-row="rowData" pTemplate>
                         <span [ngSwitch]="col.type">
-                            <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'MMM d, y h:mm a'}}</span>
+                            <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'mediumDate' | uppercase}}</span>
+                            <span *ngSwitchCase="'DATEONLY'">{{row[col.name] | date:'mediumDate' | uppercase}}</span>
                             <span *ngSwitchCase="'WIZE_MONEY'">{{row[col.name] | currency:'USD':true }}</span>
                             <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;">
                                 <span class="fa fa-sitemap" (click)="showRuleEditor(row, col.name)"></span>

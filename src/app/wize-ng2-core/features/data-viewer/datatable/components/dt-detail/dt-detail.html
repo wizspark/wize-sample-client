@@ -33,7 +33,8 @@
         <p-column *ngFor="let col of activeColumns" [field]="col.name" [header]="col.displayName" [sortable]="true">
           <ng-template let-row="rowData" pTemplate>
             <span [ngSwitch]="col.type">
-                <span *ngSwitchCase="'datetime'">{{row[col.name] | date:'mediumDate' | uppercase}}</span>
+                <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'mediumDate' | uppercase}}</span>
+                <span *ngSwitchCase="'DATEONLY'">{{row[col.name] | date:'mediumDate' | uppercase}}</span>
                 <span *ngSwitchCase="'WIZE_MONEY'">{{row[col.name] | currency:'USD':true }}</span>
                   <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;">
                     <span class="fa fa-sitemap" (click)="showRuleEditor(row, col.name)"></span>
@@ -42,7 +43,7 @@
             </span>
           </ng-template>
         </p-column>
-        <p-column header="Actions" [style]="{'width':'180px'}">
+        <p-column header="Actions">
           <ng-template let-row="rowData" pTemplate="body">
             <div class="dropdown dropdown-custom">
               <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown"
@@ -72,18 +73,21 @@
               class="fa fa-trash"></i></button>
           </ng-template>
         </p-column>
-        <ng-template let-car pTemplate="rowexpansion">
-          <div class="depend-table">
-            <ul class="nav nav-tabs app-tabs">
-              <li class="nav-item" *ngFor="let tab of entity.viewOptions.tabs; let j = index">
-                <a class="nav-link" data-toggle="tab" role="tab" [class.active]="isTabActive(j)"
-                   (click)="updateTabIndex(j)">{{ tab }}</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div *ngFor="let dt of entity.viewOptions.tabs; let p = index;" class="tab-pane" [id]="dt"
-                   role="tabpanel" [class.active]="isTabActive(p)">
-                <!--<dt-basic  [routes]="routes" [entityName]="dt" [header]="false"></dt-basic>-->
+        <ng-template let-row pTemplate="rowexpansion">
+          <div class="card mb-2">
+            <div class="card-block">
+              <div class="row">
+                <div *ngFor="let column of allColumns" class="col-sm-2 c-pricercol">
+                  <div class="form-group material-style">
+                    <div [ngSwitch]="column.type">
+                      <span *ngSwitchCase="'DATE'">{{row[column.name] | date:'MMM d, y h:mm a'}}</span>
+                      <span *ngSwitchCase="'WIZE_MONEY'">{{row[column.name] | currency:'USD':true }}</span>
+                      <code *ngSwitchCase="'WIZE_CODE'">{{row[column.name]}}</code>
+                      <span *ngSwitchDefault>{{row[column.name]}}</span>
+                    </div>
+                    <label>{{ column.displayName }}</label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
