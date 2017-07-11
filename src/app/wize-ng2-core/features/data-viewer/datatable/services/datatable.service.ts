@@ -393,4 +393,30 @@ export class DataTableService {
       .map(res => res.json());
   }
 
+
+  executeCustomAction(method:string, apiPath:string, bodyData?:any, id?:string|number) {
+    if (method === "POST") {
+      let body = JSON.stringify(bodyData);
+      return this._http
+        .post(``, body, <RequestOptionsArgs>{
+          url: `${this.apiUrl}/api/${apiPath}`
+        }, true)
+        .map(res => res.json());
+    }
+    else if (method === "PATCH") {
+      let body = JSON.stringify(bodyData);
+      return this._http
+        .patch(``, body, <RequestOptionsArgs>{
+          url: `${this.apiUrl}${apiPath}/${id}`
+        }, true);
+    }
+    else{
+      return this._http
+        .get(``, <RequestOptionsArgs>{
+          url: `${this.apiUrl}/api${apiPath}`
+        }, true)
+        .map((response:any) => response.json());
+    }
+  }
+
 }

@@ -6,6 +6,7 @@
     [columns]="allColumns"
     [headerOptions]="dataTableInputConfig.headerOptions"
     [templates]="templates"
+    [customActions]="routeData.actions?.customActions"
     (resetColumnsEvent)="resetColumns($event)"
     (updateColumnsEvent)="updateColumns($event)"
     (searchEvent)="searchRecords($event)"
@@ -13,7 +14,8 @@
     (importEvent)="importData($event)"
     (exportEvent)="exportData($event)"
     (filterEvent)="showFilterModal($event)"
-    (runRulesEvent)="showRuleInput()">
+    (runRulesEvent)="showRuleInput()"
+    (updateEvent)="refreshModel(entity)">
   </dt-header>
 </div>
 <div [ngClass]="{ 'p-2' : dataTableInputConfig.isHeader }">
