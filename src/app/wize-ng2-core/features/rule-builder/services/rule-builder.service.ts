@@ -62,7 +62,13 @@ export class RuleBuilderService {
       {code: '<=', label: 'less than or equal to'},
       {code: '>', label: 'greater than'},
       {code: '>=', label: 'greater than or equal to'},
-    ]
+    ],
+    'WIZE_MONEY': [
+      {code: '<', label: 'less than'},
+      {code: '<=', label: 'less than or equal to'},
+      {code: '>', label: 'greater than'},
+      {code: '>=', label: 'greater than or equal to'},
+    ],
   };
 
   private fields: RuleField[] = [
@@ -183,7 +189,7 @@ export class RuleBuilderService {
     if (entry.operator.code === 'in' || entry.operator.code === 'not_in') {
       return '[\'' + entry.value.replace(/\s*/g, '').split(',').join('\', \'') + '\']';
     }
-    if (entry.field.type === 'INTEGER' || entry.field.type === 'FLOAT'|| entry.field.type === 'DOUBLE') {
+    if (entry.field.type === 'INTEGER' || entry.field.type === 'FLOAT'|| entry.field.type === 'DOUBLE' || entry.field.type === 'WIZE_MONEY') {
       let val = parseFloat(entry.value);
       return isFinite(val) ? val : '';
     }

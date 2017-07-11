@@ -20,6 +20,17 @@ export class AddRuleEventRegistryComponent implements OnInit {
   public models : any;
   public entity : any;
   public ruleMeta : any;
+  public editorConfig : any = {
+    lineNumbers: false,
+    lineWrapping: false,
+    readOnly: false,
+    smartIndent: true,
+    showCursorWhenSelecting: true,
+    gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+    mode: {name: 'javascript', globalVars: true},
+    autofocus: false,
+    viewportMargin: Infinity
+  };
 
   constructor(private addRuleEventRegistryService: AddRuleEventRegistryService,
               private formBuilder: FormBuilder,
@@ -51,6 +62,8 @@ export class AddRuleEventRegistryComponent implements OnInit {
     if(data){
       this.data = data;
       this.isEditMode = true;
+      this.setModelChange(data.modelName);
+      this.setActionChange(data.action);
     } else {
       this.isEditMode = false;
     }
@@ -83,6 +96,11 @@ export class AddRuleEventRegistryComponent implements OnInit {
   }
 
   public get modelName() {
+    if(this.isEditMode && this.form.controls['modelName']){
+      this.form.controls['modelName'].disable();
+    } else {
+      this.form.controls['modelName'].enable();
+    }
     return this.form.controls['modelName'];
   }
 
@@ -91,10 +109,20 @@ export class AddRuleEventRegistryComponent implements OnInit {
   }
 
   public get ruleCriteria() {
+    if(this.isEditMode && this.form.controls['ruleCriteria']){
+      this.form.controls['ruleCriteria'].disable();
+    } else {
+      this.form.controls['ruleCriteria'].enable();
+    }
     return this.form.controls['ruleCriteria'];
   }
 
   public get action() {
+    if(this.isEditMode && this.form.controls['action']){
+      this.form.controls['action'].disable();
+    } else {
+      this.form.controls['action'].enable();
+    }
     return this.form.controls['action'];
   }
 
@@ -103,26 +131,38 @@ export class AddRuleEventRegistryComponent implements OnInit {
   // }
 
   public get description() {
+    if(this.isEditMode && this.form.controls['description']){
+      this.form.controls['description'].disable();
+    } else {
+      this.form.controls['description'].enable();
+    }
     return this.form.controls['description'];
   }
 
   public get configuration() {
+    if(this.isEditMode && this.form.controls['configuration']){
+      this.form.controls['configuration'].disable();
+      this.editorConfig.readOnly = true;
+    } else {
+      this.form.controls['configuration'].enable();
+      this.editorConfig.readOnly = false;
+    }
     return this.form.controls['configuration'];
   }
 
-  public get editorConfig() {
-    return {
-      lineNumbers: false,
-      lineWrapping: false,
-      readOnly: false,
-      smartIndent: true,
-      showCursorWhenSelecting: true,
-      gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-      mode: {name: 'javascript', globalVars: true},
-      autofocus: false,
-      viewportMargin: Infinity
-    }
-  }
+  // public get editorConfig() {
+  //   return {
+  //     lineNumbers: false,
+  //     lineWrapping: false,
+  //     readOnly: this.isEditMode,
+  //     smartIndent: true,
+  //     showCursorWhenSelecting: true,
+  //     gutters: ['CodeMirror-lint-markers', 'CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+  //     mode: {name: 'javascript', globalVars: true},
+  //     autofocus: false,
+  //     viewportMargin: Infinity
+  //   }
+  // }
 
   public get evaluationCriteria1() {
     // let criteria = [];
@@ -177,6 +217,10 @@ export class AddRuleEventRegistryComponent implements OnInit {
   public selectAction(event) {
     event.preventDefault();
     let action = event.currentTarget.value;
+    this.setActionChange(action);
+  }
+
+  private setActionChange(action) {
     if(action) {
       for (let key in this.ruleMeta.actions) {
         if(this.ruleMeta.actions[key].name === action) {
@@ -202,6 +246,10 @@ export class AddRuleEventRegistryComponent implements OnInit {
     event.preventDefault();
     this.entity = null;
     let modelName = event.currentTarget.value;
+    this.setModelChange(modelName);
+  }
+
+  private setModelChange(modelName) {
     if(modelName) {
       this.adminService.getRows('/api/metadata/models/' + modelName).subscribe(data => {
         this.entity = {};
