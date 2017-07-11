@@ -92,7 +92,6 @@ export class AddEditComponent implements OnInit {
 
   onChanges(event) {
     this.formData = event;
-    // Change Validation
     this.formValid = false;
     if (this.formData.valid) {
       this.formValid = true;

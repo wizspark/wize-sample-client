@@ -107,6 +107,7 @@
            [formControlName]="attribute.name"
            placeholder=" "
            type="date"
+           [value]="attribute.value | date:'yyyy-MM-dd'"
            (ngModelChange)="onValueChange($event)"
            [ngClass]="attribute.classes?.attribute"
            [id]="attribute.key">

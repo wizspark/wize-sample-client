@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostBinding, Input, Output, ViewChild, AfterViewInit} from '@angular/core'
+import {Component, EventEmitter, HostBinding, Input, Output, ViewChild, AfterViewInit, AfterContentChecked, OnChanges} from '@angular/core'
 import {FormGroup} from '@angular/forms';
 import {Attribute} from './../../interfaces/form.interfaces'
 import {RuleInputControlComponent} from '../../../rule-builder/components/rule-input/rule-input.component';
@@ -9,7 +9,7 @@ import {RuleInputControlComponent} from '../../../rule-builder/components/rule-i
   templateUrl: './control.html'
 })
 
-export class ControlComponent implements AfterViewInit {
+export class ControlComponent implements AfterViewInit, AfterContentChecked, OnChanges {
 
   @Input() set info(value) {
     this.attribute = value.attribute;
@@ -46,7 +46,15 @@ export class ControlComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.onValueChange(null);
+    this.onValueChange(this.form);
+  }
+
+  ngAfterContentChecked(){
+    this.onValueChange(this.form);
+  }
+
+  ngOnChanges(){
+    this.onValueChange(this.form);
   }
 
   errors() {
@@ -85,9 +93,7 @@ export class ControlComponent implements AfterViewInit {
   }
 
   onValueChange(event) {
-    if (this.attribute.emitChanges !== false) {
-      this.valueChange.emit({[this.attribute.name]: event});
-    }
+    this.valueChange.emit(this.form);
   }
 
   isSelectActive(option) {
