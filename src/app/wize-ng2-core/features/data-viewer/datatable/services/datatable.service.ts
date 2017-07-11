@@ -196,9 +196,9 @@ export class DataTableService {
   getColumnsWithValue(columns, row, isEdit) {
     columns.forEach((c) => {
       c.value = isEdit ? row[c.name] : null;
-      if (c.dataType === 'ENUM' || c.dataType === 'ARRAY') {
-        c.value = this.parseValueForEdit(c.value, c.dataType);
-      }
+      //if (c.dataType === 'ENUM' || c.dataType === 'ARRAY') {
+      //  c.value = this.parseValueForEdit(c.value, c.dataType);
+      //}
       c['options'] = this.parseDataTypeOptions(c.type, null);
     });
     return columns.filter((c) => {

@@ -33,6 +33,7 @@ export class HeaderComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
+    this.name = this.entity.name;
     if(this.customActions && this.customActions.length > 0){
       this.actions = this.customActions.filter((action) => action.layout === 'HEADER');
     }

@@ -1,13 +1,13 @@
-<div *ngIf="dataTableInputConfig.isHeader && entity" class="navbar navbar-full py-1 px-2 navbar-light bg-faded sub-header">
-    <dt-header [entity]="entity" [columns]="allColumns" [headerOptions]="dataTableInputConfig.headerOptions" (resetColumnsEvent)="resetColumns($event)" (updateColumnsEvent)="updateColumns($event)" (searchEvent)="searchRecords($event)" (addRowEvent)="addRow($event)"
-        (importEvent)="importData($event)" (exportEvent)="exportData($event)" (filterEvent)="showFilterModal($event)">
-    </dt-header>
+<div *ngIf="dataTableInputConfig.isHeader && entity" class="navbar py-1 px-2 navbar-light bg-faded sub-header">
+  <dt-header [name]="routeData.name" [entity]="entity" [columns]="allColumns" [headerOptions]="dataTableInputConfig.headerOptions" [templates]="templates" [customActions]="routeData.actions?.customActions" (resetColumnsEvent)="resetColumns($event)" (updateColumnsEvent)="updateColumns($event)"
+             (searchEvent)="searchRecords($event)" (addRowEvent)="addRow($event)" (importEvent)="importData($event)" (exportEvent)="exportData($event)" (filterEvent)="showFilterModal($event)" (runRulesEvent)="showRuleInput()" (updateEvent)="refreshModel(entity)">
+  </dt-header>
 </div>
 <div [ngClass]="{ 'p-2' : dataTableInputConfig.isHeader }">
     <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">
         <div [ngClass]="{ 'card-block' : dataTableInputConfig.isHeader}">
-            <p-dataTable [styleClass]="(rows && rows.length) ? 'c-grid pf-expand-grid' : 'c-grid'" [lazy]="true" [value]="rows" [responsive]="true" [sortField]="entity.viewOptions.sortField" [rowGroupMode]="entity.viewOptions.rowGroupMode" [groupField]="entity.viewOptions.groupField"
-                [sortableRowGroup]="false" [rows]="limit" [paginator]="paginator" expandableRowGroups="true" [stacked]="stacked" [responsive]="true" resizableColumns="true" reorderableColumns="true" (onLazyLoad)="getModelData($event)" scrollable="true" resizableColumns="true"
+            <p-dataTable [styleClass]="(rows && rows.length) ? 'c-grid pf-expand-grid' : 'c-grid'" [lazy]="true" [value]="rows" [responsive]="false" [sortField]="entity.viewOptions.sortField" [rowGroupMode]="entity.viewOptions.rowGroupMode" [groupField]="entity.viewOptions.groupField"
+                [sortableRowGroup]="false" [rows]="limit" [paginator]="paginator" expandableRowGroups="true" [stacked]="stacked"    (onLazyLoad)="getModelData($event)"
                 [scrollHeight]="dataTableInputConfig.isHeader ? '600px' : '300px'">
                 <ng-template pTemplate="rowgroupheader" let-rowData>{{getString( rowData,entity.viewOptions.groupField)}}
                 </ng-template>
@@ -26,17 +26,19 @@
                         </span>
                     </template>
                 </p-column>
-                <p-column header="Actions" [style]="{'width':'180px'}">
+                <p-column header="Actions">
                     <ng-template let-row="rowData" pTemplate="body">
                         <div class="dropdown dropdown-custom">
                             <a class="action-dot" href="javascript:;" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 &#8226;&#8226;&#8226;
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a *ngIf="header" href="javascript:;" class="dropdown-item" (click)="showRow(row)"><i
+                                <a *ngIf="dataTableInputConfig.isHeader" href="javascript:;" class="dropdown-item" (click)="showRow(row)"><i
                                         aria-hidden="true" class="fa fa-eye"></i> &nbsp;&nbsp;View</a>
                                 <a class="dropdown-item" href="javascript:;" (click)="editRow(row)"><i
                                         aria-hidden="true" class="fa fa-pencil"></i> &nbsp;&nbsp;Edit</a>
+                              <a *ngFor="let action of actions" class="dropdown-item" href="javascript:void(0)" (click)="executeCustomAction(action, row)"><i
+                                aria-hidden="true" class="fa fa-paper-plane"></i> &nbsp;&nbsp;{{action.name}}</a>
                                 <a class="dropdown-item" href="javascript:;" (click)="deleteRow(row)"><i
                                         aria-hidden="true" class="fa fa-trash-o"></i> &nbsp;&nbsp;Delete</a>
                             </div>

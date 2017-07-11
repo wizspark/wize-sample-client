@@ -1,7 +1,7 @@
 <div *ngIf="dataTableInputConfig.isHeader && entity" class="navbar py-1 px-2 navbar-light bg-faded sub-header">
-    <dt-header [name]="routeData.name" [entity]="entity" [columns]="allColumns" [headerOptions]="dataTableInputConfig.headerOptions" [templates]="templates" [customActions]="routeData.actions?.customActions" (resetColumnsEvent)="resetColumns($event)" (updateColumnsEvent)="updateColumns($event)"
-        (searchEvent)="searchRecords($event)" (addRowEvent)="addRow($event)" (importEvent)="importData($event)" (exportEvent)="exportData($event)" (filterEvent)="showFilterModal($event)" (runRulesEvent)="showRuleInput()" (updateEvent)="refreshModel(entity)">
-    </dt-header>
+  <dt-header [name]="routeData.name" [entity]="entity" [columns]="allColumns" [headerOptions]="dataTableInputConfig.headerOptions" [templates]="templates" [customActions]="routeData.actions?.customActions" (resetColumnsEvent)="resetColumns($event)" (updateColumnsEvent)="updateColumns($event)"
+             (searchEvent)="searchRecords($event)" (addRowEvent)="addRow($event)" (importEvent)="importData($event)" (exportEvent)="exportData($event)" (filterEvent)="showFilterModal($event)" (runRulesEvent)="showRuleInput()" (updateEvent)="refreshModel(entity)">
+  </dt-header>
 </div>
 <div [ngClass]="{ 'p-2' : dataTableInputConfig.isHeader }">
     <div [ngClass]="{ 'card' : dataTableInputConfig.isHeader }">

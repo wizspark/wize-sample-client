@@ -132,7 +132,7 @@
 
     <!--ENUM-->
     <ng-select *ngSwitchCase="'ENUM'"
-               [active]="attribute.value"
+               [active]="enumValue"
                [multiple]="false"
                [items]="attribute.options"
                (data)="refreshValue($event)"
@@ -140,7 +140,7 @@
     </ng-select>
 
     <!--ARRAY-->
-    <tag-input *ngSwitchCase="'ARRAY'" [(ngModel)]='attribute.value'
+    <tag-input  *ngSwitchCase="'ARRAY'" [(ngModel)]='selectedValues'
                [ngModelOptions]="{standalone: true}"
                [editable]="false"
                [trimTags]="true"
