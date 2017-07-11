@@ -36,6 +36,9 @@
       <li *ngIf="entity.fact" class="list-inline-item">
         <button class="btn btn-secondary" (click)="runRules()" title="Run Rules" tooltip="Run Rules"><i class="fa fa-play"></i>&nbsp;&nbsp;Run Rules</button>
       </li>
+      <li class="list-inline-item" *ngFor="let action of actions">
+        <button class="btn btn-secondary" (click)="executeCustomAction(action)"><span class="hidden-sm-down">{{action.name}} </span></button>
+      </li>
       <li *ngIf="!headerOptions.noCreate" class="list-inline-item">
         <dt-add
           (addRowEvent)="addRow($event)">

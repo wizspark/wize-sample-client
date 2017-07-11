@@ -7,7 +7,7 @@ import {DataSet} from '../../interfaces/chart-data';
 import {ReportsApiService} from '../../services/reports-api.service';
 import {ReportsParamService} from  '../../services/reports-params.service';
 import { UIChart} from 'primeng/primeng';
-
+const Chart = require('chart.js');
 
 @Component({
   selector: 'report-list-view',

@@ -7,8 +7,7 @@
       <li *ngIf="user?.isAdmin && isACLInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','organization-unit']">Organization Unit</a></li>
       <li *ngIf="user?.isAdmin && isACLInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','email-template']">Email Template</a></li>
       <li *ngIf="user?.isAdmin && isACLInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','models']">Models</a></li>
-      <li *ngIf="user?.isAdmin && isACLInstalled" class="section-title">SETTINGS</li>
-      <li *ngIf="isReportInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','reports']">Reports</a></li>
+      <li *ngIf="isReportInstalled" class="section-title" routerLinkActive="active"><a class="header-link" [routerLink]="['/wize/admin','reports']">Report Config</a></li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" class="section-title">RULES</li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','rule-event-registry']">Events Registration</a></li>
       <li *ngIf="user?.isAdmin && isRuleInstalled" routerLinkActive="active"><a [routerLink]="['/wize/admin','rule-tasks']">Tasks</a></li>

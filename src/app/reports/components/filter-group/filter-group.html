@@ -51,7 +51,7 @@
             <label>Condition</label>
           </div>
         </div>
-        <div class="c-col col-input c2" *ngIf="((condition.columnType == null || condition.columnType == '' || condition.columnType === 'STRING') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
+        <div class="c-col col-input c2" *ngIf="((condition.columnType == null || condition.columnType == '' || condition.columnType === 'STRING' || condition.columnType === 'ENUM') && (condition.conditionOperator!='EXIST' && condition.conditionOperator!='NOT_EXIST'))">
           <div class="form-group material-style">
             <input class="form-control has-value" [(ngModel)]="condition.value1" required/>
             <label>Value</label>
