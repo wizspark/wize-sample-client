@@ -16,6 +16,7 @@ export interface Attribute {
   validation?: Array<Validation>
   required:boolean
   dataType: string
+  allowNull: boolean
 }
 
 export interface Settings {
