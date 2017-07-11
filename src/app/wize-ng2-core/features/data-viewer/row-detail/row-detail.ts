@@ -143,7 +143,7 @@ export class RowDetailComponent implements OnInit {
 
   getSingleRelationships() {
     const rels = this.dataTableService.getRelationships(this.entity);
-    this.singleRelationship = rels.filter((r) => r.type === 'hasOne' || r.type !== 'belongsTo');
+    this.singleRelationship = rels.filter((r) => r.type === 'hasOne');
   }
 
   getRelationshipOptions(route:string) {

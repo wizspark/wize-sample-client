@@ -62,6 +62,13 @@ export class UIConfigService {
     return orderBy(routerItems, 'index', 'asc');
   }
 
+  getFirstRoute(){
+    const routes = this.getRoutes();
+    if(routes && routes.length > 0){
+      return routes[0].url;
+    }
+    return "/";
+  }
   /**
    * Get Config
    * @returns {T[]}

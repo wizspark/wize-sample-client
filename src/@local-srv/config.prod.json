@@ -1,6 +1,6 @@
 {
   "host":"http://localhost:8080",
-  "appTitle":"Loan Pricer PROD",
+  "appTitle":"Wize Frontend",
   "defaultRoute": "/",
   "auth": false,
   "auth0Options":{

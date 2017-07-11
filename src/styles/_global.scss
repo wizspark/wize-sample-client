@@ -701,13 +701,15 @@ li.ui-state-default.ui-corner-top.ui-tabview-selected.ui-state-active a {
     }
 }
 
-ng-select {
-    .ui-select-container {
-        display: inline-block;
-        width: 200px;
-        vertical-align: middle;
-        .form-control {
-            padding: 0.5rem 1rem;
+.media-right {
+    ng-select {
+        .ui-select-container {
+            display: inline-block;
+            width: 200px !important;
+            vertical-align: middle;
+            .form-control {
+                padding: 0.5rem 1rem;
+            }
         }
     }
 }

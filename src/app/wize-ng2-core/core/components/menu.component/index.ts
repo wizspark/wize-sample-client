@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UIConfigService } from '../../shared/services/index';
 import { MenuItem } from 'primeng/primeng';
 import { AuthService } from '../../../../user/services/auth.service';
-import { AppConfigService } from '../../shared/services/app.config.service';
+import { AppConfigService, UIConfigService } from '../../shared/services/index';
 
 @Component({
   selector: 'app-menu-bar',
@@ -58,6 +57,6 @@ export class MenuBarComponent implements OnInit {
   }
 
   navigateToHome() {
-    this.router.navigate([this.appConfigService.getConfig('defaultRoute')])
+    this.router.navigate([this.uiConfigService.getFirstRoute()])
   }
 }

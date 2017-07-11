@@ -1,30 +1,29 @@
-
-
-
-.ui-chkbox{
-  .ui-chkbox-box{
-    background-color: #fff;
-    color:#EA585A;
-    box-shadow: inset 0px 0px 0px 2px #EA585A;
-
-    &.ui-state-active{
-      background-color: #EA585A;
-      color: #fff;
+.ui-chkbox {
+    .ui-chkbox-box {
+        background-color: #fff;
+        color: #EA585A;
+        box-shadow: inset 0px 0px 0px 2px #EA585A;
+        &.ui-state-active {
+            background-color: #EA585A;
+            color: #fff;
+        }
     }
-
-  }
 }
 
-.ui-inputtext{
-  border:none;
-  padding: 0em;
+.ui-inputtext {
+    border: none;
+    padding: 0em;
 }
 
+.nested-table {
+    th {
+        border-top: 0px solid transparent !important;
+        background: none !important;
+    }
+}
 
-.nested-table{
-
-  th{
-    border-top:0px solid transparent !important;
-    background: none !important;
-  }
+.col-sm-2 .c-pricercol {
+    .material-style {
+        min-height: 26px;
+    }
 }
