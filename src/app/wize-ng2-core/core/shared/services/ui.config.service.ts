@@ -41,7 +41,7 @@ export class UIConfigService {
   getRoutes():any [] {
     const routerItems = [];
     this.config.routes.filter(route => !route.hidden).forEach((route) => {
-      if (route.entities && route.entities.length > 0 && route.pageType !== 'custom') {
+      if (route.entities && route.entities.length > 0 && route.pageType === 'standard') {
         routerItems.push({
           index: route.index,
           url: `/wize/page/${route.route}`,

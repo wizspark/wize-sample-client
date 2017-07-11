@@ -48,8 +48,10 @@
         <p-column *ngFor="let col of getColumnByUnique(true)" [field]="col.name" [header]="col.displayName || col.name"
                   [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)">
           <ng-template let-row="rowData" pTemplate="body">
-            <div [ngSwitch]="col.type">
+            <div [ngSwitch]="col.dataType">
               <a *ngSwitchCase="'DATE'" (click)="showRow(row)" href="javascript:;">{{row[col.name] |
+                date:'MMM d, y h:mm a'}}</a>
+              <a *ngSwitchCase="'DATEONLY'" (click)="showRow(row)" href="javascript:;">{{row[col.name] |
                 date:'MMM d, y h:mm a'}}</a>
               <a *ngSwitchCase="'WIZE_MONEY'" (click)="showRow(row)" href="javascript:;">{{row[col.name]
                 | currency:'USD':true }}</a>
@@ -68,7 +70,9 @@
           <ng-template let-row="rowData" pTemplate="body">
                         <span [ngSwitch]="col.type">
                             <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'MMM d, y h:mm a'}}</span>
+                            <span *ngSwitchCase="'DATEONLY'">{{row[col.name] | date:'MMM d, y h:mm a'}}</span>
                             <span *ngSwitchCase="'WIZE_MONEY'">{{row[col.name] | currency:'USD':true }}</span>
+                            <a [href]="row[col.name]" target="_blank" *ngSwitchCase="'WIZE_URL'">{{row[col.name] }}</a>
                             <a *ngSwitchCase="'WIZE_CODE'" href="javascript:;">
                               <span class="fa fa-sitemap" (click)="showRuleEditor(row, col.name)"></span>
                             </a>
