@@ -38,6 +38,13 @@ import { ArrayFilterPipe } from './pipes/array-filter.pipe';
 import { EllipsisPipe } from './pipes/ellipses.pipe';
 import { RuleBuilderModule } from '../../rule-builder/index';
 
+import {
+  MODAL_DIRECTIVES,
+  ConfirmationComponent,
+  ConfirmationService,
+  DateRangeSelectorComponent
+} from '../shared/index';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -71,7 +78,8 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     DataViewComponent,
     ViewDetailComponent,
     RuleInputComponent,
-    SingleRelationshipComponent
+    SingleRelationshipComponent,
+    ConfirmationComponent
   ],
   declarations: [
     BasicDataTableComponent,
@@ -95,9 +103,15 @@ import { RuleBuilderModule } from '../../rule-builder/index';
     EllipsisPipe,
     ViewDetailComponent,
     RuleInputComponent,
-    SingleRelationshipComponent
+    SingleRelationshipComponent,
+    MODAL_DIRECTIVES,
+    ConfirmationComponent,
+    DateRangeSelectorComponent
   ],
-  providers: [DataTableService, PluralService]
+  providers: [
+    DataTableService,
+    PluralService,
+    ConfirmationService]
 })
 
 export class WizeDataTableModule {

@@ -11,7 +11,7 @@ import { PluralService } from '../../../../../core/shared/services/index';
 import { PrimeTemplate } from 'primeng/components/common/shared';
 import { CoreToastManager } from '../../../../../../root/services/core-toast-manager';
 import { RuleBuilderComponent } from '../../../../rule-builder/components/rule-builder/rule-builder.component';
-
+import { ConfirmationService, IConfirmation } from '../../../shared/index';
 @Component({
   selector: 'dt-basic',
   templateUrl: './dt-basic.html',
@@ -72,7 +72,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
               protected activatedRoute:ActivatedRoute,
               protected dataTableService:DataTableService,
               protected pluralService:PluralService,
-              private toastr:CoreToastManager) {
+              private toastr:CoreToastManager, private confirmationService:ConfirmationService) {
     this.addSubscription = dataTableService.add$.subscribe(
       item => {
         this.showAddView = true;
@@ -220,37 +220,47 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
   }
 
   deleteRow(row:any) {
-    if (this.dataTableInputConfig.belongsToMany) {
-      let index = this.rows.indexOf(row, 0);
-      if (index > -1) {
-        this.rows.splice(index, 1);
-      }
-      const path = this.dataTableService.getAPIPath(this.primaryEntity, this.entity, 'delete', this.id, false, true);
-      this.dataTableService.deleteRow(path, this.rows, true).subscribe((data) => {
-        let event = {
-          first: 0,
-          rows: this.limit,
-          sortField: null,
-          sortOrder: null
-        };
-        this.getModelData(event);
-        this.toastr.success('Successfully deleted record.', 'Sucess');
-      });
-    }
-    else {
-      const path = this.dataTableService.getAPIPath(this.primaryEntity, this.entity, 'delete', this.id, false, false);
-      this.dataTableService.deleteRow(path, row, false).subscribe((data) => {
-        this.toastr.success('Successfully deleted record.', 'Sucess');
-        let event = {
-          first: 0,
-          rows: this.limit,
-          sortField: null,
-          sortOrder: null
-        };
-        this.getModelData(event);
+    let deleteConfirmation:IConfirmation = <IConfirmation>{
+      title: 'Delete Confirmation',
+      message: 'Do you want to delete this record ?',
+      firstButton: 'Delete',
+      secondButton: 'Cancel'
+    };
+    this.confirmationService.activate(deleteConfirmation).then((responseOK) => {
+      if (responseOK) {
+        if (this.dataTableInputConfig.belongsToMany) {
+          let index = this.rows.indexOf(row, 0);
+          if (index > -1) {
+            this.rows.splice(index, 1);
+          }
+          const path = this.dataTableService.getAPIPath(this.primaryEntity, this.entity, 'delete', this.id, false, true);
+          this.dataTableService.deleteRow(path, this.rows, true).subscribe((data) => {
+            let event = {
+              first: 0,
+              rows: this.limit,
+              sortField: null,
+              sortOrder: null
+            };
+            this.getModelData(event);
+            this.toastr.success('Successfully deleted record.', 'Sucess');
+          });
+        }
+        else {
+          const path = this.dataTableService.getAPIPath(this.primaryEntity, this.entity, 'delete', this.id, false, false);
+          this.dataTableService.deleteRow(path, row, false).subscribe((data) => {
+            this.toastr.success('Successfully deleted record.', 'Sucess');
+            let event = {
+              first: 0,
+              rows: this.limit,
+              sortField: null,
+              sortOrder: null
+            };
+            this.getModelData(event);
 
-      });
-    }
+          });
+        }
+      }
+    });
   }
 
   refreshModel(event) {
@@ -515,7 +525,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     });
   }
 
-  showRuleInput(){
+  showRuleInput() {
     this.dataTableService.showRuleModal({
       primaryEntity: this.entity,
       entity: this.entity,
@@ -532,7 +542,7 @@ export class BasicDataTableComponent implements OnChanges, OnDestroy {
     });
   }
 
-  formatExecutionData(data){
+  formatExecutionData(data) {
     let executionData = [];
     data.forEach((row) => {
       const item = {
