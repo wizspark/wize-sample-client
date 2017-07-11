@@ -67,8 +67,7 @@
           </ng-template>
         </p-column>
         <p-column *ngFor="let col of getColumnByUnique(false)" [field]="col.name" [header]="col.displayName || col.name"
-                  [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)"
-                  [style]="getStyle(col.name)">
+                  [sortable]="(!col.viewOptions.noSortable && dataTableInputConfig.isHeader)">
           <ng-template let-row="rowData" pTemplate="body">
                         <span [ngSwitch]="col.type">
                             <span *ngSwitchCase="'DATE'">{{row[col.name] | date:'MMM d, y h:mm a'}}</span>
