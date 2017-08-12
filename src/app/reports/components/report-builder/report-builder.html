@@ -108,11 +108,11 @@
                         [header]="field.columnHeader" [sortable]="true">
                 <ng-template let-row="rowData" pTemplate="body">
                   <div [ngSwitch]="field.columnType">
-                    <span *ngSwitchCase="'DATE'" [innerHTML]="toDate(row[field.columnName])"></span>
-                    <span *ngSwitchCase="'DOUBLE'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
-                    <span *ngSwitchCase="'FLOAT'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
-                    <span *ngSwitchCase="'INTEGER'" [innerHTML]="roundNumber(row[field.columnName], 2)"></span>
-                    <span *ngSwitchDefault [innerHTML]="row[field.columnName]"></span>
+                    <span *ngSwitchCase="'DATE'" [innerHTML]="row[field.columnName]?toDate(row[field.columnName]):toDate(row[field.columnName.toUpperCase()])"></span>
+                    <span *ngSwitchCase="'DOUBLE'" [innerHTML]="row[field.columnName]?roundNumber(row[field.columnName], 2):roundNumber(row[field.columnName.toUpperCase()], 2)"></span>
+                    <span *ngSwitchCase="'FLOAT'" [innerHTML]="row[field.columnName]?roundNumber(row[field.columnName], 2):roundNumber(row[field.columnName.toUpperCase()], 2)"></span>
+                    <span *ngSwitchCase="'INTEGER'" [innerHTML]="row[field.columnName]?roundNumber(row[field.columnName], 2):roundNumber(row[field.columnName.toUpperCase()], 2)"></span>
+                    <span *ngSwitchDefault [innerHTML]="row[field.columnName]?row[field.columnName]:row[field.columnName.toUpperCase()]"></span>
                   </div>
                 </ng-template>
               </p-column>

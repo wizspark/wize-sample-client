@@ -147,7 +147,7 @@ export class ReportBuilderComponent implements OnInit {
       this.queryErrorMessage = "No Record Found";
       this.reportsApiService.postQuery(null, query)
         .subscribe(response => {
-          this.queryResult = response;
+          this.queryResult = response.rows;
           if(this.queryResult && this.queryResult.length > 0) {
             let tempTableDisplayColumns =  Object.keys(this.queryResult[0]);
             for(let i=0; i<3;i++) {

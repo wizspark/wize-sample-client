@@ -153,7 +153,7 @@ export class ReportListComponent implements OnInit {
         this.reportCategory = JSON.parse(JSON.stringify(this.getReportCategoryObj(this.report)));
         this.reportsApiService.postQuery(null, this.report.dataQuery)
           .subscribe(response => {
-            this.queryResult = response;
+            this.queryResult = response.rows;
             this.reportStatus = "view";
           }, err => {
             this.queryResult = [];
@@ -166,7 +166,7 @@ export class ReportListComponent implements OnInit {
         this.reportCategory = JSON.parse(JSON.stringify(this.getReportCategoryObj(this.report)));
         this.reportsApiService.postQuery(null, this.report.dataQuery)
           .subscribe(response => {
-            this.queryResult = response;
+            this.queryResult = response.rows;
             this.reportStatus = "edit";
           }, err => {
             this.queryResult = [];

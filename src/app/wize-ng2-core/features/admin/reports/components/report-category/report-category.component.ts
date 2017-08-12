@@ -80,7 +80,7 @@ export class ReportCategoryComponent implements OnInit {
       this.isDataLoaded = true;
     }else{
       this.reportService.getMetaData().subscribe((records: any) => {
-        this.dbMetaData = records;
+        this.dbMetaData = records.rows;
         if(this.isClone && this.reportCategory.modelName!=""){
           this.initReport();
         }else if(this.reportCategory.modelName!=""){
